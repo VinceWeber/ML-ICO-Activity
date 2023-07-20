@@ -1,0 +1,42 @@
+/****** Script for SelectTopNRows command from SSMS  ******/
+
+
+--VARIABLES
+
+
+
+DECLARE
+@MaxRow int,
+@BaseLenght int,
+@NBofbits int,
+@Table_Cat nvarchar(50),
+@Query nvarchar(max)
+
+--DEFINIR LES VALEURS DES VARIABLES :
+	--Max row
+	--LEN(Binary(Max(Row))
+	--UTILISER LA FONCTION LPAD() POUR AJOUTER DES ZEROS DEVANT LA CHAINE ENCODEE
+SET @Table_Cat='TABLE_TEST_BINARY_ENCODING'
+SET @Query='DECLARE @MaxRow int SET @MaxRow = (SELECT COUNT(*) FROM [' + @Table_Cat + '])'
+PRINT(@Query)
+
+SET @MaxRow = (SELECT COUNT(*) FROM [@Table_Cat])
+EXEC(@Query)
+
+SET @NBofbits=4
+
+PRINT('MaxRow : ' + CAST(@MaxRow as varchar))
+
+IF @MaxRow > POWER(CONVERT(BIGINT,2), 8*@NBofbits) THROW 51000, 'Not enought memory for binary encoding, set a bigger value in Binary Encoding Procedure',1;
+
+/*
+SELECT 
+	ROW_NUMBER() OVER(ORDER BY cle ASC) AS Row#,
+	[Cle],
+	--[dbo].[ConvertToBase](Cle,2) as Cle_Binary_Encoded,
+	--[dbo].[ConvertToBase](ROW_NUMBER() OVER(ORDER BY cle ASC),2) AS Row_Encoded#,
+	--CAST( [dbo].[ConvertToBase](ROW_NUMBER() OVER(ORDER BY cle ASC)),2) as nvarchar(20)) AS Row_Encoded2#
+	CAST(ROW_NUMBER() OVER(ORDER BY cle ASC) as binary(4)) AS Row_Encoded
+
+  FROM [@Table_Cat]
+ */

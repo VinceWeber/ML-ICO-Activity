@@ -161,7 +161,11 @@ cython_debug/
 
 
 #PERSONAL FILES
-01 - Initial data/
+00 - Description - Documentation/
 00 - Ressources/
+01 - Initial data/
+02 - Preprocessing Data/sql/
+02 - Preprocessing Data/py/
+03 - Analyse des donnees/
 04 - Modelisation/~$Structure de classes.xlsx
 

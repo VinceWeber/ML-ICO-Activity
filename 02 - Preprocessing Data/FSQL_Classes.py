@@ -4,6 +4,9 @@
 import pyodbc
 
 def F_SQL_Requete(cnxn,requete_sql,pyodbc,output=None):
+   import warnings
+   warnings.filterwarnings('ignore')
+
    import pandas as pd
    try:
         df = pd.read_sql(requete_sql, cnxn)
@@ -21,6 +24,8 @@ def F_SQL_Requete(cnxn,requete_sql,pyodbc,output=None):
 
 def F_SQL_Execute(cnxn,requete_sql,pyodbc,output=None):
    import pandas as pd
+   import warnings
+   warnings.filterwarnings('ignore')
    try:
         #df = pd.read_sql(requete_sql, cnxn)
         cursor.execute(requete_sql) # ATTENTION SI ERREUR, le SERVEUR SQL plante!!  VOIR https://www.mytecbits.com/internet/python/execute-sql-server-stored-procedure
@@ -40,7 +45,7 @@ def F_SQL_Execute(cnxn,requete_sql,pyodbc,output=None):
 #Initialisation des paramètres d'accès à la BDD Activité
 try:
     #import pyodbc 
-    server = '172.31.244.53'
+    server = '192.168.166.198'
     database = 'ICO_Activite'
     username = 'sa' 
     password = 'vyNM~pgDxO>0[5+ryM>F'

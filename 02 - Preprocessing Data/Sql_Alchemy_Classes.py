@@ -25,9 +25,9 @@ def AlSQL_Execute(engine, requete_sql, output=None):
 
     try:
         # Use the execute() method of the engine to execute the SQL command
-        with engine.connect() as connection:
-            connection.execute(sqlalchemy.text(requete_sql))
-            #connection.commit()
+        with engine.begin() as conn:
+            conn.execute(sqlalchemy.text(requete_sql))
+            #conn.commit()
 
     except sqlalchemy.exc.SQLAlchemyError as ex:
         print('ALSQL_Execution - ERROR')

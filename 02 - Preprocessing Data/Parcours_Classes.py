@@ -22,7 +22,8 @@ class Caracteristiques_Dataset_Parcours:
         self.set_attibutes(name,date1, date2,site,date_etude1,date_etude2)
     
     def get_x(self):
-        Return_dict={'Name' : [self.name] ,'Date1' : [self.date1] ,'Date2' : [self.date2], 'Site' : [self.site], \
+        Return_dict={'Name' : [self.name] ,'Date1_filtreNIP' : [self.date1] ,'Date2_filtreNIP' : [self.date2],'Date3_filtre_Data_set' : [self.DebutDataset] , \
+                     'Date4_filtre_Data_set' : [self.FinDataset], 'Site' : [self.site], \
             'Total actes' : [self.Actes_Total], 'Encoded_Actes' : [self.Actes_Encoded], '% Encoded_Actes' : [self.Actes_percent_encoded], \
             'Total_sejours': [self.Sejours_Total], 'Encoded_Sejours' : [self.Sejours_Encoded], '% Encoded_Sejours' : [self.Sejours_percent_encoded], \
             'Total_sequence': [self.Sequence_Total], 'Encoded_Sequence' : [self.Sequence_Encoded], '% Encoded_Sequence' : [self.Sequence_percent_encoded], \
@@ -34,7 +35,8 @@ class Caracteristiques_Dataset_Parcours:
         Return_String=str(self.get_x())
         return Return_String
     def __repr__(self):
-        return 'Dataset_Parcours( from ' + self.date1.strftime('%Y-%m-%d %H:%M:%S') + ', to ' + self.date2.strftime('%Y-%m-%d %H:%M:%S') + ', on site ' + self.site + ' )'
+        return 'Dataset_Parcours( from ' + self.date3.strftime('%Y-%m-%d %H:%M:%S') + ', to ' + self.date4.strftime('%Y-%m-%d %H:%M:%S') + ',\
+              on site ' + self.site + ' , NIP Filtered between '+ self.date1.strftime('%Y-%m-%d %H:%M:%S') + ' and ' + self.date2.strftime('%Y-%m-%d %H:%M:%S') + ' )'
 
 
     def set_attibutes(self, name,date1, date2,my_site,date3,date4):

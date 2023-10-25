@@ -41,7 +41,7 @@ def AlSQL_Execute(engine, requete_sql, output=None):
 
 # Initialisation des paramètres d'accès à la BDD Activité
 try:
-    server = '192.168.166.198'
+    server = '172.28.119.1'
     database = 'ICO_Activite'
     username = 'sa'
     password = 'vyNM~pgDxO>0[5+ryM>F'
@@ -58,6 +58,9 @@ try:
     #    result = connection.execute('SELECT * FROM MaTable')
     #    for row in result:
     #        print(row)
+
+    df = pd.read_sql_query("SELECT TOP (10) [idUFX_Ress_Equ] FROM [ICO_Activite].[dbo].[Listing_UF_V3]", engine)
+
 
 except sqlalchemy.exc.SQLAlchemyError as ex:
     print(f'Erreur de connexion à la BDD : {ex}')

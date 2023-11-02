@@ -1,0 +1,109 @@
+INSIDE THE LOOP TO CREATE QUERY FILLING THE CURRENT AGGREGATOR (MONTH,TRIMESTER, YEAR, or other defined by Cursor from the Calendar Table) AND AND PUT
+
+
+TO BE DONE :
+
+	ADD TYPE OF CHOICE :
+		DAY,WEEK,MONTH YEAR -> OK 1
+		N° de SEQUENCE + TYPE -> OK 1
+	
+	APPLY A APPLICATION PARAMETER FOR THE CHOICE :
+		Date de l'acte -> OK
+		Jour du parcours -> OK
+			(SIMPLIFIER L'ACCES AUX CALCULS DE J0,V1,V2,V3 ?  pour chaque acte ?) --OK
+		
+		
+	DEFINIR LE PARAMETRE DE SUIVI (Equiv au montant de la facture dans worldwide importer) et sa fonction d'aggrégation.
+		Type d'acte concerné par le rapport d'activité ( UF particulière, Famille d'UF, Dimension, etc...) --OK
+		Fonction d'aggrégation : Présence O/N = COUNT, Densité --OK
+		
+
+AJOUTER UNE PROCEDURE 'PREPROC' :
+	-> Définir une date T0 des J parcours (01/01/1900) -> OK
+	-> Créer une table ACTE <-> DDA + JParcours (au format date) V1,V2,V3,V4 -> OK
+
+
+DIVISER LA REQUETE EN DEUX :
+	-> ReportCarePathActivtiy_By_actes_Calendar
+			-Supprimer les références à J0V1/V2/V3 et V4
+			-Supprimer les paramètres d'entrée de la procédure
+	
+	-> ReportCarePathActivity_By_Actes_Parcours
+			-Définir une date T0 des J parcours (01/01/1900)
+			-Modifier la création du calendrier avec les paramètres.
+
+
+
+
+
+
+NEW TYPE OF QUERY TO BE INTEGRATED IN THE ReportCarePathActivity_By_Actes Procédure: 
+
+SELECT Table_Actes.[NIP]
+								  --,Table_Actes.[ID_A]
+								  ,STRING_AGG(Table_Encoded_Actes.Cle_Acte_Encoded,'-')  WITHIN GROUP(ORDER BY Table_Actes.DD_A ASC,CONCAT(UFX,R_CCAM,R_NGAP,UFH)  ASC) as Actes_Serie
+								  , MAX(TCalendar.MYDATE) as MyDate
+								  , MAX(TCalendar.MYWEEK) as MyWeek
+								  , MAX(TCalendar.MYMONTH) as MyMonth
+							      , MAX(TCalendar.MYTRIMESTER) as MyTrimester
+								  , MAX(TCalendar.MYYEAR) as MyYear--,Table_Actes.[N_S]
+								  , MAX(TCalendar.MYYEARWEEK) as MyYearWeek
+								  , MAX(TCalendar.MYYEARMONTH) as MyYearMonth
+							      , MAX(TCalendar.MYYEARQUARTER) as MyYearQuarter
+								  , MAX(Table_Type_Seq.id_Sequence) as  MyIDSequence
+								  , MAX(Table_Type_Seq.Type_Sequence) as  MyTypeSequence
+
+								  , MIN(T_PS.J0_V1) as J0V1
+								  , DATEDIFF(D,MIN(T_PS.J0_V1),MIN(TCalendar.MYDATE)) as MyCarePath_V1_Day
+								  , ROUND(DATEDIFF(D,MIN(T_PS.J0_V1),MIN(TCalendar.MYDATE))/7,0) as MyCarePath_V1_Week
+								  , ROUND(DATEDIFF(D,MIN(T_PS.J0_V1),MIN(TCalendar.MYDATE))/30.41,0) as MyCarePath_V1_Month
+								  , ROUND(DATEDIFF(D,MIN(T_PS.J0_V1),MIN(TCalendar.MYDATE))/365.25,0)  as MyCarePath_V1_Year
+								  , MIN(T_PS.J0_V2) as J0V2
+								  , DATEDIFF(D,MIN(T_PS.J0_V2),MIN(TCalendar.MYDATE)) as MyCarePath_V2_Day
+								  , ROUND(DATEDIFF(D,MIN(T_PS.J0_V2),MIN(TCalendar.MYDATE))/7,0) as MyCarePath_V2_Week
+								  , ROUND(DATEDIFF(D,MIN(T_PS.J0_V2),MIN(TCalendar.MYDATE))/30.41,0) as MyCarePath_V2_Month
+								  , ROUND(DATEDIFF(D,MIN(T_PS.J0_V2),MIN(TCalendar.MYDATE))/365.25,0)  as MyCarePath_V2_Year								  
+
+								  , MIN(Table_Type_Seq.J0_V3) as J0V3
+								  , DATEDIFF(D,MIN(Table_Type_Seq.J0_V3),MIN(TCalendar.MYDATE)) as MyCarePath_V3_Day
+								  , ROUND(DATEDIFF(D,MIN(Table_Type_Seq.J0_V3),MIN(TCalendar.MYDATE))/7,0) as MyCarePath_V3_Week
+								  , ROUND(DATEDIFF(D,MIN(Table_Type_Seq.J0_V3),MIN(TCalendar.MYDATE))/30.41,0) as MyCarePath_V3_Month
+								  , ROUND(DATEDIFF(D,MIN(Table_Type_Seq.J0_V3),MIN(TCalendar.MYDATE))/365.25,0)  as MyCarePath_V3_Year
+								  , MIN(Table_Type_Seq.J0_V4) as J0V4
+								  , DATEDIFF(D,MIN(Table_Type_Seq.J0_V4),MIN(TCalendar.MYDATE)) as MyCarePath_V4_Day
+								  , ROUND(DATEDIFF(D,MIN(Table_Type_Seq.J0_V4),MIN(TCalendar.MYDATE))/7,0) as MyCarePath_V4_Week
+								  , ROUND(DATEDIFF(D,MIN(Table_Type_Seq.J0_V4),MIN(TCalendar.MYDATE))/30.41,0) as MyCarePath_V4_Month
+								  , ROUND(DATEDIFF(D,MIN(Table_Type_Seq.J0_V4),MIN(TCalendar.MYDATE))/365.25,0)  as MyCarePath_V4_Year
+
+								  -- ID SEQ + TYPE SEQUENCE
+
+								  --,Table_Encoded_Sejours.Cle_Sejour_Encoded
+								  --,Table_Encoded_Sequence.id_Sequence
+								  --,Table_Encoded_Sequence.Cle_Sequence_Encoded
+								  --,Table_Encoded_Parcours.Cle_Parcours_Encoded
+								  --,Table_Actes.[DD_A]
+								  --,[UFX]
+								  --,[INX]
+								  --,[R_NGAP]
+								  --,[R_CCAM]
+								  --,[UFH]
+								  --,[Site]
+							  FROM [ICO_Activite].[dbo].[Tmp_A_Actes_Table_Analyse] as Table_Actes,
+								   [ICO_Activite].[dbo].[Tmp_Acte_Encoded] as Table_Encoded_Actes,
+								   [ICO_Activite].[dbo].[Tmp_Sejour_Encoded] as Table_Encoded_Sejours,
+								   [ICO_Activite].[dbo].[Tmp_Sequence_Encoded] as Table_Encoded_Sequence,
+								   [ICO_Activite].[dbo].[Tmp_Type_Sequence] as Table_Type_Seq,
+								   [ICO_Activite].[dbo].[Tmp_Parcours_Encoded] as Table_Encoded_Parcours,
+								   [ICO_Activite].[dbo].[Tmp_MYCALENDAR] as TCalendar,
+								   [ICO_Activite].[dbo].[Tmp_PS_] as T_PS
+
+							  WHERE Table_Actes.ID_A=Table_Encoded_Actes.ID_A AND
+									Table_Actes.N_S=Table_Encoded_Sejours.N_S AND
+									Table_Actes.N_S=Table_Type_Seq.N_S AND
+									Table_Type_Seq.id_Sequence=Table_Encoded_Sequence.id_Sequence AND
+									Table_Actes.NIP=Table_Encoded_Parcours.NIP AND Table_Actes.DD_A BETWEEN '2019-09-01 00:00:00.000' AND  '2019-09-10 00:00:00.000' AND
+									TCalendar.MYDATE = Table_Actes.DD_A AND
+									T_PS.N_S=Table_Actes.N_S     --AND AGGREGATOR  ->  MyYear=2015 AND MyTrimester= 1
+							
+							GROUP BY Table_Actes.[NIP] 
+							ORDER BY NIP

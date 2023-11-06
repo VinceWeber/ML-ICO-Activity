@@ -1,0 +1,56 @@
+
+
+
+REQUETE SQL POUR RECUPERER UNE TABLE NIP -> SEQUENCE
+
+A FAIRE : 
+	INTEGRER CETTE REQUETE DANS LE NB PYTHON
+	REALISER UNE ROUTINE POUR CREER UN DATA SET AVEC :
+		1 LIGNE = 1 NIP.
+		EN COLONNE LES SEQ DE TT ET CARACTERISTIQUES ASSOCIEES.
+	
+	NIP / Seq 1 - JP_Vx - Duree_Seq - Nb_sej - Service - Activite / Seq 2 etc....
+
+	TENTER UN CLUSTERING DES PATIENT SUR CETTE TABLE
+
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT Tble_Seq.[NIP]
+      ,Tble_Seq.[id_Sequence]
+	  --,MIN(T_Duree_Seq.DD_A) as DD_Seq
+	  --,MAX(T_Duree_Seq.DF_A) as DF_Seq
+	  --,MIN(T_J0V1234.J0_V1) as J0_V1
+	  ,DATEDIFF(DAY,MIN(T_J0V1234.J0_V1),MIN(T_Duree_Seq.DD_A)) as JP_V1
+	  ,DATEDIFF(DAY,MIN(T_J0V1234.J0_V2),MIN(T_Duree_Seq.DD_A)) as JP_V2
+	  ,DATEDIFF(DAY,MIN(T_J0V1234.J0_V3),MIN(T_Duree_Seq.DD_A)) as JP_V3
+	  ,DATEDIFF(DAY,MIN(T_J0V1234.J0_V4),MIN(T_Duree_Seq.DD_A)) as JP_V4
+	  ,DATEDIFF(DAY,MIN(T_Duree_Seq.DD_A),MAX(T_Duree_Seq.DF_A))+1 as Duree_Seq
+      ,COUNT(Tble_Seq.[N_S]) Nb_sejours
+      --,Tble_Seq.[Ddebsej]
+      --,Tble_Seq.[J0_V3]
+      --,Tble_Seq.[J0_V4]
+      --,Tble_Seq.[Poids_Sejour_DS]
+      --,Tble_Seq.[Type_Sequence]
+	  --,Table_Acte_C.Id_A_Caracteristique
+	  ,MIN(Table_Actes.UFX) as UFX
+	  ,Min(Table_Actes.UFX_CL) as UFX_CL
+	  ,MIN(T_List_UF.Service) as My_Service
+	  ,MIN(T_List_UF.Activite) as Activite
+
+  FROM [ICO_Activite].[dbo].[Tmp_Type_Sequence] as Tble_Seq
+		, [ICO_Activite].[dbo].[Tmp_A3_Soins] as Table_Acte_C
+		, [ICO_Activite].[dbo].[Tmp_A_Actes_Table_Analyse] as Table_Actes
+		, [ICO_Activite].[dbo].[Listing_UF_V3] as T_List_UF
+		, [ICO_Activite].[dbo].[Tmp_Sequence_Encoded] as T_Duree_Seq
+		, [ICO_Activite].[dbo].[Tmp_NIP_J0] as T_J0V1234
+  WHERE
+		Tble_Seq.N_S=Table_Acte_C.N_S AND
+		Table_Acte_C.Id_A_Caracteristique=Table_Actes.ID_A AND
+		T_List_UF.UFX_Code=Table_Actes.UFX AND
+		Tble_Seq.id_Sequence=T_Duree_Seq.id_Sequence AND
+		Tble_Seq.NIP=T_J0V1234.NIP
+		--AND Tble_Seq.NIP='N199804183'
+		AND
+		Type_Sequence='TRAIT'
+  GROUP BY Tble_Seq.id_Sequence,Tble_Seq.NIP
+  ORDER BY NIP,id_Sequence

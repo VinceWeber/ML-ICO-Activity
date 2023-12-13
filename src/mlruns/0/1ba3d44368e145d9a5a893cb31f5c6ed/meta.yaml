@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/vince/Documents/DSTI/DSTI_Projects/ML%20ICO%20Activity/src/mlruns/0/1ba3d44368e145d9a5a893cb31f5c6ed/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 1ba3d44368e145d9a5a893cb31f5c6ed
+run_name: enthused-slug-511
+run_uuid: 1ba3d44368e145d9a5a893cb31f5c6ed
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702481833184
+status: 1
+tags: []
+user_id: vince

@@ -1,20 +1,20 @@
 
 
 #Definition d'une fonction de création de la requete d'aggregation
-def req_aggreg (Aggreg_parameters):
+def req_aggreg (Aggreg_parameters,Aggprefix):
     
     Requete="""EXECUTE [dbo].[ReportCarePathActivtiy_By_actes] """ \
-    + Aggreg_parameters['Report_type'] + "," \
-		+ "'" + Aggreg_parameters['Aggreg_type'] + "'"+ "," \
-			+ Aggreg_parameters['Date_ref'] + "," \
-				+ Aggreg_parameters['Start_at_item'] + "," \
-					+ Aggreg_parameters['Stop_at_item'] + "," \
-						+ "'" + Aggreg_parameters['Method'] + "'" + "," \
-							+ Aggreg_parameters['Type_filter1'] + "," \
-								+ "'" + Aggreg_parameters['Val_filter1'] + "'" + "," \
-									+ Aggreg_parameters['Type_filter2'] + "," \
-										+ "'" + Aggreg_parameters['Val_filter2'] + "'" + "," \
-											+ "'" + Aggreg_parameters['Param_J0'] + "'"
+    + Aggreg_parameters[Aggprefix + 'Report_type'] + "," \
+		+ "'" + Aggreg_parameters[Aggprefix +'Aggreg_type'] + "'"+ "," \
+			+ Aggreg_parameters[Aggprefix +'Date_ref'] + "," \
+				+ Aggreg_parameters[Aggprefix +'Start_at_item'] + "," \
+					+ Aggreg_parameters[Aggprefix +'Stop_at_item'] + "," \
+						+ "'" + Aggreg_parameters[Aggprefix +'Method'] + "'" + "," \
+							+ Aggreg_parameters[Aggprefix +'Type_filter1'] + "," \
+								+ "'" + Aggreg_parameters[Aggprefix +'Val_filter1'] + "'" + "," \
+									+ Aggreg_parameters[Aggprefix +'Type_filter2'] + "," \
+										+ "'" + Aggreg_parameters[Aggprefix +'Val_filter2'] + "'" + "," \
+											+ "'" + Aggreg_parameters[Aggprefix +'Param_J0'] + "'"
 
     return Requete
 
@@ -37,19 +37,19 @@ def req_aggreg_V2 (Aggreg_parameters):
     return Requete
 
 
-def Create_dataset (Create_dataset_parameters):
+def Create_dataset (Create_dataset_parameters,DSprefix):
     from datetime import datetime
     from datetime import timedelta
     import pandas as pd
     import Parcours_Classes as PC
 
-    My_NIP_filter_1rst_date=datetime.strptime(Create_dataset_parameters['DS_My_NIP_filter_1rst_date'], '%m-%d-%Y %H:%M:%S')
-    My_NIP_filter_2nd_date=My_NIP_filter_1rst_date + timedelta(days=Create_dataset_parameters['DS_My_NIP_filter_2nd_date_delta_in_days'])
+    My_NIP_filter_1rst_date=datetime.strptime(Create_dataset_parameters[DSprefix + 'My_NIP_filter_1rst_date'], '%m-%d-%Y %H:%M:%S')
+    My_NIP_filter_2nd_date=My_NIP_filter_1rst_date + timedelta(days=Create_dataset_parameters[DSprefix + 'My_NIP_filter_2nd_date_delta_in_days'])
 
-    Site=Create_dataset_parameters['DS_Site']
+    Site=Create_dataset_parameters[DSprefix + 'Site']
 
-    Mydataset_date1=datetime.strptime(Create_dataset_parameters['DS_Start_Window_time'], '%m-%d-%Y %H:%M:%S')
-    Mydataset_date2=datetime.strptime(Create_dataset_parameters['DS_End_Window_time'], '%m-%d-%Y %H:%M:%S')
+    Mydataset_date1=datetime.strptime(Create_dataset_parameters[DSprefix + 'Start_Window_time'], '%m-%d-%Y %H:%M:%S')
+    Mydataset_date2=datetime.strptime(Create_dataset_parameters[DSprefix + 'End_Window_time'], '%m-%d-%Y %H:%M:%S')
 
     Caract_Df_SH = pd.DataFrame.from_dict(PC.Caracteristiques_Dataset_Parcours(1, My_NIP_filter_1rst_date,My_NIP_filter_2nd_date,Site,Mydataset_date1,Mydataset_date2).get_x())
 
@@ -141,7 +141,7 @@ def get_Aggreg_Dataset(Agg_param1,Agg_param2=None,Agg_param3=None,Agg_param4=Non
         }
     return dict_out
 
-def get_Aggreg_Dataset2(list_param):
+def get_Aggreg_Dataset2(list_param,Aggprefix):
     import pandas as pd
     import Sql_Alchemy_Classes as AlSQL
 
@@ -153,7 +153,7 @@ def get_Aggreg_Dataset2(list_param):
     for Agg_param in agg_list: 
         
         #definition de la requete
-        Requete=req_aggreg (Agg_param)    
+        Requete=req_aggreg (Agg_param,Aggprefix)    
 
         #Get the dataset
         df=AlSQL.AlSQL_Requete(AlSQL.engine,Requete,True)
@@ -163,10 +163,10 @@ def get_Aggreg_Dataset2(list_param):
             df[col] = pd.to_numeric(df[col], errors='coerce')
 
         #Add information of the parameters used
-        df['FT1']=Agg_param['Type_filter1']
-        df['FV1']=Agg_param['Val_filter1']
-        df['FT2']=Agg_param['Type_filter2']
-        df['FV2']=Agg_param['Val_filter2']
+        df['FT1']=Agg_param[Aggprefix + 'Type_filter1']
+        df['FV1']=Agg_param[Aggprefix + 'Val_filter1']
+        df['FT2']=Agg_param[Aggprefix + 'Type_filter2']
+        df['FV2']=Agg_param[Aggprefix + 'Val_filter2']
 
 
         #Merge this newdataset with the previous one
@@ -179,11 +179,11 @@ def get_Aggreg_Dataset2(list_param):
     return dict_out
 
 
-def GetDistanceMatrix(Parcours_dict, Aggreg_parameters):
+def GetDistanceMatrix(Parcours_dict, Aggreg_parameters,Aggprefix):
     import numpy as np
     import dtw as dtw
 
-    Timesteps=int(Aggreg_parameters['Stop_at_item'])-int(Aggreg_parameters['Start_at_item'])
+    Timesteps=int(Aggreg_parameters[Aggprefix + 'Stop_at_item'])-int(Aggreg_parameters[Aggprefix + 'Start_at_item'])
     Parcours_dict['df'].sort_values(['NIP', 'FV1','FV2'], ascending=[True, True, True], inplace=True)
 
     data_to_plot = Parcours_dict['df'].iloc[:,1:(Timesteps+1)] 

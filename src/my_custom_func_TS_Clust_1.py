@@ -358,6 +358,9 @@ def plot_TS_clusters(Aggreg_Patients,Aggreg_parameters,filename_path,cluster_dic
     colname = cluster_dict['Column_name']
 
     Timesteps=int(Aggreg_parameters[Aggprefix + 'Stop_at_item'])-int(Aggreg_parameters[Aggprefix + 'Start_at_item'])
+    X_text=Timesteps-0.5
+    Y_text_base=0.8 #is multiplied later by the max value of the subdataset
+    
     Nb_dim=int(Aggreg_Patients['Nb_dim'])
 
     param_dict = {}
@@ -400,33 +403,53 @@ def plot_TS_clusters(Aggreg_Patients,Aggreg_parameters,filename_path,cluster_dic
                 (Aggreg_Patients['df']['FV2'] == param_dict[dim]['FV2'])
                 ]
             cluster_dataY_trimmed  = cluster_dataY.iloc[:, 1:(Timesteps+2)]
-            cluster_dataY_Mean_ind = cluster_dataY[colname + '_Mean_Indiv']
+            cluster_dataY_Mean_ind = cluster_dataY[['NIP',colname + '_Mean_Indiv']]
 
+            Y_text=cluster_dataY_trimmed.max().max()*Y_text_base
+            
+            
             #num_individuals = Aggreg_Patients['df']['Cluster'].value_counts()[i]
             num_individuals = cluster_dataY_trimmed.shape[0]
 
             # Plot on the respective axis
             #for j in range(len(cluster_dataY)):
             for j in range(num_individuals):
-                if Nb_dim!=1:
-                    if cluster_dataY_Mean_ind.iloc[j] :
-                        ax[i,k].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=10)
-                    else:
-                        ax[i,k].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=1)
+                
+                color=None
+                if cluster_dataY_Mean_ind.iloc[j,1] :  # Mean or Avg Individual -> linewidth=10, 1 else
+                    width=5
+                    mytext=True
+                    color='blue'
                 else:
-                    if cluster_dataY_Mean_ind.iloc[j] :
-                        ax[i].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=10)
-                    else:
-                        ax[i].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=1)
-                    
-                    
+                    width=1
+                    mytext=False
 
+                if 'Avg' in cluster_dataY_Mean_ind.iloc[j, 0]:
+                    linestyle = '-.'  # Dot-dash line
+                    y_pos = 1
+                    color='red'
+                else:
+                    linestyle = '-'  # Continuous line
+                    y_pos = 2
+                
+                if Nb_dim!=1:   # if Nb_dim = 2 or more ( !! Zero value can be an error ! )
+                
+                    line = ax[i,k].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=width, linestyle=linestyle, color=color)
+                    #color = line[0].get_color()
+                    if mytext:
+                        ax[i,k].text(X_text, y_pos,str(cluster_dataY_Mean_ind.iloc[j,0]), color=color)
+                else:       #if Nb_dim =1
 
+                    line = ax[i].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=width, linestyle=linestyle, color=color)
+                    color = line[0].get_color()
+                    if mytext:
+                        ax[i].text(X_text, Y_text + y_pos,str(cluster_dataY_Mean_ind.iloc[j,0]), color=color)
+                    
             if k==Nb_dim-1 :
                 if Nb_dim!=1:
-                    ax[i,k].text(Timesteps+3, 0, 'N=' + str(num_individuals)) #correct this code with the dimension number.
+                    ax[i,k].text(X_text, Y_text, 'N=' + str(num_individuals)) #correct this code with the dimension number.
                 else:
-                    ax[i].text(Timesteps+3, 0, 'N=' + str(num_individuals)) #correct this code with the dimension number.
+                    ax[i].text(X_text, Y_text, 'N=' + str(num_individuals)) #correct this code with the dimension number.
             
             if i==n_clusters-1 :
                 if Nb_dim!=1:

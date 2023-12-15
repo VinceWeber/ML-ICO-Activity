@@ -350,11 +350,14 @@ def Parrallelization_parameters_half_sq_matrix(nthreads, n_col):
 
 
 
-def plot_TS_clusters(Aggreg_Patients,Aggreg_parameters,filename_path,n_clusters):
+def plot_TS_clusters(Aggreg_Patients,Aggreg_parameters,filename_path,cluster_dict,Aggprefix):
     import numpy as np
     import matplotlib.pyplot as plt
 
-    Timesteps=int(Aggreg_parameters['Stop_at_item'])-int(Aggreg_parameters['Start_at_item'])
+    n_clusters = cluster_dict['nb_cluster']
+    colname = cluster_dict['Column_name']
+
+    Timesteps=int(Aggreg_parameters[Aggprefix + 'Stop_at_item'])-int(Aggreg_parameters[Aggprefix + 'Start_at_item'])
     Nb_dim=int(Aggreg_Patients['Nb_dim'])
 
     param_dict = {}
@@ -373,10 +376,11 @@ def plot_TS_clusters(Aggreg_Patients,Aggreg_parameters,filename_path,n_clusters)
         param_dict['dim_' + str(index+1)] = new_param
 
 
-    id_x =np.linspace(0,len(Aggreg_Patients['df'].columns)-9,num=len(Aggreg_Patients['df'].columns)-9)
+    #id_x =np.linspace(0,len(Aggreg_Patients['df'].columns)-9,num=len(Aggreg_Patients['df'].columns)-9)
+    id_x = np.linspace(0, Timesteps, num=Timesteps+1)
 
     #define subplot layout
-    fig, ax = plt.subplots(n_clusters, Nb_dim, figsize=(40,48))
+    fig, ax = plt.subplots(n_clusters, Nb_dim, figsize=(15,30))
     fig.tight_layout()
 
     #fig.xlabel('Weeks') # to be linked with the aggregate function parameters
@@ -391,11 +395,12 @@ def plot_TS_clusters(Aggreg_Patients,Aggreg_parameters,filename_path,n_clusters)
             #print(dim + param_dict[dim]['FV1'] + " & " + param_dict[dim]['FV2'])
             #cluster_dataY = Aggreg_Patients['df'][Aggreg_Patients['df']['Cluster'] == i]
             cluster_dataY = Aggreg_Patients['df'][
-                (Aggreg_Patients['df']['Cluster'] == i) &
+                (Aggreg_Patients['df'][colname] == i) &
                 (Aggreg_Patients['df']['FV1'] == param_dict[dim]['FV1']) &
                 (Aggreg_Patients['df']['FV2'] == param_dict[dim]['FV2'])
                 ]
-            cluster_dataY_trimmed  = cluster_dataY.iloc[:, 1:-8]
+            cluster_dataY_trimmed  = cluster_dataY.iloc[:, 1:(Timesteps+2)]
+            cluster_dataY_Mean_ind = cluster_dataY[colname + '_Mean_Indiv']
 
             #num_individuals = Aggreg_Patients['df']['Cluster'].value_counts()[i]
             num_individuals = cluster_dataY_trimmed.shape[0]
@@ -404,9 +409,18 @@ def plot_TS_clusters(Aggreg_Patients,Aggreg_parameters,filename_path,n_clusters)
             #for j in range(len(cluster_dataY)):
             for j in range(num_individuals):
                 if Nb_dim!=1:
-                    ax[i,k].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:])
+                    if cluster_dataY_Mean_ind.iloc[j] :
+                        ax[i,k].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=10)
+                    else:
+                        ax[i,k].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=1)
                 else:
-                    ax[i].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:])
+                    if cluster_dataY_Mean_ind.iloc[j] :
+                        ax[i].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=10)
+                    else:
+                        ax[i].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=1)
+                    
+                    
+
 
             if k==Nb_dim-1 :
                 if Nb_dim!=1:
@@ -416,9 +430,9 @@ def plot_TS_clusters(Aggreg_Patients,Aggreg_parameters,filename_path,n_clusters)
             
             if i==n_clusters-1 :
                 if Nb_dim!=1:
-                    ax[0,k].set_title(dim + " " + param_dict[dim]['FV1'] + " & " + param_dict[dim]['FV2'], rotation=60)
+                    ax[0,k].set_title(dim + " " + param_dict[dim]['FV1'] + " & " + param_dict[dim]['FV2'], rotation=0)
                 else:
-                    ax[0].set_title(dim + " " + param_dict[dim]['FV1'] + " & " + param_dict[dim]['FV2'], rotation=60)
+                    ax[0].set_title(dim + " " + param_dict[dim]['FV1'] + " & " + param_dict[dim]['FV2'], rotation=0)
                 #add here a text to explicit which dimension is shown.
             
             #plt.legend(loc='center right')  # Converted 'i' to string for the title

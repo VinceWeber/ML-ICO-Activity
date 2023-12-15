@@ -177,4 +177,7 @@ def my_clust_func(X_scaled,Method,n_clusters,max_clusters,threshold,ouput,mlflow
         NIP_Carac.to_csv(NIP_Carac_filename)
         mlflow.log_artifact(NIP_Carac_filename,NIP_Carac_mlflowname)
 
-    return
+    ouput_dict={'ncluster' : n_clusters,
+                'df_dist' : df_dist}
+
+    return ouput_dict

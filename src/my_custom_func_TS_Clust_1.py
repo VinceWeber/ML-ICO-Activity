@@ -350,14 +350,12 @@ def Parrallelization_parameters_half_sq_matrix(nthreads, n_col):
 
 
 
-def plot_TS_clusters(Aggreg_Patients,Aggreg_parameters,filename_path,cluster_dict,Aggprefix):
+def plot_TS_clusters(Aggreg_Table,Timesteps,filename_path,cluster_dict):
     #design to plot Time series curves and return a plot
     # Input parameters:
     # Aggreg_Patients : Table with the activity aggregated by timesteps (in column)
     # and one line per individual
     # it can also work with multidimensional time series, then each individual is a group of nlines (n = nb of dimensions)
-    
-    
     
     import numpy as np
     import matplotlib.pyplot as plt
@@ -365,15 +363,15 @@ def plot_TS_clusters(Aggreg_Patients,Aggreg_parameters,filename_path,cluster_dic
     n_clusters = cluster_dict['nb_cluster']
     colname = cluster_dict['Column_name']
 
-    Timesteps=int(Aggreg_parameters[Aggprefix + 'Stop_at_item'])-int(Aggreg_parameters[Aggprefix + 'Start_at_item'])
+    Timesteps
     X_text=Timesteps-0.5
     Y_text_base=0.8 #is multiplied later by the max value of the subdataset
     
-    Nb_dim=int(Aggreg_Patients['Nb_dim'])
+    Nb_dim=int(Aggreg_Table['Nb_dim'])
 
     param_dict = {}
 
-    unique_rows = Aggreg_Patients['df'][['FT1','FV1','FT2','FV2']].drop_duplicates()
+    unique_rows = Aggreg_Table['df'][['FT1','FV1','FT2','FV2']].drop_duplicates()
     unique_rows.reset_index()
     # Iterate through each row and print
 
@@ -405,10 +403,10 @@ def plot_TS_clusters(Aggreg_Patients,Aggreg_parameters,filename_path,cluster_dic
             dim='dim_' + str(k+1)
             #print(dim + param_dict[dim]['FV1'] + " & " + param_dict[dim]['FV2'])
             #cluster_dataY = Aggreg_Patients['df'][Aggreg_Patients['df']['Cluster'] == i]
-            cluster_dataY = Aggreg_Patients['df'][
-                (Aggreg_Patients['df'][colname] == i) &
-                (Aggreg_Patients['df']['FV1'] == param_dict[dim]['FV1']) &
-                (Aggreg_Patients['df']['FV2'] == param_dict[dim]['FV2'])
+            cluster_dataY = Aggreg_Table['df'][
+                (Aggreg_Table['df'][colname] == i) &
+                (Aggreg_Table['df']['FV1'] == param_dict[dim]['FV1']) &
+                (Aggreg_Table['df']['FV2'] == param_dict[dim]['FV2'])
                 ]
             cluster_dataY_trimmed  = cluster_dataY.iloc[:, 1:(Timesteps+2)]
             cluster_dataY_Mean_ind = cluster_dataY[['NIP',colname + '_Mean_Indiv']]

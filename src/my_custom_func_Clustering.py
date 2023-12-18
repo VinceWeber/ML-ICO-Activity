@@ -219,9 +219,7 @@ def my_clust_func(X_scaled,Method,n_clusters,max_clusters,threshold,ouput,mlflow
 
     return ouput_dict
 
-
-
-def prepare_clust_DDA(Create_dataset_parameters,DSprefix, List_NIP ):
+def prepare_clust_DDA(Create_dataset_parameters,DSprefix, List_NIP):
     #Function qui généère un dataset 'DDA clust' en vue d'une clusterisation
 
     #import variables : create dataset_parameters, list_NIP provenant de la fonction d'aggregation SQL
@@ -247,7 +245,7 @@ def prepare_clust_DDA(Create_dataset_parameters,DSprefix, List_NIP ):
     Requete="""SELECT [NIP]
         ,MIN([DD_A]) DPA_NIP
         ,MAX([DF_A]) DDA_NIP
-    FROM [ICO_Activite].[dbo].[Tmp_A_Actes_Table_Analyse]
+    FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes]
     GROUP BY NIP
     """
     CP_Bounds_NIP=AlSQL.AlSQL_Requete(AlSQL.engine,Requete,'No')
@@ -271,6 +269,8 @@ def prepare_clust_DDA(Create_dataset_parameters,DSprefix, List_NIP ):
     print(DDA_Clust[['DPA_NIP','DDA_NIP']])
     
     return DDA_Clust
+
+
 
 
 def df_avg_individual(My_Aggreg, My_clust_result, mlflow_param):
@@ -305,3 +305,63 @@ def df_avg_individual(My_Aggreg, My_clust_result, mlflow_param):
         My_avg_NIP_df = My_avg_NIP_df.append(result, ignore_index=True)
 
     return My_avg_NIP_df
+
+def clustering_result_to_df(My_Aggreg_dict_df,My_Clust_result,My_Clust_parameter ):
+    #Function to store result of the clustering
+
+    #Input :
+    #My_Aggreg_df : a dict of aggregation, composed of : nb_of dim and 'df' : a dataset with columns NIP, (timestep) x columns of time aggregation , FT, FV (filters from aggreg)
+    #My_Clust_result : a dict of the result of a clustering given by the function my_clust_func
+    #My_Clust_parameter : a dict of the parameters of the clustering
+
+    #output: 
+    # dataset = My_Aggreg_df + My_Clust_result
+
+    import pandas as pd
+
+    My_Clust_result['Avg_Indiv']=df_avg_individual(My_Aggreg_dict_df['df'], My_Clust_result, My_Clust_parameter)
+    Aggreg_Patients_TC=My_Aggreg_dict_df
+    clust_name=My_Clust_parameter['clust_name']
+    subset_cols = My_Clust_result['df_dist'][['NIP',clust_name,clust_name +'_Mean_Indiv']]
+    my_merged_df = pd.merge(My_Aggreg_dict_df['df'], subset_cols, on='NIP')
+    Parcours_Aggreg=pd.concat([my_merged_df,My_Clust_result['Avg_Indiv']], axis=0)
+
+    Aggreg_Patients_TC['df']=Parcours_Aggreg
+
+    return Aggreg_Patients_TC
+
+def cluster(My_Aggreg_dict_df,Data_to_be_clustered,ouput,mlflow,My_Clust_parameter):
+    #perform a clustering and update the initial dataset (dict) with the result
+
+    #Input = 
+    # Data_to_be_clustered
+    # Method of clustering
+    # Maximum nb of cluster
+    # Threshold
+    # output : yes/no
+    # mflow
+    # My_Clust_parameter
+    # List NIP 
+    
+    from sklearn.preprocessing import StandardScaler
+
+    List_NIP=My_Aggreg_dict_df['df']['NIP']
+    Myaggreg_copy=My_Aggreg_dict_df.copy()
+    
+    Method=My_Clust_parameter['Method']
+    Nb_clust=My_Clust_parameter['Nb_clusters']
+    Max_clusters=My_Clust_parameter['max_nb_clusters']
+    threshold=My_Clust_parameter['threshold']
+
+    # Standardiser les données
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(Data_to_be_clustered)
+
+    #Perform the clustering with calling my_clust_func
+    TC_Result=my_clust_func(X_scaled,Method,Nb_clust, Max_clusters,threshold,ouput,mlflow,My_Clust_parameter,List_NIP)
+    
+    out_dict=clustering_result_to_df(Myaggreg_copy,TC_Result,My_Clust_parameter )
+    out_dict['Nb_clusters']=TC_Result['ncluster']
+    out_dict['df_dist']=TC_Result['df_dist']
+
+    return out_dict

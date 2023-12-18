@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/949948631190999289/6fa472bdf0c14ba4a838e1b2f7cbb210/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '949948631190999289'
+lifecycle_stage: active
+run_id: 6fa472bdf0c14ba4a838e1b2f7cbb210
+run_name: capable-bear-325
+run_uuid: 6fa472bdf0c14ba4a838e1b2f7cbb210
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702894878935
+status: 1
+tags: []
+user_id: vince

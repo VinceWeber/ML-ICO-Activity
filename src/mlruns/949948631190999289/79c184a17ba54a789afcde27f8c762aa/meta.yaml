@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/949948631190999289/79c184a17ba54a789afcde27f8c762aa/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '949948631190999289'
+lifecycle_stage: active
+run_id: 79c184a17ba54a789afcde27f8c762aa
+run_name: casual-pig-142
+run_uuid: 79c184a17ba54a789afcde27f8c762aa
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702908319690
+status: 1
+tags: []
+user_id: vince

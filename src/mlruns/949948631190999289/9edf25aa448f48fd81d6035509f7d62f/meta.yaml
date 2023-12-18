@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/949948631190999289/9edf25aa448f48fd81d6035509f7d62f/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '949948631190999289'
+lifecycle_stage: active
+run_id: 9edf25aa448f48fd81d6035509f7d62f
+run_name: receptive-owl-208
+run_uuid: 9edf25aa448f48fd81d6035509f7d62f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702895255146
+status: 1
+tags: []
+user_id: vince

@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/949948631190999289/e529f5101d4044f5a207376a3df388b3/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '949948631190999289'
+lifecycle_stage: active
+run_id: e529f5101d4044f5a207376a3df388b3
+run_name: rare-asp-714
+run_uuid: e529f5101d4044f5a207376a3df388b3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702747467806
+status: 1
+tags: []
+user_id: vince

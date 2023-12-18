@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/949948631190999289/f218d94d90e34b309dfec18831e59cc1/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '949948631190999289'
+lifecycle_stage: active
+run_id: f218d94d90e34b309dfec18831e59cc1
+run_name: carefree-wren-35
+run_uuid: f218d94d90e34b309dfec18831e59cc1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702887868712
+status: 1
+tags: []
+user_id: vince

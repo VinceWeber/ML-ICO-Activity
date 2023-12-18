@@ -351,6 +351,14 @@ def Parrallelization_parameters_half_sq_matrix(nthreads, n_col):
 
 
 def plot_TS_clusters(Aggreg_Patients,Aggreg_parameters,filename_path,cluster_dict,Aggprefix):
+    #design to plot Time series curves and return a plot
+    # Input parameters:
+    # Aggreg_Patients : Table with the activity aggregated by timesteps (in column)
+    # and one line per individual
+    # it can also work with multidimensional time series, then each individual is a group of nlines (n = nb of dimensions)
+    
+    
+    
     import numpy as np
     import matplotlib.pyplot as plt
 

@@ -1,4 +1,7 @@
 def optimal_nb_cluster(inertia,threshold,max_clusters):
+    #design to return eht optimal nb of cluster
+    #by reading the inertia value and stop when the threshold as been reached.
+
     optimal_nb_cluster = None  # Initialiser à None pour indiquer qu'aucune valeur optimale n'est encore trouvée
     for i in range(1, max_clusters):  # Commencer à 1 car la différence est calculée entre i et i-1
         if abs(inertia[i] - inertia[i - 1]) / inertia[0] < threshold:
@@ -8,6 +11,15 @@ def optimal_nb_cluster(inertia,threshold,max_clusters):
 
 
 def Automatic_nb_cluster(X_scaled,Method, max_clusters,threshold,ouput=None,mlflow=None,mlflow_output=None):
+    # Design to perform multiple clustering and return a nb of clusters :
+    # a matrix (Xscaled)
+    # a method (KMeans, Agglomerative, GMM, or....)
+    # a maxi number of cluster 
+    # a threshold to stop the loop of finding the right nb of cluster
+    # output : Boolean show or not show the plot during the execution
+    # mlfow : mlflow module (if=None , not loaded), no log of the parameters
+    # mlflowoutput : dictionnary with the parameters to be stored in the study    
+
     import matplotlib.pyplot as plt
     
     #APPLY CLUSTERING
@@ -50,7 +62,14 @@ def Automatic_nb_cluster(X_scaled,Method, max_clusters,threshold,ouput=None,mlfl
 
 
 def Do_Clustering(X_scaled,Method,nb_clusters,ouput=None,mlflow=None,mlflow_output=None):
-    
+    # Design to perform a clustering from :
+    # a matrix (Xscaled)
+    # a method (KMeans, Agglomerative, GMM, or....)
+    # a number of cluster (if n_cluster=None, get an automatic choice of nb_cluster)
+    # output : Boolean show or not show the plot during the execution
+    # mlfow : mlflow module (if=None , not loaded), no log of the parameters
+    # mlflowoutput : dictionnary with the parameters to be stored in the study
+
     import matplotlib.pyplot as plt
     import pandas as pd
     
@@ -109,6 +128,9 @@ def Do_Clustering(X_scaled,Method,nb_clusters,ouput=None,mlflow=None,mlflow_outp
     summary_data = df_dist_matrix.groupby(col_name).agg({col_name + '_NIP': 'count', col_name + '_Mean_dist': 'var'}).reset_index()
     summary_data.columns = [col_name, col_name + '_NIP_Count', col_name + '_Mean_dist_Variance']
     
+    #remove 'col_name + '_NIP' column from df_dist_matrix
+    df_dist_matrix.drop(columns=[col_name + '_NIP'],inplace=True)
+
     # Creating the Clustering_summary DataFrame
     Clustering_summary = summary_data.copy()
 
@@ -149,6 +171,18 @@ def Do_Clustering(X_scaled,Method,nb_clusters,ouput=None,mlflow=None,mlflow_outp
     return df_dist_matrix, Clustering_summary
 
 def my_clust_func(X_scaled,Method,n_clusters,max_clusters,threshold,ouput,mlflow,mlflow_output,List_NIP):
+    # Design to perform a clustering from :
+    # a matrix (Xscaled)
+    # a method (KMeans, Agglomerative, GMM, or....)
+    # a number of cluster (if n_cluster=None, get an automatic choice of nb_cluster)
+    # If Automatic choice of cluster: 
+    #       a maximum of cluster 
+    #       a threshold to stop the loop of finding the right nb of cluster
+    # output : Boolean show or not show the plot during the execution
+    # mlfow : mlflow module (if=None , not loaded), no log of the parameters
+    # mlflowoutput : dictionnary with the parameters to be stored in the study
+    # List NIP : A list of NIP in the same order with Xscaled (1line of Xcaled is linked with the 1st line of ListNIP) 
+    
     import pandas as pd
 
     Cluster_summary_filename=mlflow_output['Summary_filename']
@@ -177,7 +211,97 @@ def my_clust_func(X_scaled,Method,n_clusters,max_clusters,threshold,ouput,mlflow
         NIP_Carac.to_csv(NIP_Carac_filename)
         mlflow.log_artifact(NIP_Carac_filename,NIP_Carac_mlflowname)
 
+    #add the NIP to 'df_dist' and set it as index
+    df_out=pd.concat([df_dist,List_NIP], axis=1)
+    
     ouput_dict={'ncluster' : n_clusters,
-                'df_dist' : df_dist}
+                'df_dist' : df_out}
 
     return ouput_dict
+
+
+
+def prepare_clust_DDA(Create_dataset_parameters,DSprefix, List_NIP ):
+    #Function qui généère un dataset 'DDA clust' en vue d'une clusterisation
+
+    #import variables : create dataset_parameters, list_NIP provenant de la fonction d'aggregation SQL
+    #ouput variable : DDA clust (3 colonnes : NIP / DDA Date dernier acte / DPA Date Premier acte)
+    
+    # AJOUTER DES VARIABLES D'INTERET DU PATIENT
+    #Date de la dernière activitée ?
+
+    import pandas as pd
+    from datetime import datetime
+    import Sql_Alchemy_Classes as AlSQL
+
+    date_format = '%m-%d-%Y %H:%M:%S'
+
+    DPA_ref=datetime.strptime(Create_dataset_parameters[DSprefix + 'Start_Window_time'], date_format)
+    DDA_ref=datetime.strptime(Create_dataset_parameters[DSprefix + 'End_Window_time'], date_format)
+
+    DPA_ref = pd.to_datetime(DPA_ref)
+    DPA_ref = pd.to_datetime(DPA_ref)
+
+
+    #Calcul des distances entre les bornes de fenêtre temporelle et premier et dernier acte
+    Requete="""SELECT [NIP]
+        ,MIN([DD_A]) DPA_NIP
+        ,MAX([DF_A]) DDA_NIP
+    FROM [ICO_Activite].[dbo].[Tmp_A_Actes_Table_Analyse]
+    GROUP BY NIP
+    """
+    CP_Bounds_NIP=AlSQL.AlSQL_Requete(AlSQL.engine,Requete,'No')
+
+    CP_Bounds_NIP['DPA_NIP'] = pd.to_datetime(CP_Bounds_NIP['DPA_NIP'])
+    CP_Bounds_NIP['DDA_NIP'] = pd.to_datetime(CP_Bounds_NIP['DDA_NIP'])
+
+    CP_Bounds_NIP.DPA_NIP=(CP_Bounds_NIP['DPA_NIP'] - DPA_ref).dt.days
+    CP_Bounds_NIP.DDA_NIP=( DDA_ref - CP_Bounds_NIP['DDA_NIP']).dt.days
+
+    #integration au dataset Aggregpatient ?
+    Temp_df = pd.merge(List_NIP,CP_Bounds_NIP, on='NIP')
+
+    #Création d'une matrice concaténée entre dist_matrix et CP_bounds
+    agg_func = { 
+        'DPA_NIP': 'min',
+        'DDA_NIP': 'min'
+    }
+    #print(Aggreg_Patients2)
+    DDA_Clust=Temp_df[['NIP','DPA_NIP','DDA_NIP']].groupby('NIP').agg(agg_func)
+    print(DDA_Clust[['DPA_NIP','DDA_NIP']])
+    
+    return DDA_Clust
+
+
+def df_avg_individual(My_Aggreg, My_clust_result, mlflow_param):
+    import pandas as pd
+    import numpy as np
+    
+    Clust_name=mlflow_param['clust_name']
+    Mydf0=pd.merge(My_Aggreg,My_clust_result['df_dist'][['NIP',Clust_name]], on='NIP' )
+
+    My_avg_NIP_df=pd.DataFrame()
+
+    for clust in range(My_clust_result['ncluster']):
+        Mydf=Mydf0.loc[Mydf0[Clust_name]==clust, :]
+
+        #Lister les types de colonnes du dataframe
+        column_types = Mydf.dtypes
+
+        # Séparer les colonnes numériques et textuelles
+        numeric_columns = [col for col, dtype in column_types.items() if np.issubdtype(dtype, np.number)]
+        text_columns = [col for col, dtype in column_types.items() if dtype == 'object']
+        bool_columns = [col for col, dtype in column_types.items() if dtype == bool]
+
+        # Appliquer différentes fonctions d'agrégation aux colonnes
+        aggregations = {col: 'mean' for col in numeric_columns}
+        aggregations.update({col: 'max' for col in text_columns})
+        aggregations.update({col: 'any' for col in bool_columns})
+
+        # Appliquer les agrégations à chaque colonne
+        result = Mydf.agg(aggregations)
+        result['NIP']='Avg_' + Clust_name + "_" + str(clust)
+
+        My_avg_NIP_df = My_avg_NIP_df.append(result, ignore_index=True)
+
+    return My_avg_NIP_df

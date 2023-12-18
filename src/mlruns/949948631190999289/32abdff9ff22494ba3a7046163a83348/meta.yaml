@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/949948631190999289/32abdff9ff22494ba3a7046163a83348/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '949948631190999289'
+lifecycle_stage: active
+run_id: 32abdff9ff22494ba3a7046163a83348
+run_name: inquisitive-fowl-602
+run_uuid: 32abdff9ff22494ba3a7046163a83348
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702749087295
+status: 1
+tags: []
+user_id: vince

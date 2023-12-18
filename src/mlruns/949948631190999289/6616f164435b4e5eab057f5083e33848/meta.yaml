@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/949948631190999289/6616f164435b4e5eab057f5083e33848/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '949948631190999289'
+lifecycle_stage: active
+run_id: 6616f164435b4e5eab057f5083e33848
+run_name: ambitious-squid-407
+run_uuid: 6616f164435b4e5eab057f5083e33848
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702749306418
+status: 1
+tags: []
+user_id: vince

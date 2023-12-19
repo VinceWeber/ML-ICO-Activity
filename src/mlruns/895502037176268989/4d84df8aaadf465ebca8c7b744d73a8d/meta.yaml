@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/895502037176268989/4d84df8aaadf465ebca8c7b744d73a8d/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '895502037176268989'
+lifecycle_stage: active
+run_id: 4d84df8aaadf465ebca8c7b744d73a8d
+run_name: sincere-rook-599
+run_uuid: 4d84df8aaadf465ebca8c7b744d73a8d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702994849899
+status: 1
+tags: []
+user_id: vince

@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/895502037176268989/fb0bdb9e303644edb799087e73b4f43e/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '895502037176268989'
+lifecycle_stage: active
+run_id: fb0bdb9e303644edb799087e73b4f43e
+run_name: puzzled-flea-355
+run_uuid: fb0bdb9e303644edb799087e73b4f43e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702970537474
+status: 1
+tags: []
+user_id: vince

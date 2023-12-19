@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/895502037176268989/5507f2976f504c9e90f71b81d205c57b/artifacts
+end_time: 1702973469538
+entry_point_name: ''
+experiment_id: '895502037176268989'
+lifecycle_stage: active
+run_id: 5507f2976f504c9e90f71b81d205c57b
+run_name: rebellious-fish-715
+run_uuid: 5507f2976f504c9e90f71b81d205c57b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702973097701
+status: 3
+tags: []
+user_id: vince

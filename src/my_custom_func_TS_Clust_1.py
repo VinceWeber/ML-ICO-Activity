@@ -179,9 +179,14 @@ def get_Aggreg_Dataset2(list_param,Aggprefix):
     return dict_out
 
 
-def GetDistanceMatrix(Parcours_dict, Aggreg_parameters,Aggprefix):
+def GetDistanceMatrix(Parcours_dict, Aggreg_parameters,Aggprefix,dtw_param):
     import numpy as np
     import dtw as dtw
+
+    my_dist_method=dtw_param['dist_method']  # 'euclidian'
+    my_window_type=dtw_param['window_type']  # 'sakoechiba'
+    my_window_args=dtw_param['window_args']  # 'sakoechiba'
+    my_distance_only=dtw_param['distance_only']  # 'sakoechiba'
 
     Timesteps=int(Aggreg_parameters[Aggprefix + 'Stop_at_item'])-int(Aggreg_parameters[Aggprefix + 'Start_at_item'])
     Parcours_dict['df'].sort_values(['NIP', 'FV1','FV2'], ascending=[True, True, True], inplace=True)
@@ -207,7 +212,8 @@ def GetDistanceMatrix(Parcours_dict, Aggreg_parameters,Aggprefix):
             #print("query" + str(query))
             #print("query" + str(template))
 
-            result[i, j] = dtw.dtw(query, template, distance_only=True).distance
+            #result[i, j] = dtw.dtw(query, template, distance_only=True).distance
+            result[i, j] =dtw.dtw(query, template,dist_method=my_dist_method,window_type=my_window_type, window_args=my_window_args,distance_only=my_distance_only).distance
             result[j, i] = result[i, j]
 
         if i % 100 == 0:  # Mise à jour toutes les 10 itérations

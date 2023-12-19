@@ -111,7 +111,34 @@ def Compute_abcisses(Parcours_Dataset,Principal_clust_param,Sub_Clust_param ):
     return my_df, plot_dict
 
 
-def Save_Cluster_and_Carepath_to_Database(Abcisses_DF,Principal_clust_param,Sub_Clust_param, myouputpath ):
+def Save_only_Cluster_to_Database(Mydf,Clust_param, myouputpath,table_name ):
+    #Input : 
+    # Principal cluster name
+    # Sub Clust name 
+    # mydf : Dataset with colums : NIP, Cluster name
+
+    import Sql_Alchemy_Classes as AlSQL
+    import sqlalchemy
+    import mlflow
+    
+    #defintion
+    my_df=Mydf
+    principal_clust_name=Clust_param['clust_name']
+
+    #Sauvegarder dans la BDD l'association NIP - Cluster
+    Table_Cluster=table_name 
+    Requete = 'EXECUTE dbo.Delete_Table_if_exists ' + Table_Cluster
+    with AlSQL.engine.begin() as conn:
+                conn.execute(sqlalchemy.text(Requete))
+    my_df[['NIP',principal_clust_name]].to_sql(Table_Cluster,AlSQL.engine)
+
+    my_df[['NIP',principal_clust_name]].to_csv(myouputpath + principal_clust_name + '_clust.csv')
+    mlflow.log_artifact(myouputpath + principal_clust_name + '_clust.csv', principal_clust_name + "-Cluster Ouput")
+
+    return
+
+
+def Save_Cluster_and_Carepath_to_Database(Abcisses_DF,Principal_clust_param,Sub_Clust_param, myouputpath,table_name ):
     #Input : 
     # Principal cluster name
     # Sub Clust name 
@@ -127,7 +154,7 @@ def Save_Cluster_and_Carepath_to_Database(Abcisses_DF,Principal_clust_param,Sub_
     sub_clust_name=Sub_Clust_param['clust_name']
 
     #Sauvegarder dans la BDD l'association NIP - Cluster
-    Table_Cluster='Tmp_NIP_Cluster' 
+    Table_Cluster=table_name 
     Requete = 'EXECUTE dbo.Delete_Table_if_exists ' + Table_Cluster
     with AlSQL.engine.begin() as conn:
                 conn.execute(sqlalchemy.text(Requete))

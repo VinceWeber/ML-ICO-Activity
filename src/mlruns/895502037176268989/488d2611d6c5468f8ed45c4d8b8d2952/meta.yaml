@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/895502037176268989/488d2611d6c5468f8ed45c4d8b8d2952/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '895502037176268989'
+lifecycle_stage: active
+run_id: 488d2611d6c5468f8ed45c4d8b8d2952
+run_name: beautiful-loon-573
+run_uuid: 488d2611d6c5468f8ed45c4d8b8d2952
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702972769450
+status: 1
+tags: []
+user_id: vince

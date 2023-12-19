@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/895502037176268989/a9b805c037df4e40ba48ca42068d3b4b/artifacts
+end_time: 1702995998877
+entry_point_name: ''
+experiment_id: '895502037176268989'
+lifecycle_stage: active
+run_id: a9b805c037df4e40ba48ca42068d3b4b
+run_name: serious-frog-849
+run_uuid: a9b805c037df4e40ba48ca42068d3b4b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702995810411
+status: 3
+tags: []
+user_id: vince

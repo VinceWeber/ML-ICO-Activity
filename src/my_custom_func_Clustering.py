@@ -223,6 +223,7 @@ def prepare_clust_DDA(Create_dataset_parameters,DSprefix, List_NIP):
     #Function qui généère un dataset 'DDA clust' en vue d'une clusterisation
 
     #import variables : create dataset_parameters, list_NIP provenant de la fonction d'aggregation SQL
+    # import : requete au format string
     #ouput variable : DDA clust (3 colonnes : NIP / DDA Date dernier acte / DPA Date Premier acte)
     
     # AJOUTER DES VARIABLES D'INTERET DU PATIENT
@@ -248,6 +249,7 @@ def prepare_clust_DDA(Create_dataset_parameters,DSprefix, List_NIP):
     FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes]
     GROUP BY NIP
     """
+    
     CP_Bounds_NIP=AlSQL.AlSQL_Requete(AlSQL.engine,Requete,'No')
 
     CP_Bounds_NIP['DPA_NIP'] = pd.to_datetime(CP_Bounds_NIP['DPA_NIP'])
@@ -270,7 +272,69 @@ def prepare_clust_DDA(Create_dataset_parameters,DSprefix, List_NIP):
     
     return DDA_Clust
 
+def prepare_clust_DDA_DDT(Create_dataset_parameters,DSprefix, List_NIP):
+    #Function qui généère un dataset 'DDA clust' en vue d'une clusterisation
 
+    #import variables : create dataset_parameters, list_NIP provenant de la fonction d'aggregation SQL
+    # import : requete au format string
+    #ouput variable : DDA clust (3 colonnes : NIP / DDA Date dernier acte / DPA Date Premier acte)
+    
+    # AJOUTER DES VARIABLES D'INTERET DU PATIENT
+    #Date de la dernière activitée ?
+
+    import pandas as pd
+    from datetime import datetime
+    import Sql_Alchemy_Classes as AlSQL
+
+    date_format = '%m-%d-%Y %H:%M:%S'
+
+    DPA_ref=datetime.strptime(Create_dataset_parameters[DSprefix + 'Start_Window_time'], date_format)
+    DDA_ref=datetime.strptime(Create_dataset_parameters[DSprefix + 'End_Window_time'], date_format)
+
+    DPA_ref = pd.to_datetime(DPA_ref)
+    DDA_ref = pd.to_datetime(DPA_ref)
+    DPT_ref = DPA_ref
+    DDT_ref = DDA_ref
+
+    #Calcul des distances entre les bornes de fenêtre temporelle et premier et dernier acte
+    Requete="""SELECT [NIP]
+                        ,MIN([DD_A]) DPA_NIP
+                        ,MAX([DF_A]) DDA_NIP
+                        ,MIN(CASE WHEN T_ActesC.Phase='Traitement' THEN [DD_A] ELSE 99999 END) AS DPT_NIP
+                        ,MAX(CASE WHEN T_ActesC.Phase='Traitement' THEN [DF_A] ELSE 99999 END) AS DDT_NIP
+                        --,T_ActesC.Phase as PHASE
+                    FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as T_ActesC
+                    GROUP BY NIP --,PHASE
+    """
+    
+    CP_Bounds_NIP=AlSQL.AlSQL_Requete(AlSQL.engine,Requete,'No')
+
+    CP_Bounds_NIP['DPA_NIP'] = pd.to_datetime(CP_Bounds_NIP['DPA_NIP'])
+    CP_Bounds_NIP['DDA_NIP'] = pd.to_datetime(CP_Bounds_NIP['DDA_NIP'])
+    CP_Bounds_NIP['DPT_NIP'] = pd.to_datetime(CP_Bounds_NIP['DPT_NIP'])
+    CP_Bounds_NIP['DDT_NIP'] = pd.to_datetime(CP_Bounds_NIP['DDT_NIP'])
+
+
+    CP_Bounds_NIP.DPA_NIP=(CP_Bounds_NIP['DPA_NIP'] - DPA_ref).dt.days
+    CP_Bounds_NIP.DDA_NIP=( DDA_ref - CP_Bounds_NIP['DDA_NIP']).dt.days
+    CP_Bounds_NIP.DPT_NIP=(CP_Bounds_NIP['DPT_NIP'] - DPT_ref).dt.days
+    CP_Bounds_NIP.DDT_NIP=( DDT_ref - CP_Bounds_NIP['DDT_NIP']).dt.days
+
+    #integration au dataset Aggregpatient ?
+    Temp_df = pd.merge(List_NIP,CP_Bounds_NIP, on='NIP')
+
+    #Création d'une matrice concaténée entre dist_matrix et CP_bounds
+    agg_func = { 
+        'DPA_NIP': 'min',
+        'DDA_NIP': 'min',
+        'DPT_NIP': 'min',
+        'DDT_NIP': 'min'        
+    }
+    #print(Aggreg_Patients2)
+    DDA_Clust=Temp_df[['NIP','DPA_NIP','DDA_NIP','DPT_NIP','DDT_NIP']].groupby('NIP').agg(agg_func)
+    print(DDA_Clust[['DPA_NIP','DDA_NIP','DPT_NIP','DDT_NIP']])
+    
+    return DDA_Clust
 
 
 def df_avg_individual(My_Aggreg, My_clust_result, mlflow_param):

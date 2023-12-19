@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/895502037176268989/635b115d092446249c9438562cc73901/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '895502037176268989'
+lifecycle_stage: active
+run_id: 635b115d092446249c9438562cc73901
+run_name: useful-turtle-36
+run_uuid: 635b115d092446249c9438562cc73901
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702975654401
+status: 1
+tags: []
+user_id: vince

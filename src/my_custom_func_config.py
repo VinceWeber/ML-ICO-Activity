@@ -31,6 +31,20 @@ def my_custom_func_MLFLOWconfig(Experiment_name,Experiment_tag1,Experiment_tag2)
     return
 
 
+def get_Create_dataset_parameters(CSV_config):
+
+    DSprefix=CSV_config['DS_Prefix']
+    Create_dataset_parameters={DSprefix + 'My_NIP_filter_1rst_date': CSV_config['My_NIP_filter_1rst_date'],
+                                DSprefix + 'My_NIP_filter_2nd_date_delta_in_days': int(CSV_config['My_NIP_filter_2nd_date_delta_in_days']),
+                                DSprefix + 'Site': str(CSV_config['Site']),
+                                DSprefix + 'Start_Window_time': CSV_config['Start_Window_time'],
+                                DSprefix + 'End_Window_time': CSV_config['End_Window_time'],
+                                }
+
+    return Create_dataset_parameters
+
+
+
 def get_Aggreg_param(CSV_config):
     
     Aggprefix=CSV_config['Aggprefix']
@@ -148,7 +162,9 @@ def get_dtw_param(CSV_config):
     'distance_only':True
     }
 
-    if CSV_config['P_Window_size']!='None':
+    if CSV_config['P_Window_type']!='None':
         dtw_param['window_args'] = {'window_size': int(CSV_config['P_Window_size'])}
+    else:
+        dtw_param['window_type'] = None
 
     return dtw_param

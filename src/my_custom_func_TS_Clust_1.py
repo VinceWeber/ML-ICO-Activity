@@ -57,7 +57,7 @@ def Create_dataset (Create_dataset_parameters,DSprefix):
     return Caract_Df_SH
 
 
-def plot_carepath(dataset,filename_path):
+def plot_carepath(dataset,filename_path,mlflow,mlflowname):
     import matplotlib.pyplot as plt
     import seaborn as sns
     
@@ -79,11 +79,11 @@ def plot_carepath(dataset,filename_path):
     fig, axs = plt.subplots(1, 1, figsize=(15, 6))
     axs.set_title('Carepathes')
     Myscatterplot=sns.scatterplot(data=Temp_dataset, x='ID_NIP', y='J_Parcours_V1',markers='Activite', hue='Service')
-
+    mlflow.log_artifact(filename_path, mlflowname)
     del Temp_dataset
 
     plt.savefig(filename_path)
-    return Myscatterplot
+    return #Myscatterplot
 
 def chk_Agg_param(Agg_param):
     if Agg_param!=None:
@@ -356,7 +356,7 @@ def Parrallelization_parameters_half_sq_matrix(nthreads, n_col):
 
 
 
-def plot_TS_clusters(Aggreg_Table,Timesteps,filename_path,cluster_dict):
+def plot_TS_clusters(Aggreg_Table,Timesteps,filename_path,cluster_dict,mlflow,mlflowname):
     #design to plot Time series curves and return a plot
     # Input parameters:
     # Aggreg_Patients : Table with the activity aggregated by timesteps (in column)
@@ -473,4 +473,7 @@ def plot_TS_clusters(Aggreg_Table,Timesteps,filename_path,cluster_dict):
             #plt.legend(loc='center right')  # Converted 'i' to string for the title
     
     plt.savefig(filename_path)
+    mlflow.log_artifact(filename_path, mlflowname)
+    plt.close()
+
     return 

@@ -24,7 +24,6 @@ def Prepare_Plot_carepath_clustered_2levels(df_actes,Aggreg_principal_clust,Prin
     # For One Clust Name (we can add clust and sub clust)
     #principal clust
     df_Parcours_plot=pd.merge(df_actes[['NIP','J_Parcours_V1','J_Parcours_V3']],Aggreg_principal_clust['df'][['NIP',principal_clust_name]], on='NIP',how='left')
-
     #sub clust
     df_Parcours_plot=pd.merge(df_Parcours_plot,Aggreg_sub_clust['df'][['NIP',sub_clust_name]], on='NIP',how='left')
     #merge on 'right' will add the average NIP lines (1 AVG nip for 1 cluster), these individuals will get J_Parcours_V1 and V3=0
@@ -39,7 +38,6 @@ def Prepare_Plot_carepath_clustered_2levels(df_actes,Aggreg_principal_clust,Prin
         'J_Parcours_V1': 'min',
         'J_Parcours_V3': 'min',
     }
-
     df_Parcours_plot_max = df_Parcours_plot.groupby('NIP').agg(agg_functions_max)
     df_Parcours_plot_max = df_Parcours_plot_max.rename(columns={'J_Parcours_V1': 'Max_J_V1','J_Parcours_V3': 'Max_J_V3'})
 
@@ -242,9 +240,9 @@ def plot_df_actes(Df,Aggreg_principal_clust,Principal_clust_param,Aggreg_sub_clu
     plt.savefig(myouputpath + 'Parcours_clustered_shape.png')
     mlflow.log_artifact(myouputpath + 'Parcours_clustered_shape.png', "Carepath_Clustered")
 
-    plt.show()
-
+    #plt.show()
+    plt.close()
     #axs.flat[1].set_title('ratings_count boxplot')
     #sns.boxplot(data=df, x='ratings_count', ax=axs[1])
 
-    return plt
+    return 

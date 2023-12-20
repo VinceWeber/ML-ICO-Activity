@@ -1,5 +1,5 @@
 ﻿ID_RUN,Experiment,Experiment_tag_1,Experiment_tag_2,DS_Prefix,My_NIP_filter_1rst_date,My_NIP_filter_2nd_date_delta_in_days,Site,Start_Window_time,End_Window_time,myouputpath,T_Actes_Total,T_Requete,T_Filename,T_MlflowName,P_Specific_Plot,P_Requete,P_Filename,P_MlflowName,Aggprefix,Report_type,Aggreg_type,Date_ref,Start_at_item,Stop_at_item,Method,Type_filter1,Val_filter1,Type_filter2,Val_filter2,Param_J0,filename,mlflowname,T_F_Cluster,T_DDA,T_DDT,T_DD…. ?,T_Clust_Name,T_Method,T_linkage,T_Nb_clusters,T_max_nb_clusters,T_threshold,T_Table Name,T_Dist_Cluster,P_Nb dimensions,P_Clust_Name,P_Method,P_linkage,P_Nb_clusters,P_max_nb_clusters,P_threshold,P_dist_method,P_Window_type,P_Window_size,P_Table Name,CPP_Plot,CPP_Order,CPP_Save_Tble_Name,CPP_Requete,CPP_Filter_df_col,CPP_Filter_df_value
-1,Clustering parcours_V4,release.version,0.1,000_DS_,1/1/2019 0:00,1,2,1/9/2018 0:00,12/31/2020 0:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+1,Clustering parcours_V1,release.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
 	  --,Table_Cluster.Cluster
 	  --,Table_Cluster.X_abscisse
       ,Table_Acte.[J_Parcours_V1]
@@ -40,7 +40,7 @@
   
   WHERE Table_Cluster.NIP = Table_Acte.NIP
   ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement
-1,Clustering parcours_V5,release.version,0.1,000_DS_,1/1/2019 0:00,1,2,1/9/2018 0:00,12/31/2020 0:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+1,Clustering parcours_V1,release.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
 	  --,Table_Cluster.Cluster
 	  --,Table_Cluster.X_abscisse
       ,Table_Acte.[J_Parcours_V1]
@@ -81,7 +81,7 @@
   
   WHERE Table_Cluster.NIP = Table_Acte.NIP
   ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement
-1,Clustering parcours_V6,release.version,0.1,000_DS_,1/1/2019 0:00,1,2,1/9/2018 0:00,12/31/2020 0:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+1,Clustering parcours_V1,release.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
 	  --,Table_Cluster.Cluster
 	  --,Table_Cluster.X_abscisse
       ,Table_Acte.[J_Parcours_V1]
@@ -122,7 +122,7 @@
   
   WHERE Table_Cluster.NIP = Table_Acte.NIP
   ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement
-1,Clustering parcours_V7,release.version,0.1,000_DS_,1/1/2019 0:00,1,2,1/9/2018 0:00,12/31/2020 0:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+1,Clustering parcours_V1,release.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
 	  --,Table_Cluster.Cluster
 	  --,Table_Cluster.X_abscisse
       ,Table_Acte.[J_Parcours_V1]
@@ -163,7 +163,7 @@
   
   WHERE Table_Cluster.NIP = Table_Acte.NIP
   ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement
-1,Clustering parcours_V8,release.version,0.1,000_DS_,1/1/2019 0:00,1,2,1/9/2018 0:00,12/31/2020 0:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+1,Clustering parcours_V1,release.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
 	  --,Table_Cluster.Cluster
 	  --,Table_Cluster.X_abscisse
       ,Table_Acte.[J_Parcours_V1]
@@ -204,7 +204,7 @@
   
   WHERE Table_Cluster.NIP = Table_Acte.NIP
   ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement
-1,Clustering parcours_V9,release.version,0.1,000_DS_,1/1/2019 0:00,1,2,1/9/2018 0:00,12/31/2020 0:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+1,Clustering parcours_V1,release.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
 	  --,Table_Cluster.Cluster
 	  --,Table_Cluster.X_abscisse
       ,Table_Acte.[J_Parcours_V1]

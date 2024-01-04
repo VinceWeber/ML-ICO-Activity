@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/724416742047337142/1410aa277e3d4588976f224b1eb94096/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '724416742047337142'
+lifecycle_stage: active
+run_id: 1410aa277e3d4588976f224b1eb94096
+run_name: colorful-cub-721
+run_uuid: 1410aa277e3d4588976f224b1eb94096
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704383891563
+status: 1
+tags: []
+user_id: vince

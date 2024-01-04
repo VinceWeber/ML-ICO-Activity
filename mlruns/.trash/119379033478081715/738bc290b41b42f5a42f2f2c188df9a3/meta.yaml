@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/119379033478081715/738bc290b41b42f5a42f2f2c188df9a3/artifacts
+deleted_time: 1704365024495
+end_time: 1704364818458
+entry_point_name: ''
+experiment_id: '119379033478081715'
+lifecycle_stage: deleted
+run_id: 738bc290b41b42f5a42f2f2c188df9a3
+run_name: wistful-foal-307
+run_uuid: 738bc290b41b42f5a42f2f2c188df9a3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704364814286
+status: 3
+tags: []
+user_id: vince

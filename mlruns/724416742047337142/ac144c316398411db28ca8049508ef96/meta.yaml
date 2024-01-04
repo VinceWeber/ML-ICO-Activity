@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/724416742047337142/ac144c316398411db28ca8049508ef96/artifacts
+end_time: 1704366321645
+entry_point_name: ''
+experiment_id: '724416742047337142'
+lifecycle_stage: active
+run_id: ac144c316398411db28ca8049508ef96
+run_name: silent-ox-742
+run_uuid: ac144c316398411db28ca8049508ef96
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704366035639
+status: 3
+tags: []
+user_id: vince

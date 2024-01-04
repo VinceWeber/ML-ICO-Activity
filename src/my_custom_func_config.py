@@ -10,23 +10,25 @@ def my_custom_func_MLFLOWconfig(Experiment_name,Experiment_tag1,Experiment_tag2)
     # Run the shell command in the background
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-
     # LAUNCH ML FLOW UI
     mlflow.set_tracking_uri(uri="http://127.0.0.1:8080")
 
     # Set an experiment name, which must be unique and case-sensitive.
-    experiment = mlflow.set_experiment(Experiment_name)
+    experiment = mlflow.set_experiment(Experiment_name,None)
+    
+
+    # Launch a run into the experiment
+    mlflow.end_run()
+    mlflow.start_run()
+
     mlflow.set_experiment_tag(Experiment_tag1, Experiment_tag2)
+    mlflow.set_tag(Experiment_tag1, Experiment_tag2)
 
     # Get Experiment Details
     print(f"Experiment_id: {experiment.experiment_id}")
     print(f"Artifact Location: {experiment.artifact_location}")
     print(f"Tags: {experiment.tags}")
     print(f"Lifecycle_stage: {experiment.lifecycle_stage}")
-
-    # Launch a run into the experiment
-    mlflow.end_run()
-    mlflow.start_run()
 
     return
 

@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/fcecc0cd2a3c4fc9b2098418b6125fbc/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: fcecc0cd2a3c4fc9b2098418b6125fbc
+run_name: amusing-jay-158
+run_uuid: fcecc0cd2a3c4fc9b2098418b6125fbc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704380825154
+status: 1
+tags: []
+user_id: vince

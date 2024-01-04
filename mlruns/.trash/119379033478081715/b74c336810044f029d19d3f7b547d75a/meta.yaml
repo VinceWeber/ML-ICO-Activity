@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/119379033478081715/b74c336810044f029d19d3f7b547d75a/artifacts
+deleted_time: 1704365024495
+end_time: 1704364375767
+entry_point_name: ''
+experiment_id: '119379033478081715'
+lifecycle_stage: deleted
+run_id: b74c336810044f029d19d3f7b547d75a
+run_name: legendary-croc-903
+run_uuid: b74c336810044f029d19d3f7b547d75a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704364243022
+status: 3
+tags: []
+user_id: vince

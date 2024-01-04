@@ -8,8 +8,8 @@ def optimal_nb_cluster(inertia,threshold,max_clusters):
             if abs(inertia[i] - inertia[i - 1]) / inertia[0] < threshold:
                 optimal_nb_cluster = i
                 break  # Sortir de la boucle lorsque la condition est satisfaite*
-            else:
-                optimal_nb_cluster=1
+        else:
+            optimal_nb_cluster=1
     return optimal_nb_cluster
 
 

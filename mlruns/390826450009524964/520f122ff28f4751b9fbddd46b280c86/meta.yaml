@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/390826450009524964/520f122ff28f4751b9fbddd46b280c86/artifacts
+end_time: 1704386992280
+entry_point_name: ''
+experiment_id: '390826450009524964'
+lifecycle_stage: active
+run_id: 520f122ff28f4751b9fbddd46b280c86
+run_name: abrasive-jay-571
+run_uuid: 520f122ff28f4751b9fbddd46b280c86
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704386851191
+status: 3
+tags: []
+user_id: vince

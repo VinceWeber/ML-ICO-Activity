@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/390826450009524964/9d4ec849bdbe48e2b9619a6df91b2b44/artifacts
+end_time: 1704386851134
+entry_point_name: ''
+experiment_id: '390826450009524964'
+lifecycle_stage: active
+run_id: 9d4ec849bdbe48e2b9619a6df91b2b44
+run_name: wistful-bass-53
+run_uuid: 9d4ec849bdbe48e2b9619a6df91b2b44
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704386712216
+status: 3
+tags: []
+user_id: vince

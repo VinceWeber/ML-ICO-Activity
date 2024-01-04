@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/390826450009524964/24ead856cb0c4d72851729d71b15c676/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '390826450009524964'
+lifecycle_stage: active
+run_id: 24ead856cb0c4d72851729d71b15c676
+run_name: adventurous-jay-168
+run_uuid: 24ead856cb0c4d72851729d71b15c676
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704386992320
+status: 1
+tags: []
+user_id: vince

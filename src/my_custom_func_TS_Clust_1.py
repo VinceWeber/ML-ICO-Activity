@@ -43,6 +43,7 @@ def Create_dataset (Create_dataset_parameters,DSprefix):
     import pandas as pd
     import Parcours_Classes as PC
 
+    
     My_NIP_filter_1rst_date=datetime.strptime(Create_dataset_parameters[DSprefix + 'My_NIP_filter_1rst_date'], '%m-%d-%Y %H:%M:%S')
     My_NIP_filter_2nd_date=My_NIP_filter_1rst_date + timedelta(days=Create_dataset_parameters[DSprefix + 'My_NIP_filter_2nd_date_delta_in_days'])
 

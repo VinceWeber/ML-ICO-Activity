@@ -53,7 +53,7 @@ def Automatic_nb_cluster(X_scaled,Method, max_clusters,threshold,ouput=None,mlfl
         plt.savefig(curve_filename)
         #MLFLOW LOG
         #Curve of nb of cluster
-        mlflow.log_artifact(curve_filename, curve_mlflowname)
+        mlflow.log_artifact(curve_filename, 'Plots')
         
     #if ouput:
         #plt.show()
@@ -163,7 +163,7 @@ def Do_Clustering(X_scaled,Method,nb_clusters,ouput=None,mlflow=None,mlflow_outp
         plt.savefig(PCA_filename)
         #MLFLOW LOG
         #Curve of nb of cluster
-        mlflow.log_artifact(PCA_filename, PCA_mlflowname)
+        mlflow.log_artifact(PCA_filename, 'Plots')
         
     #if ouput:
     #    plt.show()
@@ -206,10 +206,12 @@ def my_clust_func(X_scaled,Method,n_clusters,max_clusters,threshold,ouput,mlflow
 
     if mlflow!=None:
         Cl_sum.to_csv(Cluster_summary_filename)
-        mlflow.log_artifact(Cluster_summary_filename,Cluster_summary_mlflowname)
+        mlflow.log_artifact(Cluster_summary_filename,'Dataset_csv')
+        #mlflow.log_artifact(Cluster_summary_filename,Cluster_summary_mlflowname)
         
         NIP_Carac.to_csv(NIP_Carac_filename)
-        mlflow.log_artifact(NIP_Carac_filename,NIP_Carac_mlflowname)
+        mlflow.log_artifact(NIP_Carac_filename,'Dataset_csv')
+        #mlflow.log_artifact(NIP_Carac_filename,NIP_Carac_mlflowname)
 
     #add the NIP to 'df_dist' and set it as index
     df_out=pd.concat([df_dist,List_NIP], axis=1)

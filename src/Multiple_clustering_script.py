@@ -39,11 +39,9 @@ import Sql_Alchemy_Classes as AlSQL
 
 import os
 current_directory = os.getcwd()
-#print("Current directory:", current_directory)
 
 #Open config.csv file as a dict
 file_path = current_directory + "\\07-Batch_configuration\\export_config.csv"
-file_path = file_path.replace('\\\\', '\\')
 
 config = pd.read_csv(file_path, encoding='ISO-8859-1')
 #Add a function to chekc csv file
@@ -51,6 +49,17 @@ print(Mcfbf.myprint('Import csv batch file succeed', 1, 1))
 
 
 total_index = len(config)
+
+
+#Delete all existing result tables from database ************TO BE COMPLETED*******************
+myRequete = 'EXECUTE dbo.Delete_TmpTables '
+AlSQL.AlSQL_Execute(AlSQL.engine,myRequete,'No')
+
+myRequete = 'EXECUTE dbo.Delete_MlflowTables '
+AlSQL.AlSQL_Execute(AlSQL.engine,myRequete,'No')
+
+
+
 for index,row in config.iterrows():
     #Initialize previous parameters variables
     if index!=0:
@@ -93,6 +102,7 @@ for index,row in config.iterrows():
     if same_dataset and First_run==False:
         print(Mcfbf.myprint('SKIP PREPARE DATASET STEP Parameters are identical', index, total_index))
     else :
+        
         Caracteristiques_Dataset=Mcftsc.Create_dataset(Create_dataset_parameters,DSprefix)
 
     #STORE THE RESULT IN MLFLOW
@@ -110,7 +120,6 @@ for index,row in config.iterrows():
     mlflow.log_metrics({'Time_STEP_DB_seconds' : elapsed_time }) 
 
 
-
     if Ac_config['T_Actes_Total']:
         #Recuperer une table acte pour affichage parcours complet
         Requete=Ac_config['T_Requete']
@@ -120,7 +129,7 @@ for index,row in config.iterrows():
         else:
             df_Actes_graph=AlSQL.AlSQL_Requete(AlSQL.engine,Requete,'No')
         
-        Mcftsc.plot_carepath(df_Actes_graph,myouputpath+ Ac_config['T_Filename'],mlflow,Ac_config['T_MlflowName'])
+        Mcftsc.plot_carepath(df_Actes_graph,myouputpath+ Ac_config['T_Filename'],mlflow,'Plots')
         #mlflow.log_artifact(myouputpath+ Ac_config['T_Filename'], Ac_config['T_MlflowName'])
         print(Mcfbf.myprint('STORE table acte pour affichage parcours complet OK', index, total_index))
 
@@ -133,7 +142,8 @@ for index,row in config.iterrows():
         else:
             df_Actes_graph0=AlSQL.AlSQL_Requete(AlSQL.engine,Requete,'No')
 
-        Mcftsc.plot_carepath(df_Actes_graph0,myouputpath+ Ac_config['P_Filename'],mlflow,Ac_config['P_MlflowName'])
+        Mcftsc.plot_carepath(df_Actes_graph0,myouputpath+ Ac_config['P_Filename'],mlflow,'Plots')
+        #Mcftsc.plot_carepath(df_Actes_graph0,myouputpath+ Ac_config['P_Filename'],mlflow,Ac_config['P_MlflowName'])
         #mlflow.log_artifact(myouputpath+ Ac_config['P_Filename'], Ac_config['P_MlflowName'])
         print(Mcfbf.myprint('STORE table acte pour affichage parcours radiotherapie OK', index, total_index))
 
@@ -158,9 +168,10 @@ for index,row in config.iterrows():
     mlflow.log_metrics({'Time_STEP_Aggregation_seconds ' : elapsed_time }) 
 
 
-    #Save the aggregation table !!!!!!  A DEPLACER A LA FIN DU NOTEBOOK POUR INTEGRER LES RESULTATS DE CLUSTERING
+    #Save the aggregation table !!!!!!  A DEPLACER A LA FIN DU NOTEBOOK POUR INTEGRER LES RESULTATS DE CLUSTERING ?
     Aggreg_Patients['df'].to_csv(myouputpath + Ac_config['filename'])
-    mlflow.log_artifact(myouputpath + Ac_config['filename'], Ac_config['mlflowname'])
+    #mlflow.log_artifact(myouputpath + Ac_config['filename'], Ac_config['mlflowname'])
+    mlflow.log_artifact(myouputpath + Ac_config['filename'], 'Dataset_csv')
     print(Mcfbf.myprint('Save the aggregation table OK', index, total_index))
 
     if Ac_config['T_F_Cluster']:
@@ -182,8 +193,9 @@ for index,row in config.iterrows():
         mlflow.log_metrics({'Time-TimeWindow_clustering_seconds' : elapsed_time }) 
 
         #SAVE CLUSTERING TO BDD
-        Mydf=Aggreg_Time_clust['df_dist'][['NIP',Time_Clust_parameters['clust_name']]]
-        Mcfcp.Save_only_Cluster_to_Database(Mydf,Time_Clust_parameters, myouputpath, 'Tmp_' + Time_Clust_parameters['clust_name'] )
+        #Mydf=Aggreg_Time_clust['df_dist'][['NIP',Time_Clust_parameters['clust_name']]]
+        Mydf=Aggreg_Time_clust['df_dist']
+        Mcfcp.Save_only_Cluster_to_Database(Mydf,Time_Clust_parameters, myouputpath, Time_Clust_parameters['Table_name'] )
         print(Mcfbf.myprint('Save First clustering to BDD (Principal clust) OK', index, total_index))
 
     if Ac_config['T_Dist_Cluster']:
@@ -212,8 +224,9 @@ for index,row in config.iterrows():
         mlflow.log_metrics({'Time-Parcours_clustering_seconds' : elapsed_time })
 
         #SAVE CLUSTERING TO BDD
-        Mydf=Aggreg_Parcours_clust['df_dist'][['NIP',Parcours_Clust_parameters['clust_name']]]
-        Mcfcp.Save_only_Cluster_to_Database(Mydf,Parcours_Clust_parameters, myouputpath, 'Tmp_' + Parcours_Clust_parameters['clust_name'] )
+        #Mydf=Aggreg_Parcours_clust['df_dist'][['NIP',Parcours_Clust_parameters['clust_name']]]
+        Mydf=Aggreg_Parcours_clust['df_dist']
+        Mcfcp.Save_only_Cluster_to_Database(Mydf,Parcours_Clust_parameters, myouputpath, Parcours_Clust_parameters['Table_name'] )
         print(Mcfbf.myprint('Save Second clustering to BDD (Principal clust) OK', index, total_index))
 
         #PLOT AND SAVE THE TS CURVES
@@ -223,37 +236,113 @@ for index,row in config.iterrows():
             'nb_cluster' : Aggreg_Parcours_clust['Nb_clusters'],
             'Column_name' : Parcours_Clust_parameters['clust_name'],
         }
-        Mcftsc.plot_TS_clusters(Aggreg_Parcours_clust,Timesteps,myouputpath+ 'TS_curves.png',Parcours_nb_clusters,mlflow,"TS_Curves_Clustering")
+        Mcftsc.plot_TS_clusters(Aggreg_Parcours_clust,Timesteps,myouputpath+ 'TS_curves.png',Parcours_nb_clusters,mlflow,'Plots')
+        #Mcftsc.plot_TS_clusters(Aggreg_Parcours_clust,Timesteps,myouputpath+ 'TS_curves.png',Parcours_nb_clusters,mlflow,"TS_Curves_Clustering")
         print(Mcfbf.myprint('TS Curves - Plotting and Saving OK', index, total_index))
 
     if Ac_config['CPP_Plot']:
+
+        CPP_Param=Mcfconf.set_CPP_Plot_parameters(Ac_config)
+
         #PLOT CARTEPATHES
-        My_order=Ac_config['CPP_Order']
-        Table_name=Ac_config['CPP_Save_Tble_Name']
-        Requete=Ac_config['CPP_Requete']
-        Filter_df_col=Ac_config['CPP_Filter_df_col']
-        Filter_df_value=Ac_config['CPP_Filter_df_value']
+        #My_order=Ac_config['CPP_Order']
+        #Table_name=Ac_config['CPP_Save_Tble_Name']
+        #Requete=Ac_config['CPP_Requete']
+        Filter_df_col=CPP_Param['CPP_Filter_df_col']
+        Filter_df_value=CPP_Param['CPP_Filter_df_value']
 
-        #PREPARE THE DATASET TO BE PLOTED
-        Parcours_DF=Mcfcp.Prepare_Plot_carepath_clustered_2levels(df_Actes_graph,Aggreg_Parcours_clust,Parcours_Clust_parameters,Aggreg_Time_clust,Time_Clust_parameters, My_order)
-        Abcisses_DF, Plot_dict =Mcfcp.Compute_abcisses(Parcours_DF,Parcours_Clust_parameters,Time_Clust_parameters)
-        print(Mcfbf.myprint('CPP - Computing Abcisses OK', index, total_index))
 
-        #SAVE THE CLUSTERING + PLOTTING VALUES TO THE DATABASE
-        Mcfcp.Save_Cluster_and_Carepath_to_Database(Abcisses_DF,Parcours_Clust_parameters,Time_Clust_parameters,myouputpath,Table_name)
-        print(Mcfbf.myprint('CPP - Saving Abcisses to BDD OK', index, total_index))
+        # **************** ADD HERE WHAT TO DO IF Clust 1 only, or Clust1+Clust2 set in CPP Parameters 
+        # 1 LEVEL (PARCOURS CLUSTERING)
+        if CPP_Param['primary_clust_name']!='NO_VALUE':
+            #Get df_parcours from database
+            myRequete="""SELECT * FROM [ICO_Activite].[dbo].[""" + CPP_Param['primary_clust_TableName'] +"""]"""
+            df_Parcours_clust=AlSQL.AlSQL_Requete(AlSQL.engine,myRequete,'No')
+            nameToBeSaved=CPP_Param['primary_clust_TableName'] + '_CPP'
 
-        #GET A DATASET OF ACTES
-        df_Actes_graph2=AlSQL.AlSQL_Requete(AlSQL.engine,Requete,'No')
-        #FILTER THE DATASET IN ORDER NOT TO SHOW ALL ACTES
-        filtered_df = df_Actes_graph2[df_Actes_graph2[Filter_df_col] == Filter_df_value]
-        nip_no_treatment_info = df_Actes_graph2[~df_Actes_graph2['NIP'].isin(filtered_df['NIP'])]
-        nip_no_treatment_info = nip_no_treatment_info[['NIP', 'Clust', 'X_abscisse']].drop_duplicates()
-        final_df = pd.concat([filtered_df, nip_no_treatment_info], ignore_index=True)
-        final_df_sorted = final_df.sort_values(by='X_abscisse')
-        #PLOT AND SAVE IN MLFLOW
-        Mcfcp.plot_df_actes(final_df_sorted,Aggreg_Parcours_clust,Parcours_Clust_parameters,Aggreg_Time_clust,Time_Clust_parameters, Plot_dict, mlflow, myouputpath)
-        print(Mcfbf.myprint('CPP - PLOTING AND SAVE TO MLFLOW OK', index, total_index))
+            Requete="""SELECT Table_Acte.[NIP]  ,
+            Table_Cluster.""" + CPP_Param['primary_clust_name'] + """ as Clust  ,
+            Table_Cluster.X_abscisse     ,
+            Table_Acte.[J_Parcours_V1]      ,
+            Table_Acte.[J_Parcours_V3]     ,
+            Table_Acte.[Service]      ,
+            Table_Acte.[Activite]      ,
+            Table_Acte.[Phase]     ,
+            Table_Acte.[Dimension]      ,
+            Table_Acte.[Type_seq]  
+
+            FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte ,
+            [ICO_Activite].[dbo].[""" + nameToBeSaved + """] as Table_Cluster
+
+            WHERE Table_Cluster.NIP = Table_Acte.NIP  
+
+            ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]"""
+
+
+            Mcfcp.Prepare_Save_Plot_one_clust(df_Actes_graph,df_Parcours_clust,CPP_Param['primary_clust_name'], CPP_Param['CPP_order'],myouputpath,nameToBeSaved,Requete,Filter_df_col,Filter_df_value,mlflow, nameToBeSaved)
+            print(Mcfbf.myprint('Primary Clust CPP - Plotting and Saving OK', index, total_index))
+        
+
+        # 1 LEVEL (TIME CLUSTERING)
+        if CPP_Param['sub_clust_name']!='NO_VALUE':
+            #Get df_parcours from database
+            myRequete="""SELECT * FROM [ICO_Activite].[dbo].[""" + CPP_Param['sub_clust_TableName'] +"""]"""
+            df_Parcours_clust=AlSQL.AlSQL_Requete(AlSQL.engine,myRequete,'No')
+            nameToBeSaved=CPP_Param['sub_clust_TableName'] + '_CPP'
+
+            Requete="""SELECT Table_Acte.[NIP]  ,
+            Table_Cluster.""" + CPP_Param['sub_clust_name'] + """ as Clust  ,
+            Table_Cluster.X_abscisse     ,
+            Table_Acte.[J_Parcours_V1]      ,
+            Table_Acte.[J_Parcours_V3]     ,
+            Table_Acte.[Service]      ,
+            Table_Acte.[Activite]      ,
+            Table_Acte.[Phase]     ,
+            Table_Acte.[Dimension]      ,
+            Table_Acte.[Type_seq]  
+
+            FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte ,
+            [ICO_Activite].[dbo].[""" + nameToBeSaved + """] as Table_Cluster
+
+            WHERE Table_Cluster.NIP = Table_Acte.NIP  
+
+            ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]"""
+
+            Mcfcp.Prepare_Save_Plot_one_clust(df_Actes_graph,df_Parcours_clust,CPP_Param['sub_clust_name'], CPP_Param['CPP_order'],myouputpath,nameToBeSaved,Requete,Filter_df_col,Filter_df_value,mlflow, nameToBeSaved)
+            print(Mcfbf.myprint('Subclust CPP - Plotting and Saving OK', index, total_index))
+
+        
+        # 2 LEVELS (TIME + PARCOURS CLUSTERING)
+        if CPP_Param['sub_clust_name']!='NO_VALUE' and CPP_Param['primary_clust_name']!='NO_VALUE':
+            #Get df_parcours from database
+            myRequete="""SELECT * FROM [ICO_Activite].[dbo].[""" + CPP_Param['primary_clust_TableName'] + """]"""
+            cluster1_Table=AlSQL.AlSQL_Requete(AlSQL.engine,myRequete,'No')
+            myRequete="""SELECT * FROM [ICO_Activite].[dbo].[""" + CPP_Param['sub_clust_TableName'] + """]"""
+            cluster2_Table=AlSQL.AlSQL_Requete(AlSQL.engine,myRequete,'No')
+            nameToBeSaved=CPP_Param['CPP_Table_Name'] + CPP_Param['primary_clust_name'] +"-" + CPP_Param['sub_clust_name'] + '_CPP'
+
+
+            Requete="""SELECT Table_Acte.[NIP]  ,
+            Table_Cluster.""" + CPP_Param['primary_clust_name'] + """ as Clust1  ,
+            Table_Cluster.""" + CPP_Param['sub_clust_name'] + """ as Clust2  ,
+            Table_Cluster.X_abscisse     ,
+            Table_Acte.[J_Parcours_V1]      ,
+            Table_Acte.[J_Parcours_V3]     ,
+            Table_Acte.[Service]      ,
+            Table_Acte.[Activite]      ,
+            Table_Acte.[Phase]     ,
+            Table_Acte.[Dimension]      ,
+            Table_Acte.[Type_seq]  
+
+            FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte ,
+            [ICO_Activite].[dbo].[""" + CPP_Param['CPP_Table_Name'] + """] as Table_Cluster
+
+            WHERE Table_Cluster.NIP = Table_Acte.NIP  
+
+            ORDER BY Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]"""
+            
+            Mcfcp.Prepare_Save_Plot_twice_clustered(df_Actes_graph,cluster1_Table,cluster2_Table,CPP_Param,Requete,myouputpath,mlflow,nameToBeSaved)
+            print(Mcfbf.myprint('Primary And Subclust CPP - Plotting and Saving OK', index, total_index))
 
     # CLOSE THE MLFLOW
     mlflow.end_run()

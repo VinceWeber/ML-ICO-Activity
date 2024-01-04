@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/676768059614581921/dfa14c8911e94a2296732eb733294461/artifacts
+deleted_time: 1704278849025
+end_time: 1704191989147
+entry_point_name: ''
+experiment_id: '676768059614581921'
+lifecycle_stage: deleted
+run_id: dfa14c8911e94a2296732eb733294461
+run_name: sedate-quail-277
+run_uuid: dfa14c8911e94a2296732eb733294461
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704191938733
+status: 3
+tags: []
+user_id: vince

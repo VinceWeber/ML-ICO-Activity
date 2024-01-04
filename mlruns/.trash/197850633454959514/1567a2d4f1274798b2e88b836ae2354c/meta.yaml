@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/197850633454959514/1567a2d4f1274798b2e88b836ae2354c/artifacts
+deleted_time: 1704280245979
+end_time: null
+entry_point_name: ''
+experiment_id: '197850633454959514'
+lifecycle_stage: deleted
+run_id: 1567a2d4f1274798b2e88b836ae2354c
+run_name: stately-hog-771
+run_uuid: 1567a2d4f1274798b2e88b836ae2354c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704278880382
+status: 1
+tags: []
+user_id: vince

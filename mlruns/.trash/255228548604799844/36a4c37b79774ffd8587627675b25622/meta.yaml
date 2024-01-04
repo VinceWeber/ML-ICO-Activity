@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/255228548604799844/36a4c37b79774ffd8587627675b25622/artifacts
+deleted_time: 1704359580042
+end_time: null
+entry_point_name: ''
+experiment_id: '255228548604799844'
+lifecycle_stage: deleted
+run_id: 36a4c37b79774ffd8587627675b25622
+run_name: overjoyed-ram-679
+run_uuid: 36a4c37b79774ffd8587627675b25622
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704292904102
+status: 1
+tags: []
+user_id: vince

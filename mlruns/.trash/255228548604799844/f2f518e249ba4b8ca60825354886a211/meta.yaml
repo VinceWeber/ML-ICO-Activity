@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/255228548604799844/f2f518e249ba4b8ca60825354886a211/artifacts
+deleted_time: 1704359580042
+end_time: null
+entry_point_name: ''
+experiment_id: '255228548604799844'
+lifecycle_stage: deleted
+run_id: f2f518e249ba4b8ca60825354886a211
+run_name: bemused-shad-556
+run_uuid: f2f518e249ba4b8ca60825354886a211
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704289196873
+status: 1
+tags: []
+user_id: vince

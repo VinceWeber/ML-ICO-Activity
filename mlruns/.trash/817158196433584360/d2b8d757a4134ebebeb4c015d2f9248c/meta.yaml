@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/817158196433584360/d2b8d757a4134ebebeb4c015d2f9248c/artifacts
+deleted_time: 1704288472417
+end_time: 1704287932075
+entry_point_name: ''
+experiment_id: '817158196433584360'
+lifecycle_stage: deleted
+run_id: d2b8d757a4134ebebeb4c015d2f9248c
+run_name: efficient-ram-408
+run_uuid: d2b8d757a4134ebebeb4c015d2f9248c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704287869317
+status: 3
+tags: []
+user_id: vince

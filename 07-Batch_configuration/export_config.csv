@@ -1,5 +1,5 @@
-ID_RUN,Experiment,Experiment_tag_1,Experiment_tag_2,DS_Prefix,My_NIP_filter_1rst_date,My_NIP_filter_2nd_date_delta_in_days,Site,Start_Window_time,End_Window_time,myouputpath,T_Actes_Total,T_Requete,T_Filename,T_MlflowName,P_Specific_Plot,P_Requete,P_Filename,P_MlflowName,Aggprefix,Report_type,Aggreg_type,Date_ref,Start_at_item,Stop_at_item,Method,Type_filter1,Val_filter1,Type_filter2,Val_filter2,Param_J0,filename,mlflowname,T_F_Cluster,T_DDA,T_DDT,T_DD…. ?,T_Clust_Name,T_Method,T_linkage,T_Nb_clusters,T_max_nb_clusters,T_threshold,T_Table Name,T_Dist_Cluster,P_Nb dimensions,P_Clust_Name,P_Method,P_linkage,P_Nb_clusters,P_max_nb_clusters,P_threshold,P_dist_method,P_Window_type,P_Window_size,P_Table Name,CPP_Plot,CPP_Order,CPP_Save_Tble_Name,CPP_Requete,CPP_Filter_df_col,CPP_Filter_df_value
-1,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+PARAMETER,ID_RUN,Experiment,Experiment_tag_1,Experiment_tag_2,DS_Prefix,My_NIP_filter_1rst_date,My_NIP_filter_2nd_date_delta_in_days,Site,Start_Window_time,End_Window_time,myouputpath,T_Actes_Total,T_Requete,T_Filename,T_MlflowName,P_Specific_Plot,P_Requete,P_Filename,P_MlflowName,Aggprefix,Report_type,Aggreg_type,Date_ref,Start_at_item,Stop_at_item,Method,Type_filter1,Val_filter1,Type_filter2,Val_filter2,Param_J0,filename,mlflowname,T_F_Cluster,T_DDA,T_DDT,T_DD…. ?,T_Clust_Name,T_Method,T_linkage,T_Nb_clusters,T_max_nb_clusters,T_threshold,T_Table_Name,T_Dist_Cluster,P_Nb dimensions,P_Clust_Name,P_Method,P_linkage,P_Nb_clusters,P_max_nb_clusters,P_threshold,P_dist_method,P_Window_type,P_Window_size,P_Table_Name,CPP_Plot,CPP_Order,CPP_Save_Tble_Name,CPP_Requete,CPP_Filter_df_col,CPP_Filter_df_value,CPP_Clust1_name,CPP_Clust1_T_name,CPP_Clust2_name,CPP_Clust2_T_name
+VALUE1,1,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
 	  --,Table_Cluster.Cluster
 	  --,Table_Cluster.X_abscisse
       ,Table_Acte.[J_Parcours_V1]
@@ -25,22 +25,11 @@ ID_RUN,Experiment,Experiment_tag_1,Experiment_tag_2,DS_Prefix,My_NIP_filter_1rst
   FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
 	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
   
-  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,2,PARCOURS,'',0,24,COUNT,6,TRAIT,1,Oncologie Medicale,V1,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,,Cl_T1,KMeans,ward,None,20,0.05,Exp_NIP_Cl_T1,TRUE,1,Cl_P1,KMeans,ward,None,20,0.05,euclidean,None,None,Exp_NIP_Cl_P1,TRUE,Max_J_V1,Exp_NIP_Cluster1,"SELECT Table_Acte.[NIP]
-	  ,Table_Cluster.CL_T1 as Clust
-	  ,Table_Cluster.X_abscisse
-      ,Table_Acte.[J_Parcours_V1]
-      ,Table_Acte.[J_Parcours_V3]
-      ,Table_Acte.[Service]
-      ,Table_Acte.[Activite]
-      ,Table_Acte.[Phase]
-      ,Table_Acte.[Dimension]
-      ,Table_Acte.[Type_seq]
-  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
-	 , [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
-  
+  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,2,PARCOURS,'',0,24,COUNT,6,TRAIT,1,Oncologie Medicale,V1,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,,Cl_T1,KMeans,ward,None,10,0.05,Mlflow_Exp_NIP_Cl_T1,TRUE,1,Cl_P1,KMeans,ward,None,10,0.05,euclidean,sakoechiba,8,Mlflow_Exp_NIP_Cl_P1,TRUE,Max_J_V1,Mlflow_Exp_NIP_CPP1,"SELECT Table_Acte.[NIP]  ,Table_Cluster.Cl_P1 as Clust  ,Table_Cluster.X_abscisse   ,Table_Acte.[J_Parcours_V1]  ,Table_Acte.[J_Parcours_V3]   ,Table_Acte.[Service] ,Table_Acte.[Activite]   ,Table_Acte.[Phase]   ,Table_Acte.[Dimension]   ,Table_Acte.[Type_seq]  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 , [ICO_Activite].[dbo].[Mlflow_Exp_NIP_Cl_P1] as Table_Cluster
   WHERE Table_Cluster.NIP = Table_Acte.NIP
-  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement
-2,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement,Cl_P1,Mlflow_Exp_NIP_Cl_P1,Cl_T1,Mlflow_Exp_NIP_Cl_T1
+VALUE4,2,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
 	  --,Table_Cluster.Cluster
 	  --,Table_Cluster.X_abscisse
       ,Table_Acte.[J_Parcours_V1]
@@ -66,22 +55,11 @@ ID_RUN,Experiment,Experiment_tag_1,Experiment_tag_2,DS_Prefix,My_NIP_filter_1rst
   FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
 	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
   
-  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,2,PARCOURS,'',0,24,PRESENCE,6,TRAIT,1,Oncologie Medicale,V1,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T1,KMeans,ward,None,20,0.05,Exp_NIP_Cl_T2,TRUE,1,Cl_P1,KMeans,ward,None,20,0.05,euclidean,None,None,Exp_NIP_Cl_P2,TRUE,Max_J_V1,Exp_NIP_Cluster2,"SELECT Table_Acte.[NIP]
-	  ,Table_Cluster.CL_T1 as Clust
-	  ,Table_Cluster.X_abscisse
-      ,Table_Acte.[J_Parcours_V1]
-      ,Table_Acte.[J_Parcours_V3]
-      ,Table_Acte.[Service]
-      ,Table_Acte.[Activite]
-      ,Table_Acte.[Phase]
-      ,Table_Acte.[Dimension]
-      ,Table_Acte.[Type_seq]
-  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
-	 , [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
-  
+  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,2,PARCOURS,'',0,24,PRESENCE,6,TRAIT,1,Oncologie Medicale,V2,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T2,KMeans,ward,None,10,0.05,Mlflow_Exp_NIP_Cl_T2,TRUE,1,Cl_P2,KMeans,ward,None,10,0.05,euclidean,sakoechiba,8,Mlflow_Exp_NIP_Cl_P2,TRUE,Max_J_V1,Mlflow_Exp_NIP_CPP2,"SELECT Table_Acte.[NIP]  ,Table_Cluster.Cl_P2 as Clust  ,Table_Cluster.X_abscisse   ,Table_Acte.[J_Parcours_V1]  ,Table_Acte.[J_Parcours_V3]   ,Table_Acte.[Service] ,Table_Acte.[Activite]   ,Table_Acte.[Phase]   ,Table_Acte.[Dimension]   ,Table_Acte.[Type_seq]  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 , [ICO_Activite].[dbo].[Mlflow_Exp_NIP_Cl_P2] as Table_Cluster
   WHERE Table_Cluster.NIP = Table_Acte.NIP
-  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement
-3,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement,Cl_P2,Mlflow_Exp_NIP_Cl_P2,Cl_T2,Mlflow_Exp_NIP_Cl_T2
+VALUE7,3,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
 	  --,Table_Cluster.Cluster
 	  --,Table_Cluster.X_abscisse
       ,Table_Acte.[J_Parcours_V1]
@@ -107,22 +85,11 @@ ID_RUN,Experiment,Experiment_tag_1,Experiment_tag_2,DS_Prefix,My_NIP_filter_1rst
   FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
 	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
   
-  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,1,PARCOURS,'',0,104,COUNT,6,TRAIT,1,Oncologie Medicale,V1,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T1,KMeans,ward,None,20,0.05,Exp_NIP_Cl_T3,TRUE,1,Cl_P1,KMeans,ward,None,20,0.05,euclidean,sakoechiba,34,Exp_NIP_Cl_P3,TRUE,Max_J_V1,Exp_NIP_Cluster3,"SELECT Table_Acte.[NIP]
-	  ,Table_Cluster.CL_T1 as Clust
-	  ,Table_Cluster.X_abscisse
-      ,Table_Acte.[J_Parcours_V1]
-      ,Table_Acte.[J_Parcours_V3]
-      ,Table_Acte.[Service]
-      ,Table_Acte.[Activite]
-      ,Table_Acte.[Phase]
-      ,Table_Acte.[Dimension]
-      ,Table_Acte.[Type_seq]
-  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
-	 , [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
-  
+  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,1,PARCOURS,'',0,104,COUNT,6,TRAIT,1,Oncologie Medicale,V3,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T3,KMeans,ward,None,10,0.05,Mlflow_Exp_NIP_Cl_T3,TRUE,1,Cl_P3,KMeans,ward,None,10,0.05,euclidean,sakoechiba,34,Mlflow_Exp_NIP_Cl_P3,TRUE,Max_J_V1,Mlflow_Exp_NIP_CPP3,"SELECT Table_Acte.[NIP]  ,Table_Cluster.Cl_P3 as Clust  ,Table_Cluster.X_abscisse   ,Table_Acte.[J_Parcours_V1]  ,Table_Acte.[J_Parcours_V3]   ,Table_Acte.[Service] ,Table_Acte.[Activite]   ,Table_Acte.[Phase]   ,Table_Acte.[Dimension]   ,Table_Acte.[Type_seq]  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 , [ICO_Activite].[dbo].[Mlflow_Exp_NIP_Cl_P3] as Table_Cluster
   WHERE Table_Cluster.NIP = Table_Acte.NIP
-  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement
-4,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement,Cl_P3,Mlflow_Exp_NIP_Cl_P3,Cl_T3,Mlflow_Exp_NIP_Cl_T3
+VALUE10,4,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
 	  --,Table_Cluster.Cluster
 	  --,Table_Cluster.X_abscisse
       ,Table_Acte.[J_Parcours_V1]
@@ -148,9 +115,13 @@ ID_RUN,Experiment,Experiment_tag_1,Experiment_tag_2,DS_Prefix,My_NIP_filter_1rst
   FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
 	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
   
-  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,1,PARCOURS,'',0,104,PRESENCE,6,TRAIT,1,Oncologie Medicale,V1,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T1,KMeans,ward,None,20,0.05,Exp_NIP_Cl_T4,TRUE,1,Cl_P1,KMeans,ward,None,20,0.05,euclidean,sakoechiba,34,Exp_NIP_Cl_P4,TRUE,Max_J_V1,Exp_NIP_Cluster4,"SELECT Table_Acte.[NIP]
-	  ,Table_Cluster.CL_T1 as Clust
-	  ,Table_Cluster.X_abscisse
+  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,1,PARCOURS,'',0,104,PRESENCE,6,TRAIT,1,Oncologie Medicale,V4,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T4,KMeans,ward,None,10,0.05,Mlflow_Exp_NIP_Cl_T4,TRUE,1,Cl_P4,KMeans,ward,None,10,0.05,euclidean,sakoechiba,34,Mlflow_Exp_NIP_Cl_P4,TRUE,Max_J_V1,Mlflow_Exp_NIP_CPP4,"SELECT Table_Acte.[NIP]  ,Table_Cluster.Cl_P4 as Clust  ,Table_Cluster.X_abscisse   ,Table_Acte.[J_Parcours_V1]  ,Table_Acte.[J_Parcours_V3]   ,Table_Acte.[Service] ,Table_Acte.[Activite]   ,Table_Acte.[Phase]   ,Table_Acte.[Dimension]   ,Table_Acte.[Type_seq]  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 , [ICO_Activite].[dbo].[Mlflow_Exp_NIP_Cl_P4] as Table_Cluster
+  WHERE Table_Cluster.NIP = Table_Acte.NIP
+  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement,Cl_P4,Mlflow_Exp_NIP_Cl_P4,Cl_T4,Mlflow_Exp_NIP_Cl_T4
+VALUE13,5,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
       ,Table_Acte.[J_Parcours_V1]
       ,Table_Acte.[J_Parcours_V3]
       ,Table_Acte.[Service]
@@ -159,7 +130,232 @@ ID_RUN,Experiment,Experiment_tag_1,Experiment_tag_2,DS_Prefix,My_NIP_filter_1rst
       ,Table_Acte.[Dimension]
       ,Table_Acte.[Type_seq]
   FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
-	 , [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
   
+  --WHERE Table_Cluster.NIP = Table_Acte.NIP",Actes_total.png,DS_General_plot,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,2,PARCOURS,'',0,24,COUNT,6,TRAIT,1,Radiothérapie,V5,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T5,KMeans,ward,None,10,0.05,Mlflow_Exp_NIP_Cl_T5,TRUE,1,Cl_P5,KMeans,ward,None,10,0.05,euclidean,sakoechiba,8,Mlflow_Exp_NIP_Cl_P5,TRUE,Max_J_V1,Mlflow_Exp_NIP_CPP5,"SELECT Table_Acte.[NIP]  ,Table_Cluster.Cl_P5 as Clust  ,Table_Cluster.X_abscisse   ,Table_Acte.[J_Parcours_V1]  ,Table_Acte.[J_Parcours_V3]   ,Table_Acte.[Service] ,Table_Acte.[Activite]   ,Table_Acte.[Phase]   ,Table_Acte.[Dimension]   ,Table_Acte.[Type_seq]  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 , [ICO_Activite].[dbo].[Mlflow_Exp_NIP_Cl_P5] as Table_Cluster
   WHERE Table_Cluster.NIP = Table_Acte.NIP
-  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement
+  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement,Cl_P5,Mlflow_Exp_NIP_Cl_P5,Cl_T5,Mlflow_Exp_NIP_Cl_T5
+VALUE16,6,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  --WHERE Table_Cluster.NIP = Table_Acte.NIP",Actes_total.png,DS_General_plot,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,2,PARCOURS,'',0,24,PRESENCE,6,TRAIT,1,Radiothérapie,V6,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T6,KMeans,ward,None,10,0.05,Mlflow_Exp_NIP_Cl_T6,TRUE,1,Cl_P6,KMeans,ward,None,10,0.05,euclidean,sakoechiba,8,Mlflow_Exp_NIP_Cl_P6,TRUE,Max_J_V1,Mlflow_Exp_NIP_CPP6,"SELECT Table_Acte.[NIP]  ,Table_Cluster.Cl_P6 as Clust  ,Table_Cluster.X_abscisse   ,Table_Acte.[J_Parcours_V1]  ,Table_Acte.[J_Parcours_V3]   ,Table_Acte.[Service] ,Table_Acte.[Activite]   ,Table_Acte.[Phase]   ,Table_Acte.[Dimension]   ,Table_Acte.[Type_seq]  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 , [ICO_Activite].[dbo].[Mlflow_Exp_NIP_Cl_P6] as Table_Cluster
+  WHERE Table_Cluster.NIP = Table_Acte.NIP
+  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement,Cl_P6,Mlflow_Exp_NIP_Cl_P6,Cl_T6,Mlflow_Exp_NIP_Cl_T6
+VALUE19,7,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  --WHERE Table_Cluster.NIP = Table_Acte.NIP",Actes_total.png,DS_General_plot,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,1,PARCOURS,'',0,104,COUNT,6,TRAIT,1,Radiothérapie,V7,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T7,KMeans,ward,None,10,0.05,Mlflow_Exp_NIP_Cl_T7,TRUE,1,Cl_P7,KMeans,ward,None,10,0.05,euclidean,sakoechiba,34,Mlflow_Exp_NIP_Cl_P7,TRUE,Max_J_V1,Mlflow_Exp_NIP_CPP7,"SELECT Table_Acte.[NIP]  ,Table_Cluster.Cl_P7 as Clust  ,Table_Cluster.X_abscisse   ,Table_Acte.[J_Parcours_V1]  ,Table_Acte.[J_Parcours_V3]   ,Table_Acte.[Service] ,Table_Acte.[Activite]   ,Table_Acte.[Phase]   ,Table_Acte.[Dimension]   ,Table_Acte.[Type_seq]  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 , [ICO_Activite].[dbo].[Mlflow_Exp_NIP_Cl_P7] as Table_Cluster
+  WHERE Table_Cluster.NIP = Table_Acte.NIP
+  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement,Cl_P7,Mlflow_Exp_NIP_Cl_P7,Cl_T7,Mlflow_Exp_NIP_Cl_T7
+VALUE22,8,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  --WHERE Table_Cluster.NIP = Table_Acte.NIP",Actes_total.png,DS_General_plot,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,1,PARCOURS,'',0,104,PRESENCE,6,TRAIT,1,Radiothérapie,V8,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T8,KMeans,ward,None,10,0.05,Mlflow_Exp_NIP_Cl_T8,TRUE,1,Cl_P8,KMeans,ward,None,10,0.05,euclidean,sakoechiba,34,Mlflow_Exp_NIP_Cl_P8,TRUE,Max_J_V1,Mlflow_Exp_NIP_CPP8,"SELECT Table_Acte.[NIP]  ,Table_Cluster.Cl_P8 as Clust  ,Table_Cluster.X_abscisse   ,Table_Acte.[J_Parcours_V1]  ,Table_Acte.[J_Parcours_V3]   ,Table_Acte.[Service] ,Table_Acte.[Activite]   ,Table_Acte.[Phase]   ,Table_Acte.[Dimension]   ,Table_Acte.[Type_seq]  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 , [ICO_Activite].[dbo].[Mlflow_Exp_NIP_Cl_P8] as Table_Cluster
+  WHERE Table_Cluster.NIP = Table_Acte.NIP
+  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement,Cl_P8,Mlflow_Exp_NIP_Cl_P8,Cl_T8,Mlflow_Exp_NIP_Cl_T8
+VALUE25,9,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  --WHERE Table_Cluster.NIP = Table_Acte.NIP",Actes_total.png,DS_General_plot,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,2,PARCOURS,'',0,24,COUNT,6,TRAIT,1,Chirurgie,V9,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T9,KMeans,ward,None,10,0.05,Mlflow_Exp_NIP_Cl_T9,TRUE,1,Cl_P9,KMeans,ward,None,10,0.05,euclidean,sakoechiba,8,Mlflow_Exp_NIP_Cl_P9,TRUE,Max_J_V1,Mlflow_Exp_NIP_CPP9,"SELECT Table_Acte.[NIP]  ,Table_Cluster.Cl_P9 as Clust  ,Table_Cluster.X_abscisse   ,Table_Acte.[J_Parcours_V1]  ,Table_Acte.[J_Parcours_V3]   ,Table_Acte.[Service] ,Table_Acte.[Activite]   ,Table_Acte.[Phase]   ,Table_Acte.[Dimension]   ,Table_Acte.[Type_seq]  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 , [ICO_Activite].[dbo].[Mlflow_Exp_NIP_Cl_P9] as Table_Cluster
+  WHERE Table_Cluster.NIP = Table_Acte.NIP
+  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement,Cl_P9,Mlflow_Exp_NIP_Cl_P9,Cl_T9,Mlflow_Exp_NIP_Cl_T9
+VALUE28,10,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  --WHERE Table_Cluster.NIP = Table_Acte.NIP",Actes_total.png,DS_General_plot,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,2,PARCOURS,'',0,24,PRESENCE,6,TRAIT,1,Chirurgie,V10,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T10,KMeans,ward,None,10,0.05,Mlflow_Exp_NIP_Cl_T10,TRUE,1,Cl_P10,KMeans,ward,None,10,0.05,euclidean,sakoechiba,8,Mlflow_Exp_NIP_Cl_P10,TRUE,Max_J_V1,Mlflow_Exp_NIP_CPP10,"SELECT Table_Acte.[NIP]  ,Table_Cluster.Cl_P10 as Clust  ,Table_Cluster.X_abscisse   ,Table_Acte.[J_Parcours_V1]  ,Table_Acte.[J_Parcours_V3]   ,Table_Acte.[Service] ,Table_Acte.[Activite]   ,Table_Acte.[Phase]   ,Table_Acte.[Dimension]   ,Table_Acte.[Type_seq]  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 , [ICO_Activite].[dbo].[Mlflow_Exp_NIP_Cl_P10] as Table_Cluster
+  WHERE Table_Cluster.NIP = Table_Acte.NIP
+  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement,Cl_P10,Mlflow_Exp_NIP_Cl_P10,Cl_T10,Mlflow_Exp_NIP_Cl_T10
+VALUE31,11,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  --WHERE Table_Cluster.NIP = Table_Acte.NIP",Actes_total.png,DS_General_plot,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,1,PARCOURS,'',0,104,COUNT,6,TRAIT,1,Chirurgie,V11,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T11,KMeans,ward,None,10,0.05,Mlflow_Exp_NIP_Cl_T11,TRUE,1,Cl_P11,KMeans,ward,None,10,0.05,euclidean,sakoechiba,34,Mlflow_Exp_NIP_Cl_P11,TRUE,Max_J_V1,Mlflow_Exp_NIP_CPP11,"SELECT Table_Acte.[NIP]  ,Table_Cluster.Cl_P11 as Clust  ,Table_Cluster.X_abscisse   ,Table_Acte.[J_Parcours_V1]  ,Table_Acte.[J_Parcours_V3]   ,Table_Acte.[Service] ,Table_Acte.[Activite]   ,Table_Acte.[Phase]   ,Table_Acte.[Dimension]   ,Table_Acte.[Type_seq]  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 , [ICO_Activite].[dbo].[Mlflow_Exp_NIP_Cl_P11] as Table_Cluster
+  WHERE Table_Cluster.NIP = Table_Acte.NIP
+  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement,Cl_P11,Mlflow_Exp_NIP_Cl_P11,Cl_T11,Mlflow_Exp_NIP_Cl_T11
+VALUE34,12,Clustering parcours_V1,exp.version,0.1,000_DS_,01-01-2019 00:00:00,1,2,01-09-2018 00:00:00,12-31-2020 00:00:00,C:/Users/vince/Documents/DSTI/DSTI_Projects/ML ICO Activity/06 - Temp_outputs/,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  --WHERE Table_Cluster.NIP = Table_Acte.NIP",Actes_total.png,DS_General_plot,TRUE,"SELECT Table_Acte.[NIP]
+	  --,Table_Cluster.Cluster
+	  --,Table_Cluster.X_abscisse
+      ,Table_Acte.[J_Parcours_V1]
+      ,Table_Acte.[J_Parcours_V3]
+      ,Table_Acte.[Service]
+      ,Table_Acte.[Activite]
+      ,Table_Acte.[Phase]
+      ,Table_Acte.[Dimension]
+      ,Table_Acte.[Type_seq]
+  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 --, [ICO_Activite].[dbo].[Tmp_NIP_Cluster] as Table_Cluster
+  
+  WHERE Table_Acte.[Service] = 'Radiothérapie'",Actes_rdth.png,DS_General_RDTH_plot,010_Agg_,1,PARCOURS,'',0,104,PRESENCE,6,TRAIT,1,Chirurgie,V12,Agg_Pat.csv,Aggreg_Dataset,TRUE,YES,YES,0,Cl_T12,KMeans,ward,None,10,0.05,Mlflow_Exp_NIP_Cl_T12,TRUE,1,Cl_P12,KMeans,ward,None,10,0.05,euclidean,sakoechiba,34,Mlflow_Exp_NIP_Cl_P12,TRUE,Max_J_V1,Mlflow_Exp_NIP_CPP12,"SELECT Table_Acte.[NIP]  ,Table_Cluster.Cl_P12 as Clust  ,Table_Cluster.X_abscisse   ,Table_Acte.[J_Parcours_V1]  ,Table_Acte.[J_Parcours_V3]   ,Table_Acte.[Service] ,Table_Acte.[Activite]   ,Table_Acte.[Phase]   ,Table_Acte.[Dimension]   ,Table_Acte.[Type_seq]  FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+	 , [ICO_Activite].[dbo].[Mlflow_Exp_NIP_Cl_P12] as Table_Cluster
+  WHERE Table_Cluster.NIP = Table_Acte.NIP
+  ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]",Phase,Traitement,Cl_P12,Mlflow_Exp_NIP_Cl_P12,Cl_T12,Mlflow_Exp_NIP_Cl_T12

@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/255228548604799844/abf9d10f29854cb784b92159e4a84efa/artifacts
+deleted_time: 1704359580042
+end_time: 1704358446079
+entry_point_name: ''
+experiment_id: '255228548604799844'
+lifecycle_stage: deleted
+run_id: abf9d10f29854cb784b92159e4a84efa
+run_name: monumental-steed-964
+run_uuid: abf9d10f29854cb784b92159e4a84efa
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704358210463
+status: 3
+tags: []
+user_id: vince

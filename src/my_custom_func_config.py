@@ -90,6 +90,8 @@ def set_Time_clust_parameters(CSV_Clust_config):
     NIP_Carac_filename = mypath + clust_name + "_NIP_Carac.csv"
     NIP_Carac_mlflowname = clust_name + "_NIP_Carac"
 
+    Table_name= CSV_Clust_config['T_Table_Name']
+
     #mlflowoutput
     Time_Clust_parameters={
         'Method': CSV_Clust_config['T_Method'],
@@ -104,7 +106,8 @@ def set_Time_clust_parameters(CSV_Clust_config):
         'Summary_filename' : Cluster_summary_filename,
         'Summary_mlflowname' : Cluster_summary_mlflowname,
         'NIP_Carac_filename' : NIP_Carac_filename,
-        'NIP_Carac_mlflowname' : NIP_Carac_mlflowname
+        'NIP_Carac_mlflowname' : NIP_Carac_mlflowname,
+        'Table_name' : Table_name
         }
 
     return Time_Clust_parameters
@@ -134,6 +137,8 @@ def set_parcours_clust_parameters(CSV_Clust_config):
     NIP_Carac_filename = mypath + clust_name + "_NIP_Carac.csv"
     NIP_Carac_mlflowname = clust_name + "_NIP_Carac"
 
+    Table_name= CSV_Clust_config['P_Table_Name']
+
     #mlflowoutput
     Parcours_Clust_parameters={
         'Method': CSV_Clust_config['P_Method'],
@@ -148,7 +153,8 @@ def set_parcours_clust_parameters(CSV_Clust_config):
         'Summary_filename' : Cluster_summary_filename,
         'Summary_mlflowname' : Cluster_summary_mlflowname,
         'NIP_Carac_filename' : NIP_Carac_filename,
-        'NIP_Carac_mlflowname' : NIP_Carac_mlflowname
+        'NIP_Carac_mlflowname' : NIP_Carac_mlflowname,
+        'Table_name' : Table_name
         }
 
     return Parcours_Clust_parameters
@@ -168,3 +174,40 @@ def get_dtw_param(CSV_config):
         dtw_param['window_type'] = None
 
     return dtw_param
+
+
+def set_CPP_Plot_parameters(CSV_Clust_config):
+    
+    CPP_plot=CSV_Clust_config['CPP_Plot']
+    CPP_order=CSV_Clust_config['CPP_Order']
+    CPP_Table_Name=CSV_Clust_config['CPP_Save_Tble_Name']
+    CPP_Requete=CSV_Clust_config['CPP_Requete']
+
+    CPP_Filter_df_col=CSV_Clust_config['CPP_Filter_df_col']
+    CPP_Filter_df_value=CSV_Clust_config['CPP_Filter_df_value']
+
+    primary_clust_name=CSV_Clust_config['CPP_Clust1_name']
+    primary_clust_TableName=CSV_Clust_config['CPP_Clust1_T_name']
+
+    if CSV_Clust_config['CPP_Clust2_name']!='None':
+        sub_clust_name=CSV_Clust_config['CPP_Clust2_name']
+        sub_clust_TableName=CSV_Clust_config['CPP_Clust2_T_name']
+    else:
+        sub_clust_name=None
+        sub_clust_TableName=None
+
+    #mlflowoutput
+    CPP_parameters={
+        'CPP_plot_Bool': CPP_plot,
+        'CPP_order' : CPP_order,
+        'CPP_Table_Name': CPP_Table_Name,
+        'CPP_Requete':CPP_Requete,
+        'CPP_Filter_df_col':CPP_Filter_df_col,
+        'CPP_Filter_df_value':CPP_Filter_df_value,
+        'primary_clust_name':primary_clust_name,
+        'primary_clust_TableName':primary_clust_TableName,
+        'sub_clust_name':sub_clust_name,
+        'sub_clust_TableName':sub_clust_TableName,
+
+        }
+    return CPP_parameters

@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/338463015938856163/d15b62f23a144c129afe86fa44af3dd0/artifacts
+deleted_time: 1704362111006
+end_time: 1704359683387
+entry_point_name: ''
+experiment_id: '338463015938856163'
+lifecycle_stage: deleted
+run_id: d15b62f23a144c129afe86fa44af3dd0
+run_name: funny-mule-523
+run_uuid: d15b62f23a144c129afe86fa44af3dd0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704359589946
+status: 3
+tags: []
+user_id: vince

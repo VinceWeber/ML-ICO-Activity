@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/153850428174362179/b25c06cad81f45aab17b237246f253b2/artifacts
+deleted_time: 1704289188477
+end_time: 1704288664454
+entry_point_name: ''
+experiment_id: '153850428174362179'
+lifecycle_stage: deleted
+run_id: b25c06cad81f45aab17b237246f253b2
+run_name: angry-lark-846
+run_uuid: b25c06cad81f45aab17b237246f253b2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704288487430
+status: 3
+tags: []
+user_id: vince

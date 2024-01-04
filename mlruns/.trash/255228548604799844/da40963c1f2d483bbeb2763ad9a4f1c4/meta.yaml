@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/255228548604799844/da40963c1f2d483bbeb2763ad9a4f1c4/artifacts
+deleted_time: 1704359580042
+end_time: null
+entry_point_name: ''
+experiment_id: '255228548604799844'
+lifecycle_stage: deleted
+run_id: da40963c1f2d483bbeb2763ad9a4f1c4
+run_name: popular-worm-792
+run_uuid: da40963c1f2d483bbeb2763ad9a4f1c4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704295732394
+status: 1
+tags: []
+user_id: vince

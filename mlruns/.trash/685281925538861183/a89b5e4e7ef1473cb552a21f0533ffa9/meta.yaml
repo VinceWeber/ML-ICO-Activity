@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/685281925538861183/a89b5e4e7ef1473cb552a21f0533ffa9/artifacts
+deleted_time: 1704362836495
+end_time: 1704362427764
+entry_point_name: ''
+experiment_id: '685281925538861183'
+lifecycle_stage: deleted
+run_id: a89b5e4e7ef1473cb552a21f0533ffa9
+run_name: nosy-fawn-667
+run_uuid: a89b5e4e7ef1473cb552a21f0533ffa9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704362281290
+status: 3
+tags: []
+user_id: vince

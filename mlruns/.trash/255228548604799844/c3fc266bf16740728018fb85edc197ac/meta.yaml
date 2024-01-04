@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/255228548604799844/c3fc266bf16740728018fb85edc197ac/artifacts
+deleted_time: 1704359580042
+end_time: null
+entry_point_name: ''
+experiment_id: '255228548604799844'
+lifecycle_stage: deleted
+run_id: c3fc266bf16740728018fb85edc197ac
+run_name: suave-goose-592
+run_uuid: c3fc266bf16740728018fb85edc197ac
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704296448614
+status: 1
+tags: []
+user_id: vince

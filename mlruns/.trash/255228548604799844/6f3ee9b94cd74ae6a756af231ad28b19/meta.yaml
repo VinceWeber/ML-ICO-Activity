@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/255228548604799844/6f3ee9b94cd74ae6a756af231ad28b19/artifacts
+deleted_time: 1704359580042
+end_time: null
+entry_point_name: ''
+experiment_id: '255228548604799844'
+lifecycle_stage: deleted
+run_id: 6f3ee9b94cd74ae6a756af231ad28b19
+run_name: amazing-ray-949
+run_uuid: 6f3ee9b94cd74ae6a756af231ad28b19
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704292399022
+status: 1
+tags: []
+user_id: vince

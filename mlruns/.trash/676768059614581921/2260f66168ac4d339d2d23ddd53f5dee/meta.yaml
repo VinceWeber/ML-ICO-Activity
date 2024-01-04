@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/676768059614581921/2260f66168ac4d339d2d23ddd53f5dee/artifacts
+deleted_time: 1704278849025
+end_time: 1704192571703
+entry_point_name: ''
+experiment_id: '676768059614581921'
+lifecycle_stage: deleted
+run_id: 2260f66168ac4d339d2d23ddd53f5dee
+run_name: silent-bat-594
+run_uuid: 2260f66168ac4d339d2d23ddd53f5dee
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704192338260
+status: 3
+tags: []
+user_id: vince

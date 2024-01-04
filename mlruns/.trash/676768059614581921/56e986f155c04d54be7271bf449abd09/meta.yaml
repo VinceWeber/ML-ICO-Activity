@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/676768059614581921/56e986f155c04d54be7271bf449abd09/artifacts
+deleted_time: 1704278849025
+end_time: null
+entry_point_name: ''
+experiment_id: '676768059614581921'
+lifecycle_stage: deleted
+run_id: 56e986f155c04d54be7271bf449abd09
+run_name: amusing-mole-409
+run_uuid: 56e986f155c04d54be7271bf449abd09
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704191989317
+status: 1
+tags: []
+user_id: vince

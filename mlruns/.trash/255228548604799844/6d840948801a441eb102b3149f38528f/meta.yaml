@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/255228548604799844/6d840948801a441eb102b3149f38528f/artifacts
+deleted_time: 1704359580042
+end_time: null
+entry_point_name: ''
+experiment_id: '255228548604799844'
+lifecycle_stage: deleted
+run_id: 6d840948801a441eb102b3149f38528f
+run_name: dazzling-pug-6
+run_uuid: 6d840948801a441eb102b3149f38528f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704289880344
+status: 1
+tags: []
+user_id: vince

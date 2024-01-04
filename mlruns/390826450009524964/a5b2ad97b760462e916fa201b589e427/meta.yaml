@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/390826450009524964/a5b2ad97b760462e916fa201b589e427/artifacts
+end_time: 1704386216881
+entry_point_name: ''
+experiment_id: '390826450009524964'
+lifecycle_stage: active
+run_id: a5b2ad97b760462e916fa201b589e427
+run_name: enthused-penguin-37
+run_uuid: a5b2ad97b760462e916fa201b589e427
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704386061866
+status: 3
+tags: []
+user_id: vince

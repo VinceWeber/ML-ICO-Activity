@@ -4,9 +4,12 @@ def optimal_nb_cluster(inertia,threshold,max_clusters):
 
     optimal_nb_cluster = None  # Initialiser à None pour indiquer qu'aucune valeur optimale n'est encore trouvée
     for i in range(1, max_clusters):  # Commencer à 1 car la différence est calculée entre i et i-1
-        if abs(inertia[i] - inertia[i - 1]) / inertia[0] < threshold:
-            optimal_nb_cluster = i
-            break  # Sortir de la boucle lorsque la condition est satisfaite*
+        if inertia[0]!=0:
+            if abs(inertia[i] - inertia[i - 1]) / inertia[0] < threshold:
+                optimal_nb_cluster = i
+                break  # Sortir de la boucle lorsque la condition est satisfaite*
+            else:
+                optimal_nb_cluster=1
     return optimal_nb_cluster
 
 

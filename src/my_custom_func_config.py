@@ -213,3 +213,49 @@ def set_CPP_Plot_parameters(CSV_Clust_config):
 
         }
     return CPP_parameters
+
+
+def set_FPP_Plot_parameters(CSV_Clust_config):
+    
+    FPP_plot=CSV_Clust_config['FPP_Plot']
+    FPP_order=CSV_Clust_config['FPP_Order']
+    FPP_Table_Name=CSV_Clust_config['FPP_Save_Tble_Name']
+    FPP_Requete=CSV_Clust_config['FPP_Requete']
+
+    FPP_Filter_df_col=CSV_Clust_config['FPP_Filter_df_col']
+    FPP_Filter_df_value=CSV_Clust_config['FPP_Filter_df_value']
+
+    clust1Name=CSV_Clust_config['FPP_Clust1_name']
+    clust1TableName=CSV_Clust_config['FPP_Clust1_T_name']
+
+    if CSV_Clust_config['FPP_Clust2_name']!='None':
+        clust2Name=CSV_Clust_config['FPP_Clust2_name']
+        clust2TableName=CSV_Clust_config['FPP_Clust2_T_name']
+    else:
+        clust2Name=None
+        clust2TableName=None
+
+    if CSV_Clust_config['FPP_Clust3_name']!='None':
+        clust2Name=CSV_Clust_config['FPP_Clust3_name']
+        clust2TableName=CSV_Clust_config['FPP_Clust3_T_name']
+    else:
+        clust3Name=None
+        clust3TableName=None
+
+
+    #mlflowoutput
+    FPP_parameters={
+        'FPP_plot_Bool': FPP_plot,
+        'FPP_order' : FPP_order,
+        'FPP_Table_Name': FPP_Table_Name,
+        'FPP_Requete':FPP_Requete,
+        'FPP_Filter_df_col':FPP_Filter_df_col,
+        'FPP_Filter_df_value':FPP_Filter_df_value,
+        'clust1Name':clust1Name,
+        'clust1TableName':clust1TableName,
+        'clust2Name':clust2Name,
+        'clust2TableName':clust2TableName,
+        'clust3Name':clust3Name,
+        'clust3TableName':clust3TableName
+        }
+    return FPP_parameters

@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/390826450009524964/e05f93cee45a4ed4ad27e310ad7ff711/artifacts
+end_time: 1704385960437
+entry_point_name: ''
+experiment_id: '390826450009524964'
+lifecycle_stage: active
+run_id: e05f93cee45a4ed4ad27e310ad7ff711
+run_name: bittersweet-fish-313
+run_uuid: e05f93cee45a4ed4ad27e310ad7ff711
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704385806796
+status: 3
+tags: []
+user_id: vince

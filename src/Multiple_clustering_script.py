@@ -344,6 +344,10 @@ for index,row in config.iterrows():
             Mcfcp.Prepare_Save_Plot_twice_clustered(df_Actes_graph,cluster1_Table,cluster2_Table,CPP_Param,Requete,myouputpath,mlflow,nameToBeSaved)
             print(Mcfbf.myprint('Primary And Subclust CPP - Plotting and Saving OK', index, total_index))
 
+    if Ac_config['FPP_Plot']:
+        FPP_Param=Mcfconf.set_FPP_Plot_parameters(Ac_config)
+        print(FPP_Param)
+
     # CLOSE THE MLFLOW
     mlflow.end_run()
 

@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/724416742047337142/e7d4eb8c4094444f81737afedef8d12c/artifacts
+deleted_time: 1704405029640
+end_time: null
+entry_point_name: ''
+experiment_id: '724416742047337142'
+lifecycle_stage: deleted
+run_id: e7d4eb8c4094444f81737afedef8d12c
+run_name: gregarious-kite-383
+run_uuid: e7d4eb8c4094444f81737afedef8d12c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704383163490
+status: 1
+tags: []
+user_id: vince

@@ -486,3 +486,39 @@ def Prepare_Save_Plot_twice_clustered(df_Actes_graph,cluster1_Table,cluster2_Tab
     print(Mcfbf.myprint('CPP - PLOTING AND SAVE TO MLFLOW OK', 1, 1))
 
     return
+
+
+def FPP_merge_tables(table_list, merge_column, clust_names):
+    
+    import pandas as pd
+    
+    if len(table_list) < 2 or len(table_list) > 5:
+        raise ValueError("Number of tables should be between 2 and 5.")
+    
+    merged_table = pd.DataFrame()
+
+    # Check if the merge column exists in the first table
+    if merge_column in table_list[0].columns:
+        merged_table = table_list[0][[merge_column]].copy()
+
+    for i, table in enumerate(table_list):
+        clust_name = clust_names[i] + "_T" + str(i + 1)
+        temp_table = table[[clust_names[i], merge_column]].copy()
+        temp_table.rename(columns={clust_names[i]: clust_name}, inplace=True)
+
+        temp_table[clust_name] = temp_table[clust_name].astype(str)
+
+        if i > 0:
+            merged_table = pd.merge(merged_table, temp_table, on=merge_column, how='outer')
+        else:
+            merged_table=temp_table
+
+    concat_column_name = "Concat_" + clust_names[0]
+    merged_table[concat_column_name] = merged_table.apply(lambda row: ''.join(row[[col for col in merged_table.columns if col != 'NIP' and not col.startswith('Concat_')]]), axis=1)
+
+    #for clust_name in clust_names:
+    #    merged_table.drop(columns=[clust_name + "_T" + str(i + 1) for i in range(len(table_list))], inplace=True)
+
+    merged_table[concat_column_name] = pd.factorize(merged_table[concat_column_name])[0]
+
+    return merged_table

@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/0/fcecc0cd2a3c4fc9b2098418b6125fbc/artifacts
+deleted_time: 1704405029671
 end_time: null
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: fcecc0cd2a3c4fc9b2098418b6125fbc
 run_name: amusing-jay-158
 run_uuid: fcecc0cd2a3c4fc9b2098418b6125fbc

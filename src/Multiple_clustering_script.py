@@ -346,7 +346,69 @@ for index,row in config.iterrows():
 
     if Ac_config['FPP_Plot']:
         FPP_Param=Mcfconf.set_FPP_Plot_parameters(Ac_config)
-        print(FPP_Param)
+
+        if FPP_Param['clust1TableName']!='NO_VALUE':
+
+            nameToBeSaved=FPP_Param['FPP_Name']
+
+            tables_list =[]
+            cluster_names= []
+
+            if FPP_Param['clust1TableName']!='NO_VALUE':
+                #Get Parcours Clusterings
+                myRequete="""SELECT * FROM [ICO_Activite].[dbo].[""" + FPP_Param['clust1TableName'] + """]"""
+                cluster1_Table=AlSQL.AlSQL_Requete(AlSQL.engine,myRequete,'No')
+                tables_list.append(cluster1_Table)
+                cluster_names.append(FPP_Param['clust1Name'])
+
+            if FPP_Param['clust2TableName']!='NO_VALUE':
+                myRequete="""SELECT * FROM [ICO_Activite].[dbo].[""" + FPP_Param['clust2TableName'] + """]"""
+                cluster2_Table=AlSQL.AlSQL_Requete(AlSQL.engine,myRequete,'No')
+                tables_list.append(cluster2_Table)
+                cluster_names.append(FPP_Param['clust2Name'])
+
+            if FPP_Param['clust3TableName']!='NO_VALUE':    
+                myRequete="""SELECT * FROM [ICO_Activite].[dbo].[""" + FPP_Param['clust3TableName'] + """]"""
+                cluster3_Table=AlSQL.AlSQL_Requete(AlSQL.engine,myRequete,'No')
+                tables_list.append(cluster3_Table)
+                cluster_names.append(FPP_Param['clust3Name'])
+
+            # Call the function to merge the tables
+            result_table = Mcfcp.FPP_merge_tables(tables_list, 'NIP', cluster_names)
+
+            #Sauvegarder dans la BDD la nouvelle table - Cluster
+            Table_Cluster=FPP_Param['FPP_Table_Name']
+            Requete = 'EXECUTE dbo.Delete_Table_if_exists ' + Table_Cluster
+            with AlSQL.engine.begin() as conn:
+                        conn.execute(sqlalchemy.text(Requete))
+            #my_df[['NIP',principal_clust_name]].to_sql(Table_Cluster,AlSQL.engine)
+            result_table.to_sql(Table_Cluster,AlSQL.engine)
+
+            Requete="""SELECT Table_Acte.[NIP]  ,
+                Table_Cluster.""" + 'Concat_' + FPP_Param['clust1Name'] + """ as Clust  ,
+
+                Table_Cluster.X_abscisse     ,
+                Table_Acte.[J_Parcours_V1]      ,
+                Table_Acte.[J_Parcours_V3]     ,
+                Table_Acte.[Service]      ,
+                Table_Acte.[Activite]      ,
+                Table_Acte.[Phase]     ,
+                Table_Acte.[Dimension]      ,
+                Table_Acte.[Type_seq]  
+
+                FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte ,
+                [ICO_Activite].[dbo].[""" + FPP_Param['FPP_Table_Name'] + """] as Table_Cluster
+
+                WHERE Table_Cluster.NIP = Table_Acte.NIP  
+
+                ORDER BY Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]"""
+
+            Filter_df_col=FPP_Param['FPP_Filter_df_col']
+            Filter_df_value=FPP_Param['FPP_Filter_df_value']
+            clustname='Concat_' + FPP_Param['clust1Name']
+
+            Mcfcp.Prepare_Save_Plot_one_clust(df_Actes_graph,result_table,clustname,FPP_Param['FPP_order'],myouputpath,FPP_Param['FPP_Table_Name'],Requete,Filter_df_col,Filter_df_value,mlflow,nameToBeSaved)
+            print(Mcfbf.myprint('FPP Plotting Done ! - Plotting and Saving OK', index, total_index))
 
     # CLOSE THE MLFLOW
     mlflow.end_run()

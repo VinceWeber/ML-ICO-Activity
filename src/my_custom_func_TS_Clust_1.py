@@ -401,7 +401,7 @@ def plot_TS_clusters(Aggreg_Table,Timesteps,filename_path,cluster_dict,mlflow,ml
 
     #fig.xlabel('Weeks') # to be linked with the aggregate function parameters
     #fig.ylabel('Actes ') # to be linked with the aggregate function parameters
-    for i in range(n_clusters):
+    for i in range(n_clusters):  #Check if nb_cluster=1
         for k in range(Nb_dim):
             # Filter data based on the 'clusters' column and transpose for plotting
             cluster_dataX = id_x
@@ -446,29 +446,52 @@ def plot_TS_clusters(Aggreg_Table,Timesteps,filename_path,cluster_dict,mlflow,ml
                     y_pos = 2
                 
                 if Nb_dim!=1:   # if Nb_dim = 2 or more ( !! Zero value can be an error ! )
+                    if n_clusters==1:
+                        line = ax[k].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=width, linestyle=linestyle, color=color)
+                        #color = line[0].get_color()
+                        if mytext:
+                            ax[k].text(X_text, y_pos,str(cluster_dataY_Mean_ind.iloc[j,0]), color=color)
+                    else:
+                        line = ax[i,k].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=width, linestyle=linestyle, color=color)
+                        #color = line[0].get_color()
+                        if mytext:
+                            ax[i,k].text(X_text, y_pos,str(cluster_dataY_Mean_ind.iloc[j,0]), color=color)
                 
-                    line = ax[i,k].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=width, linestyle=linestyle, color=color)
-                    #color = line[0].get_color()
-                    if mytext:
-                        ax[i,k].text(X_text, y_pos,str(cluster_dataY_Mean_ind.iloc[j,0]), color=color)
                 else:       #if Nb_dim =1
-
-                    line = ax[i].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=width, linestyle=linestyle, color=color)
-                    color = line[0].get_color()
-                    if mytext:
-                        ax[i].text(X_text, Y_text + y_pos,str(cluster_dataY_Mean_ind.iloc[j,0]), color=color)
+                    if n_clusters==1:
+                        line = ax.plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=width, linestyle=linestyle, color=color)
+                        if mytext:
+                            ax.text(X_text, Y_text + y_pos,str(cluster_dataY_Mean_ind.iloc[j,0]), color=color)
+                    else:
+                        line = ax[i].plot(cluster_dataX,cluster_dataY_trimmed.iloc[j,:], linewidth=width, linestyle=linestyle, color=color)
+                        color = line[0].get_color()
+                        if mytext:
+                            ax[i].text(X_text, Y_text + y_pos,str(cluster_dataY_Mean_ind.iloc[j,0]), color=color)
                     
             if k==Nb_dim-1 :
                 if Nb_dim!=1:
-                    ax[i,k].text(X_text, Y_text, 'N=' + str(num_individuals)) #correct this code with the dimension number.
+                    if n_clusters==1:
+                        ax[k].text(X_text, Y_text, 'N=' + str(num_individuals)) #correct this code with the dimension number.
+                    else:
+                        ax[i,k].text(X_text, Y_text, 'N=' + str(num_individuals)) #correct this code with the dimension number.
                 else:
-                    ax[i].text(X_text, Y_text, 'N=' + str(num_individuals)) #correct this code with the dimension number.
+                    if n_clusters==1:
+                        ax.text(X_text, Y_text, 'N=' + str(num_individuals)) #correct this code with the dimension number.
+                    else:
+                        ax[i].text(X_text, Y_text, 'N=' + str(num_individuals)) #correct this code with the dimension number.
             
             if i==n_clusters-1 :
                 if Nb_dim!=1:
-                    ax[0,k].set_title(dim + " " + param_dict[dim]['FV1'] + " & " + param_dict[dim]['FV2'], rotation=0)
+                    if n_clusters==1:
+                        ax[k].set_title(dim + " " + param_dict[dim]['FV1'] + " & " + param_dict[dim]['FV2'], rotation=0)
+                    else:
+                        ax[0,k].set_title(dim + " " + param_dict[dim]['FV1'] + " & " + param_dict[dim]['FV2'], rotation=0)
+                
                 else:
-                    ax[0].set_title(dim + " " + param_dict[dim]['FV1'] + " & " + param_dict[dim]['FV2'], rotation=0)
+                    if n_clusters==1:
+                        ax.set_title(dim + " " + param_dict[dim]['FV1'] + " & " + param_dict[dim]['FV2'], rotation=0)
+                    else:
+                        ax[0].set_title(dim + " " + param_dict[dim]['FV1'] + " & " + param_dict[dim]['FV2'], rotation=0)
                 #add here a text to explicit which dimension is shown.
             
             #plt.legend(loc='center right')  # Converted 'i' to string for the title

@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/390826450009524964/e9176a8805e74c738e475852402492d5/artifacts
+deleted_time: 1704405029601
+end_time: 1704386351092
+entry_point_name: ''
+experiment_id: '390826450009524964'
+lifecycle_stage: deleted
+run_id: e9176a8805e74c738e475852402492d5
+run_name: welcoming-boar-179
+run_uuid: e9176a8805e74c738e475852402492d5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704386216910
+status: 3
+tags: []
+user_id: vince

@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/724416742047337142/cb305ad9cdaf43db81673536aa3c4c91/artifacts
+deleted_time: 1704405029674
+end_time: 1704367301456
+entry_point_name: ''
+experiment_id: '724416742047337142'
+lifecycle_stage: deleted
+run_id: cb305ad9cdaf43db81673536aa3c4c91
+run_name: inquisitive-eel-237
+run_uuid: cb305ad9cdaf43db81673536aa3c4c91
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704367070804
+status: 3
+tags: []
+user_id: vince

@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/724416742047337142/6ab41d5b304e4437997a4f1b4274d528/artifacts
+deleted_time: 1704405029659
+end_time: null
+entry_point_name: ''
+experiment_id: '724416742047337142'
+lifecycle_stage: deleted
+run_id: 6ab41d5b304e4437997a4f1b4274d528
+run_name: placid-shrimp-454
+run_uuid: 6ab41d5b304e4437997a4f1b4274d528
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704381018413
+status: 1
+tags: []
+user_id: vince

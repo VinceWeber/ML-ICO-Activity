@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/390826450009524964/86c21783312d47adb27eb1e240f51dfd/artifacts
+deleted_time: 1704405029564
+end_time: 1704390844064
+entry_point_name: ''
+experiment_id: '390826450009524964'
+lifecycle_stage: deleted
+run_id: 86c21783312d47adb27eb1e240f51dfd
+run_name: sedate-worm-756
+run_uuid: 86c21783312d47adb27eb1e240f51dfd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704387568778
+status: 3
+tags: []
+user_id: vince

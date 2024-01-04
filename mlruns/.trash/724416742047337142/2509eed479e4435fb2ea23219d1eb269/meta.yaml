@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/724416742047337142/2509eed479e4435fb2ea23219d1eb269/artifacts
+deleted_time: 1704405029657
+end_time: null
+entry_point_name: ''
+experiment_id: '724416742047337142'
+lifecycle_stage: deleted
+run_id: 2509eed479e4435fb2ea23219d1eb269
+run_name: agreeable-toad-315
+run_uuid: 2509eed479e4435fb2ea23219d1eb269
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704380939012
+status: 1
+tags: []
+user_id: vince

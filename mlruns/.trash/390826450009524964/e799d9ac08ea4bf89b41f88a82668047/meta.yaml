@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/390826450009524964/e799d9ac08ea4bf89b41f88a82668047/artifacts
+deleted_time: 1704405880874
+end_time: 1704404852714
+entry_point_name: ''
+experiment_id: '390826450009524964'
+lifecycle_stage: deleted
+run_id: e799d9ac08ea4bf89b41f88a82668047
+run_name: serious-worm-133
+run_uuid: e799d9ac08ea4bf89b41f88a82668047
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704404764983
+status: 3
+tags: []
+user_id: vince

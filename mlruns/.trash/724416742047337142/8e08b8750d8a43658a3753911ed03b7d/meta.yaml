@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/724416742047337142/8e08b8750d8a43658a3753911ed03b7d/artifacts
+deleted_time: 1704405029704
+end_time: 1704366035613
+entry_point_name: ''
+experiment_id: '724416742047337142'
+lifecycle_stage: deleted
+run_id: 8e08b8750d8a43658a3753911ed03b7d
+run_name: mysterious-bear-985
+run_uuid: 8e08b8750d8a43658a3753911ed03b7d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704365872303
+status: 3
+tags: []
+user_id: vince

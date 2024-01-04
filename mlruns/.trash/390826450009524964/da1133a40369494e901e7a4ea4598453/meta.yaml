@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/390826450009524964/da1133a40369494e901e7a4ea4598453/artifacts
+deleted_time: 1704405029587
+end_time: null
+entry_point_name: ''
+experiment_id: '390826450009524964'
+lifecycle_stage: deleted
+run_id: da1133a40369494e901e7a4ea4598453
+run_name: calm-fox-701
+run_uuid: da1133a40369494e901e7a4ea4598453
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704386351121
+status: 1
+tags: []
+user_id: vince

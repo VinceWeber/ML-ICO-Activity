@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/724416742047337142/fe57559abe9641e4b96ea7fa3279a0df/artifacts
+deleted_time: 1704405029707
+end_time: 1704365723250
+entry_point_name: ''
+experiment_id: '724416742047337142'
+lifecycle_stage: deleted
+run_id: fe57559abe9641e4b96ea7fa3279a0df
+run_name: bedecked-colt-396
+run_uuid: fe57559abe9641e4b96ea7fa3279a0df
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704365500745
+status: 3
+tags: []
+user_id: vince

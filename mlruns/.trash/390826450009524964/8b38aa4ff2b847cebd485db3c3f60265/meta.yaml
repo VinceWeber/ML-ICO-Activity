@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/390826450009524964/8b38aa4ff2b847cebd485db3c3f60265/artifacts
+deleted_time: 1704405029533
+end_time: 1704395160455
+entry_point_name: ''
+experiment_id: '390826450009524964'
+lifecycle_stage: deleted
+run_id: 8b38aa4ff2b847cebd485db3c3f60265
+run_name: worried-conch-469
+run_uuid: 8b38aa4ff2b847cebd485db3c3f60265
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704395039057
+status: 3
+tags: []
+user_id: vince

@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/390826450009524964/fc98dbc8dfba4c3287a958263c195d53/artifacts
+deleted_time: 1704405029529
+end_time: 1704395521536
+entry_point_name: ''
+experiment_id: '390826450009524964'
+lifecycle_stage: deleted
+run_id: fc98dbc8dfba4c3287a958263c195d53
+run_name: masked-sponge-256
+run_uuid: fc98dbc8dfba4c3287a958263c195d53
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704395398092
+status: 3
+tags: []
+user_id: vince

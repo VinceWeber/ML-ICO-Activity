@@ -1,0 +1,8 @@
+artifact_location: mlflow-artifacts:/390826450009524964
+creation_time: 1704385806607
+experiment_id: '390826450009524964'
+last_update_time: 1704405880874
+lifecycle_stage: deleted
+name: Clustering parcours_V2
+tags:
+  exp.version: '0.1'

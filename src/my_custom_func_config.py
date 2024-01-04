@@ -221,7 +221,7 @@ def set_FPP_Plot_parameters(CSV_Clust_config):
     FPP_order=CSV_Clust_config['FPP_Order']
     FPP_Table_Name=CSV_Clust_config['FPP_Save_Tble_Name']
     FPP_Requete=CSV_Clust_config['FPP_Requete']
-
+    FPP_Name=CSV_Clust_config['FPP_Name']
     FPP_Filter_df_col=CSV_Clust_config['FPP_Filter_df_col']
     FPP_Filter_df_value=CSV_Clust_config['FPP_Filter_df_value']
 
@@ -236,8 +236,8 @@ def set_FPP_Plot_parameters(CSV_Clust_config):
         clust2TableName=None
 
     if CSV_Clust_config['FPP_Clust3_name']!='None':
-        clust2Name=CSV_Clust_config['FPP_Clust3_name']
-        clust2TableName=CSV_Clust_config['FPP_Clust3_T_name']
+        clust3Name=CSV_Clust_config['FPP_Clust3_name']
+        clust3TableName=CSV_Clust_config['FPP_Clust3_T_name']
     else:
         clust3Name=None
         clust3TableName=None
@@ -245,6 +245,7 @@ def set_FPP_Plot_parameters(CSV_Clust_config):
 
     #mlflowoutput
     FPP_parameters={
+        'FPP_Name':FPP_Name,
         'FPP_plot_Bool': FPP_plot,
         'FPP_order' : FPP_order,
         'FPP_Table_Name': FPP_Table_Name,

@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/0/295c457e97074bd38bebc92cfb2547ee/artifacts
+deleted_time: 1704405029661
 end_time: null
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 295c457e97074bd38bebc92cfb2547ee
 run_name: efficient-hawk-223
 run_uuid: 295c457e97074bd38bebc92cfb2547ee

@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/848795881541828064/0fff58064c2a43f291e1b41dd7eb7234/artifacts
+deleted_time: 1704448225417
+end_time: 1704406370098
+entry_point_name: ''
+experiment_id: '848795881541828064'
+lifecycle_stage: deleted
+run_id: 0fff58064c2a43f291e1b41dd7eb7234
+run_name: polite-zebra-287
+run_uuid: 0fff58064c2a43f291e1b41dd7eb7234
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704406085246
+status: 3
+tags: []
+user_id: vince

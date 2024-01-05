@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/848795881541828064/51e2a3a561c8426d9befaaf3b6c6c356/artifacts
+deleted_time: 1704448225417
+end_time: 1704448127914
+entry_point_name: ''
+experiment_id: '848795881541828064'
+lifecycle_stage: deleted
+run_id: 51e2a3a561c8426d9befaaf3b6c6c356
+run_name: adaptable-koi-46
+run_uuid: 51e2a3a561c8426d9befaaf3b6c6c356
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1704447760421
+status: 3
+tags: []
+user_id: vince

@@ -225,7 +225,8 @@ for index,row in config.iterrows():
 
         #SAVE CLUSTERING TO BDD
         #Mydf=Aggreg_Parcours_clust['df_dist'][['NIP',Parcours_Clust_parameters['clust_name']]]
-        Mydf=Aggreg_Parcours_clust['df_dist']
+        non_integer_columns = [col for col in Aggreg_Parcours_clust['df_dist'].columns if not isinstance(col, int)]
+        Mydf=Aggreg_Parcours_clust['df_dist'][non_integer_columns]
         Mcfcp.Save_only_Cluster_to_Database(Mydf,Parcours_Clust_parameters, myouputpath, Parcours_Clust_parameters['Table_name'] )
         print(Mcfbf.myprint('Save Second clustering to BDD (Principal clust) OK', index, total_index))
 

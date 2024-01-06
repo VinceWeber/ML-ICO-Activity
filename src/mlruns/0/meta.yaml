@@ -1,6 +1,6 @@
-artifact_location: file:///c:/Users/vince/Documents/DSTI/DSTI_Projects/ML%20ICO%20Activity/src/mlruns/0
-creation_time: 1702477995594
+artifact_location: mlflow-artifacts:/0
+creation_time: 1704550348898
 experiment_id: '0'
-last_update_time: 1702477995594
+last_update_time: 1704550348898
 lifecycle_stage: active
 name: Default

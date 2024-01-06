@@ -192,7 +192,7 @@ def GetDistanceMatrix(Parcours_dict, Aggreg_parameters,Aggprefix,dtw_param):
     Timesteps=int(Aggreg_parameters[Aggprefix + 'Stop_at_item'])-int(Aggreg_parameters[Aggprefix + 'Start_at_item'])
     Parcours_dict['df'].sort_values(['NIP', 'FV1','FV2'], ascending=[True, True, True], inplace=True)
 
-    data_to_plot = Parcours_dict['df'].iloc[:,1:(Timesteps+1)] 
+    data_to_plot = Parcours_dict['df'].iloc[:,1:(Timesteps+2)] 
 
     Nb_NIP=len(Parcours_dict['df']['NIP'].unique())
     Nb_dim=int(Parcours_dict['Nb_dim'])
@@ -201,8 +201,8 @@ def GetDistanceMatrix(Parcours_dict, Aggreg_parameters,Aggprefix,dtw_param):
     import time
     start_time = time.time()  # Temps de départ
 
-    for i in range(Nb_NIP-1):
-        for j in range(i,Nb_NIP-1):   #Compute only half of the matrix as the distance is symetric !
+    for i in range(Nb_NIP):
+        for j in range(i,Nb_NIP):   #Compute only half of the matrix as the distance is symetric !
             
             line_i=i*Nb_dim
             line_j=j*Nb_dim

@@ -204,8 +204,20 @@ def my_clust_func(X_scaled,Method,n_clusters,max_clusters,threshold,ouput,mlflow
     mlflow.log_params({'NB_ ' + col_name : n_clusters})
 
     df_dist,Cl_sum=Do_Clustering(X_scaled,Method,n_clusters,ouput,mlflow,mlflow_output)
+
+    #print('my_clust_func - Dfdist')
+    #print(df_dist)
+
     NIP_Carac=pd.concat([List_NIP,df_dist],axis=1)
+    
+    #print('my_clust_func - NIP_Carac')
+    #print(NIP_Carac)
+    
     NIP_Carac=NIP_Carac.loc[NIP_Carac[col_name + '_Mean_Indiv'] == True, ['NIP', col_name]]
+
+    #print('my_clust_func - NIP_Carac2')
+    #print(NIP_Carac)
+
 
     if mlflow!=None:
         Cl_sum.to_csv(Cluster_summary_filename)
@@ -389,13 +401,35 @@ def clustering_result_to_df(My_Aggreg_dict_df,My_Clust_result,My_Clust_parameter
     import pandas as pd
 
     My_Clust_result['Avg_Indiv']=df_avg_individual(My_Aggreg_dict_df['df'], My_Clust_result, My_Clust_parameter)
+    #print('My_Clust_result')
+    #print(My_Clust_result['Avg_Indiv'])
+
     Aggreg_Patients_TC=My_Aggreg_dict_df
+    #print('Aggreg_Patients_TC')
+    #print(Aggreg_Patients_TC)
+
     clust_name=My_Clust_parameter['clust_name']
+    #print('clust_name')
+    #print(clust_name)
+
+    #print("My_Clust_result[df_dist]")
+    #print(My_Clust_result['df_dist'])
+
     subset_cols = My_Clust_result['df_dist'][['NIP',clust_name,clust_name +'_Mean_Indiv']]
+    #print('subset_cols')
+    #print(subset_cols)
+
     my_merged_df = pd.merge(My_Aggreg_dict_df['df'], subset_cols, on='NIP')
+    #print('my_merged_df')
+    #print(my_merged_df)
+
     Parcours_Aggreg=pd.concat([my_merged_df,My_Clust_result['Avg_Indiv']], axis=0)
+    #print('Parcours_Aggreg')
+    #print(Parcours_Aggreg)
 
     Aggreg_Patients_TC['df']=Parcours_Aggreg
+    #print('Aggreg_Patients_TC')
+    #print(Aggreg_Patients_TC['df'])
 
     return Aggreg_Patients_TC
 
@@ -415,6 +449,11 @@ def cluster(My_Aggreg_dict_df,Data_to_be_clustered,ouput,mlflow,My_Clust_paramet
     from sklearn.preprocessing import StandardScaler
 
     List_NIP=My_Aggreg_dict_df['df']['NIP']
+    List_NIP2=My_Aggreg_dict_df['df']['NIP'].drop_duplicates().reset_index()
+
+    #print('func cluster - ListNIP2')
+    #print(List_NIP2)
+
     Myaggreg_copy=My_Aggreg_dict_df.copy()
     
     Method=My_Clust_parameter['Method']
@@ -427,8 +466,11 @@ def cluster(My_Aggreg_dict_df,Data_to_be_clustered,ouput,mlflow,My_Clust_paramet
     X_scaled = scaler.fit_transform(Data_to_be_clustered)
 
     #Perform the clustering with calling my_clust_func
-    TC_Result=my_clust_func(X_scaled,Method,Nb_clust, Max_clusters,threshold,ouput,mlflow,My_Clust_parameter,List_NIP)
+    TC_Result=my_clust_func(X_scaled,Method,Nb_clust, Max_clusters,threshold,ouput,mlflow,My_Clust_parameter,List_NIP2)
     
+    #print('TC_Result')
+    #print(TC_Result)
+
     out_dict=clustering_result_to_df(Myaggreg_copy,TC_Result,My_Clust_parameter )
     out_dict['Nb_clusters']=TC_Result['ncluster']
     out_dict['df_dist']=TC_Result['df_dist']

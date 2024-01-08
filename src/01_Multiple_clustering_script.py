@@ -1,4 +1,5 @@
 #python script to perform multiple clusterings and store informations in mlflow and database
+#command to launch it from Windows powershell : python 01_Multiple_clustering_script.py | Tee-Object -FilePath output2.txt
 
 from datetime import datetime
 import time

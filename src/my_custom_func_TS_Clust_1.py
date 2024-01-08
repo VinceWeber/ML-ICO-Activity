@@ -193,6 +193,8 @@ def GetDistanceMatrix(Parcours_dict, Aggreg_parameters,Aggprefix,dtw_param):
     Parcours_dict['df'].sort_values(['NIP', 'FV1','FV2'], ascending=[True, True, True], inplace=True)
 
     data_to_plot = Parcours_dict['df'].iloc[:,1:(Timesteps+2)] 
+    newColumnName='Start'
+    data_to_plot.insert(0,newColumnName,0) # Add an empty column to avoid a not understanding behaviour of the distance computation
 
     Nb_NIP=len(Parcours_dict['df']['NIP'].unique())
     Nb_dim=int(Parcours_dict['Nb_dim'])

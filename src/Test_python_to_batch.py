@@ -40,13 +40,22 @@ import os
 current_directory = os.getcwd()
 print("Current directory:", current_directory)
 
-#Open config.csv file as a dict
-file_path = current_directory + "\\07-Batch_configuration\\export_config.csv"
+
+print('environement')
+print(os.environ)
+
+if 'TERM_PROGRAM' in os.environ.keys() and os.environ['TERM_PROGRAM'] == 'vscode':
+    print("Running in VS Code")
+    current_directory = os.getcwd()
+    file_path = os.path.join(current_directory, 'src', '00-Batch_configuration', 'export_config.csv')
+else:
+    print("Not Running in VS Code")
+    current_directory = os.getcwd()
+    file_path = os.path.join(current_directory, '00-Batch_configuration', 'export_config.csv')
+
 print("file_path:", file_path)
 
-file_path = file_path.replace('\\\\', '\\')
-print("file_path:", file_path)
-
+#file_path='..\export_config.csv'
 print("Run : pd.read_csv(file_path, encoding='ISO-8859-1')")
 config = pd.read_csv(file_path, encoding='ISO-8859-1')
 #Add a function to chekc csv file

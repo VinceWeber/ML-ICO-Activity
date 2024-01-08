@@ -40,16 +40,22 @@ import Sql_Alchemy_Classes as AlSQL
 import os
 current_directory = os.getcwd()
 
-#Open config.csv file as a dict
-file_path = current_directory + "\\07-Batch_configuration\\export_config.csv"
+#Get the right path according if the programm is running in vscode or not
+if 'TERM_PROGRAM' in os.environ.keys() and os.environ['TERM_PROGRAM'] == 'vscode':
+    print("Running in VS Code")
+    current_directory = os.getcwd()
+    file_path = os.path.join(current_directory, 'src', '00-Batch_configuration', 'export_config.csv')
+else:
+    print("Not Running in VS Code")
+    current_directory = os.getcwd()
+    file_path = os.path.join(current_directory, '00-Batch_configuration', 'export_config.csv')
+
 
 config = pd.read_csv(file_path, encoding='ISO-8859-1')
 #Add a function to chekc csv file
 print(Mcfbf.myprint('Import csv batch file succeed', 1, 1))
 
-
 total_index = len(config)
-
 
 #Delete all existing result tables from database ************TO BE COMPLETED*******************
 myRequete = 'EXECUTE dbo.Delete_TmpTables '

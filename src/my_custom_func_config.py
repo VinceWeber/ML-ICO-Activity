@@ -50,19 +50,64 @@ def get_Create_dataset_parameters(CSV_config):
 def get_Aggreg_param(CSV_config):
     
     Aggprefix=CSV_config['Aggprefix']
+    
+    nb_dim_key=Aggprefix + 'Nb_dim'
+    nb_dim=CSV_config['Nb_Dim_Aggreg']
+    
+   
+    """
+    sub_dict_dim1={             Aggprefix + 'Type_filter1': str(CSV_config['D1_Type_filter1']),
+                                Aggprefix + 'Val_filter1': str(CSV_config['D1_Val_filter1']),
+                                Aggprefix + 'Type_filter2': str(CSV_config['D1_Type_filter2']),
+                                Aggprefix + 'Val_filter2': str(CSV_config['D1_Val_filter2'])
+                                }
+
+    sub_dict_dim2={             Aggprefix + 'Type_filter1': str(CSV_config['D2_Type_filter1']),
+                                Aggprefix + 'Val_filter1': str(CSV_config['D2_Val_filter1']),
+                                Aggprefix + 'Type_filter2': str(CSV_config['D2_Type_filter2']),
+                                Aggprefix + 'Val_filter2': str(CSV_config['D2_Val_filter2'])
+                                }
+
+    sub_dict_dim3={             Aggprefix + 'Type_filter1': str(CSV_config['D3_Type_filter1']),
+                                Aggprefix + 'Val_filter1': str(CSV_config['D3_Val_filter1']),
+                                Aggprefix + 'Type_filter2': str(CSV_config['D3_Type_filter2']),
+                                Aggprefix + 'Val_filter2': str(CSV_config['D3_Val_filter2'])
+                                }
+    
+    sub_dict_dim4={             Aggprefix + 'Type_filter1': str(CSV_config['D4_Type_filter1']),
+                                Aggprefix + 'Val_filter1': str(CSV_config['D4_Val_filter1']),
+                                Aggprefix + 'Type_filter2': str(CSV_config['D4_Type_filter2']),
+                                Aggprefix + 'Val_filter2': str(CSV_config['D4_Val_filter2'])
+                                }
+
+    sub_dict_dim5={             Aggprefix + 'Type_filter1': str(CSV_config['D5_Type_filter1']),
+                                Aggprefix + 'Val_filter1': str(CSV_config['D5_Val_filter1']),
+                                Aggprefix + 'Type_filter2': str(CSV_config['D5_Type_filter2']),
+                                Aggprefix + 'Val_filter2': str(CSV_config['D5_Val_filter2'])
+                                }"""
+
+
+
     Aggreg_parameters={Aggprefix + 'Report_type': str(CSV_config['Report_type']),
                             Aggprefix + 'Aggreg_type': str(CSV_config['Aggreg_type']),
                             Aggprefix + 'Date_ref': str(CSV_config['Date_ref']),
                             Aggprefix + 'Start_at_item': str(CSV_config['Start_at_item']),
                             Aggprefix + 'Stop_at_item': str(CSV_config['Stop_at_item']),
                             Aggprefix + 'Method': str(CSV_config['Method']),
-                            Aggprefix + 'Type_filter1': str(CSV_config['Type_filter1']),
-                            Aggprefix + 'Val_filter1': str(CSV_config['Val_filter1']),
-                            Aggprefix + 'Type_filter2': str(CSV_config['Type_filter2']),
-                            Aggprefix + 'Val_filter2': str(CSV_config['Val_filter2']),
                             Aggprefix + 'Param_J0': str(CSV_config['Param_J0']),
+                            nb_dim_key: 0
                                 }
+    
+    Aggreg_parameters[nb_dim_key]=nb_dim
 
+    for dim in range(nb_dim):
+        sub_dict_dim={         Aggprefix + 'Type_filter1': str(CSV_config['D' + str(dim+1) +  '_Type_filter1']),
+                                Aggprefix + 'Val_filter1': str(CSV_config['D' + str(dim+1) +  '_Val_filter1']),
+                                Aggprefix + 'Type_filter2': str(CSV_config['D' + str(dim+1) +  '_Type_filter2']),
+                                Aggprefix + 'Val_filter2': str(CSV_config['D' + str(dim+1) +  '_Val_filter2'])
+                                }
+        dim_key='Dim' + str(dim+1)
+        Aggreg_parameters[dim_key] = sub_dict_dim
 
     return Aggreg_parameters,Aggprefix
 

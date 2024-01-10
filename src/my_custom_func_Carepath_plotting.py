@@ -438,7 +438,7 @@ def Prepare_Save_Plot_one_clust(df_Actes_graph,df_Parcours_clust,clustName, My_o
 
     #SAVE THE CLUSTERING + PLOTTING VALUES TO THE DATABASE
     Save_Cluster_and_Carepath_to_Database_one_clust(Abcisses_DF,clustName,myouputpath,Table_name)
-    print(Mcfbf.myprint('CPP - Saving Abcisses to BDD OK', 1, 1))
+    print(Mcfbf.myprint('CPP - Saving Abcisses to BDD OK', -1, 0))
 
     #GET A DATASET OF ACTES
     df_Actes_graph2=AlSQL.AlSQL_Requete(AlSQL.engine,Requete,'No')
@@ -452,7 +452,7 @@ def Prepare_Save_Plot_one_clust(df_Actes_graph,df_Parcours_clust,clustName, My_o
 
     plot_df_actes_one_clust(final_df_sorted,Parcours_DF,clustName,Plot_dict,mlflow,myouputpath,mlflowname)
     #Mcfcp.plot_df_actes_one_clust(final_df_sorted,Aggreg_Parcours_clust,Parcours_Clust_parameters,Aggreg_Time_clust,Time_Clust_parameters, Plot_dict, mlflow, myouputpath)
-    print(Mcfbf.myprint('CPP - PLOTING AND SAVE TO MLFLOW OK', 1, 1))
+    print(Mcfbf.myprint('CPP - PLOTING AND SAVE TO MLFLOW OK', -1, 0))
     
     return
 
@@ -469,7 +469,7 @@ def Prepare_Save_Plot_twice_clustered(df_Actes_graph,cluster1_Table,cluster2_Tab
     #SAVE THE CLUSTERING + PLOTTING VALUES TO THE DATABASE
     
     Save_Cluster_and_Carepath_to_Database_twice_clustered(Abcisses_DF,CPP_Param['primary_clust_name'],CPP_Param['sub_clust_name'],myouputpath,CPP_Param['CPP_Table_Name'])
-    print(Mcfbf.myprint('CPP - Saving Abcisses to BDD OK', 1, 1))
+    print(Mcfbf.myprint('CPP - Saving Abcisses to BDD OK', -1, 0))
     
     #FILTER THE DATASET IN ORDER NOT TO SHOW ALL ACTES
     df_Actes_graph2=AlSQL.AlSQL_Requete(AlSQL.engine,Requete,'No')
@@ -483,7 +483,7 @@ def Prepare_Save_Plot_twice_clustered(df_Actes_graph,cluster1_Table,cluster2_Tab
     #PLOT AND SAVE IN MLFLOW
     plot_df_actes_twice_clustered(final_df_sorted,Parcours_DF,CPP_Param['primary_clust_name'],CPP_Param['sub_clust_name'],Plot_dict,mlflow,myouputpath,mlflowname)
     #Mcfcp.plot_df_actes_one_clust(final_df_sorted,Aggreg_Parcours_clust,Parcours_Clust_parameters,Aggreg_Time_clust,Time_Clust_parameters, Plot_dict, mlflow, myouputpath)
-    print(Mcfbf.myprint('CPP - PLOTING AND SAVE TO MLFLOW OK', 1, 1))
+    print(Mcfbf.myprint('CPP - PLOTING AND SAVE TO MLFLOW OK', -1, 0))
 
     return
 

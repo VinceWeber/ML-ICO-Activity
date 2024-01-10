@@ -53,8 +53,9 @@ else:
 
 
 config = pd.read_csv(file_path, encoding='ISO-8859-1')
-#Add a function to chekc csv file
-print(Mcfbf.myprint('Import csv batch file succeed', 1, 1))
+#Add a function to chekc csv file and types
+type(config['PARAMETER'])
+print(Mcfbf.myprint('Import csv batch file succeed', 0, 1))
 
 total_index = len(config)
 
@@ -126,7 +127,7 @@ for index,row in config.iterrows():
     elapsed_time = time.time() - start_time
     mlflow.log_metrics({'Time_STEP_DB_seconds' : elapsed_time }) 
 
-
+    print(Mcfbf.myprint('START - STORE table acte pour affichage parcours ', index, total_index))
     if Ac_config['T_Actes_Total']:
         #Recuperer une table acte pour affichage parcours complet
         Requete=Ac_config['T_Requete']
@@ -168,8 +169,10 @@ for index,row in config.iterrows():
     print(Mcfbf.myprint('START TO Get the aggregation table ', index, total_index))
     start_time = time.time()
 
-    #Get the aggregation table
-    Aggreg_Patients=Mcftsc.get_Aggreg_Dataset2(Parameters_list,Aggprefix)
+
+    #Get the aggregation table  #************************* Add a loop according to nb of dimensions
+    Aggreg_Patients=Mcftsc.get_Aggreg_Dataset3(Aggreg_parameters,Aggprefix)
+    #Aggreg_Patients=Mcftsc.get_Aggreg_Dataset2(Parameters_list,Aggprefix)
     print(Mcfbf.myprint('Get the aggregation table OK', index, total_index))
     elapsed_time = time.time() - start_time
     mlflow.log_metrics({'Time_STEP_Aggregation_seconds ' : elapsed_time }) 
@@ -180,6 +183,7 @@ for index,row in config.iterrows():
     #mlflow.log_artifact(myouputpath + Ac_config['filename'], Ac_config['mlflowname'])
     mlflow.log_artifact(myouputpath + Ac_config['filename'], 'Dataset_csv')
     print(Mcfbf.myprint('Save the aggregation table OK', index, total_index))
+
 
     if Ac_config['T_F_Cluster']:
 
@@ -213,6 +217,7 @@ for index,row in config.iterrows():
         ##CLUSTERING DE PARCOURS - PREPARATION
         dtw_param=Mcfconf.get_dtw_param(Ac_config)
         #CALCUL DE LA MATRICE DE DISTANCE
+        print(Mcfbf.myprint('Calcul Matrice de distance ', index, total_index))
         dist_matrix=Mcftsc.GetDistanceMatrix(Aggreg_Patients, Aggreg_parameters,Aggprefix,dtw_param)
         print(Mcfbf.myprint('Calcul Matrice de distance OK', index, total_index))
 
@@ -225,6 +230,7 @@ for index,row in config.iterrows():
         #Clustering parameters
         Parcours_Clust_parameters=Mcfconf.set_parcours_clust_parameters(Ac_config)
         #SECOND CLUSTERING (principal clust)
+        print(Mcfbf.myprint('Clustering de la  Matrice de distance ', index, total_index))
         Aggreg_Parcours_clust=McfC.cluster(Aggreg_Patients,dist_matrix,False,mlflow,Parcours_Clust_parameters )
         print(Mcfbf.myprint('Second clustering (Principal clust) OK', index, total_index))
         elapsed_time = time.time() - start_time
@@ -244,6 +250,17 @@ for index,row in config.iterrows():
             'nb_cluster' : Aggreg_Parcours_clust['Nb_clusters'],
             'Column_name' : Parcours_Clust_parameters['clust_name'],
         }
+
+        #print("DEBUG")
+        #print("plot_TS_clusters input parameters")
+        #print("Aggreg_Parcours_clust")
+        #print(Aggreg_Parcours_clust)
+        #print("Timesteps")
+        #print(Timesteps)
+        #print("Parcours_nb_clusters")
+        #print(Parcours_nb_clusters)
+
+
         Mcftsc.plot_TS_clusters(Aggreg_Parcours_clust,Timesteps,myouputpath+ 'TS_curves.png',Parcours_nb_clusters,mlflow,'Plots')
         #Mcftsc.plot_TS_clusters(Aggreg_Parcours_clust,Timesteps,myouputpath+ 'TS_curves.png',Parcours_nb_clusters,mlflow,"TS_Curves_Clustering")
         print(Mcfbf.myprint('TS Curves - Plotting and Saving OK', index, total_index))

@@ -54,7 +54,7 @@ def Create_dataset (Create_dataset_parameters,DSprefix):
 
     Caract_Df_SH = pd.DataFrame.from_dict(PC.Caracteristiques_Dataset_Parcours(1, My_NIP_filter_1rst_date,My_NIP_filter_2nd_date,Site,Mydataset_date1,Mydataset_date2).get_x())
 
-    print(Caract_Df_SH)
+    #print(Caract_Df_SH)
     return Caract_Df_SH
 
 
@@ -80,10 +80,13 @@ def plot_carepath(dataset,filename_path,mlflow,mlflowname):
     fig, axs = plt.subplots(1, 1, figsize=(15, 6))
     axs.set_title('Carepathes')
     Myscatterplot=sns.scatterplot(data=Temp_dataset, x='ID_NIP', y='J_Parcours_V1',markers='Activite', hue='Service')
-    mlflow.log_artifact(filename_path, mlflowname)
+    if mlflow!=None:
+        mlflow.log_artifact(filename_path, mlflowname)
+        plt.savefig(filename_path)
+    else:
+        plt.show()
+    
     del Temp_dataset
-
-    plt.savefig(filename_path)
     return #Myscatterplot
 
 def chk_Agg_param(Agg_param):
@@ -93,7 +96,7 @@ def chk_Agg_param(Agg_param):
         result= False
     return result
 
-def get_Aggreg_Dataset(Agg_param1,Agg_param2=None,Agg_param3=None,Agg_param4=None,Agg_param5=None):
+def old_get_Aggreg_Dataset(Agg_param1,Agg_param2=None,Agg_param3=None,Agg_param4=None,Agg_param5=None):
     import pandas as pd
     import Sql_Alchemy_Classes as AlSQL
 
@@ -175,6 +178,52 @@ def get_Aggreg_Dataset2(list_param,Aggprefix):
     
         dict_out={
             'Nb_dim': str(len(agg_list)),
+            'df': df_out
+        }
+    return dict_out
+
+def get_Aggreg_Dataset3(Param_dict,Aggprefix):
+    import pandas as pd
+    import Sql_Alchemy_Classes as AlSQL
+
+    nb_dim_key=Aggprefix + 'Nb_dim'
+    nb_dim=Param_dict[nb_dim_key]
+    print(f"Number of aggregation dimensions: {nb_dim}")
+    
+    df_out=pd.DataFrame()
+    Agg_param=Param_dict
+
+    for dim in range(nb_dim): 
+        
+        dim_key = f"Dim{dim+1}"
+        if dim_key in Param_dict:
+            Agg_param[f"{Aggprefix + 'Type_filter1'}"]=Param_dict[dim_key][f"{Aggprefix + 'Type_filter1'}"]
+            Agg_param[f"{Aggprefix + 'Val_filter1'}"]=Param_dict[dim_key][f"{Aggprefix + 'Val_filter1'}"]
+            Agg_param[f"{Aggprefix + 'Type_filter2'}"]=Param_dict[dim_key][f"{Aggprefix + 'Type_filter2'}"]
+            Agg_param[f"{Aggprefix + 'Val_filter2'}"]=Param_dict[dim_key][f"{Aggprefix + 'Val_filter2'}"]
+
+        #definition de la requete
+        Requete=req_aggreg (Agg_param,Aggprefix)    
+
+        #Get the dataset
+        df=AlSQL.AlSQL_Requete(AlSQL.engine,Requete,True)
+        
+        df.replace('','0',inplace=True)
+        for col in df.columns[1:]:  # Starting from the second column onwards
+            df[col] = pd.to_numeric(df[col], errors='coerce')
+
+        #Add information of the parameters used
+        df['FT1']=Agg_param[Aggprefix + 'Type_filter1']
+        df['FV1']=Agg_param[Aggprefix + 'Val_filter1']
+        df['FT2']=Agg_param[Aggprefix + 'Type_filter2']
+        df['FV2']=Agg_param[Aggprefix + 'Val_filter2']
+
+
+        #Merge this newdataset with the previous one
+        df_out = pd.concat([df_out, df], axis=0)
+    
+        dict_out={
+            'Nb_dim': str(nb_dim),
             'df': df_out
         }
     return dict_out
@@ -380,8 +429,17 @@ def plot_TS_clusters(Aggreg_Table,Timesteps,filename_path,cluster_dict,mlflow,ml
 
     param_dict = {}
 
+    #print("CHECK plot_TS_clusters FUNCTION")
+    #print("Aggreg_Table")
+    #print(Aggreg_Table['df'])
+
+
     unique_rows = Aggreg_Table['df'][['FT1','FV1','FT2','FV2']].drop_duplicates()
     unique_rows.reset_index()
+
+    #print("unique_rows")
+    #print(unique_rows)
+
     # Iterate through each row and print
 
     for index, row in unique_rows.iterrows():
@@ -393,6 +451,11 @@ def plot_TS_clusters(Aggreg_Table,Timesteps,filename_path,cluster_dict,mlflow,ml
         }
         param_dict['dim_' + str(index+1)] = new_param
 
+    #ADD HERE A CHECK THAT NB OF DIMENSIONS GETTING FROM PARAM_DICT IS COHERENT WITH THE INITIAL PARAMETERS
+    #TO AVOID THE CASE TO HAVE REDUNDANT FILTER IN THE CSV CONFIGURATION FILES WHICH WILL FAIL THIS PROCEDURE
+
+    #print("param_dict")
+    #print(param_dict)
 
     #id_x =np.linspace(0,len(Aggreg_Patients['df'].columns)-9,num=len(Aggreg_Patients['df'].columns)-9)
     id_x = np.linspace(0, Timesteps, num=Timesteps+1)
@@ -412,6 +475,19 @@ def plot_TS_clusters(Aggreg_Table,Timesteps,filename_path,cluster_dict,mlflow,ml
             dim='dim_' + str(k+1)
             #print(dim + param_dict[dim]['FV1'] + " & " + param_dict[dim]['FV2'])
             #cluster_dataY = Aggreg_Patients['df'][Aggreg_Patients['df']['Cluster'] == i]
+
+            #print("DEBUG")
+            #print("""Aggreg_Table['df'][
+            #    (Aggreg_Table['df'][colname] == i) &
+            #    (Aggreg_Table['df']['FV1'] == param_dict[dim]['FV1']) &
+            #    (Aggreg_Table['df']['FV2'] == param_dict[dim]['FV2'])
+            #    ]""")
+            #print(Aggreg_Table['df'][
+            #    (Aggreg_Table['df'][colname] == i) &
+            #    (Aggreg_Table['df']['FV1'] == param_dict[dim]['FV1']) &
+            #    (Aggreg_Table['df']['FV2'] == param_dict[dim]['FV2'])
+            #    ])
+
             cluster_dataY = Aggreg_Table['df'][
                 (Aggreg_Table['df'][colname] == i) &
                 (Aggreg_Table['df']['FV1'] == param_dict[dim]['FV1']) &

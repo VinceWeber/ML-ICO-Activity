@@ -522,3 +522,32 @@ def FPP_merge_tables(table_list, merge_column, clust_names):
     merged_table[concat_column_name] = pd.factorize(merged_table[concat_column_name])[0]
 
     return merged_table
+
+
+def plot_Complete_carepath_clustered (myouputpath, mlflow, mlflowname,Table_clust):
+    import my_custom_func_TS_Clust_1 as Mcftsc
+    import Sql_Alchemy_Classes as AlSQL
+    import matplotlib.pyplot as plt
+
+    Requete="""SELECT Table_Acte.[NIP]  
+                ,Table_Cluster.Cl_P as Clust  
+                ,Table_Cluster.X_abscisse   
+                ,Table_Acte.[J_Parcours_V1]  
+                ,Table_Acte.[J_Parcours_V3]   
+                ,Table_Acte.[Service] 
+                ,Table_Acte.[Activite]   
+                ,Table_Acte.[Phase]   
+                ,Table_Acte.[Dimension]   
+                ,Table_Acte.[Type_seq]  
+                
+                FROM [ICO_Activite].[dbo].[Tmp_Carac_Actes] as Table_Acte
+                , [ICO_Activite].[dbo].[""" + Table_clust + """] as Table_Cluster
+                WHERE Table_Cluster.NIP = Table_Acte.NIP
+                ORDER BY Clust asc ,Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]
+    """
+
+    df_Actes_graph=AlSQL.AlSQL_Requete(AlSQL.engine,Requete,'No')
+    #Mcftsc.plot_carepath(df_Actes_graph,None,None,None)
+    Mcftsc.plot_carepath(df_Actes_graph,myouputpath + mlflowname + '.png',mlflow,'Plots')
+
+    return

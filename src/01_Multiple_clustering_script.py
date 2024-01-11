@@ -367,7 +367,11 @@ for index,row in config.iterrows():
             ORDER BY Table_Acte.[J_Parcours_V1] desc, Table_Acte.[NIP]"""
             
             Mcfcp.Prepare_Save_Plot_twice_clustered(df_Actes_graph,cluster1_Table,cluster2_Table,CPP_Param,Requete,myouputpath,mlflow,nameToBeSaved)
+            
             print(Mcfbf.myprint('Primary And Subclust CPP - Plotting and Saving OK', index, total_index))
+
+        Mcfcp.plot_Complete_carepath_clustered(myouputpath,mlflow,"Complete carepath clustered",CPP_Param['primary_clust_TableName']+'_CPP')
+
 
     if Ac_config['FPP_Plot']:
         FPP_Param=Mcfconf.set_FPP_Plot_parameters(Ac_config)
@@ -434,6 +438,11 @@ for index,row in config.iterrows():
 
             Mcfcp.Prepare_Save_Plot_one_clust(df_Actes_graph,result_table,clustname,FPP_Param['FPP_order'],myouputpath,FPP_Param['FPP_Table_Name'],Requete,Filter_df_col,Filter_df_value,mlflow,nameToBeSaved)
             print(Mcfbf.myprint('FPP Plotting Done ! - Plotting and Saving OK', index, total_index))
+
+
+
+
+
 
     # CLOSE THE MLFLOW
     mlflow.end_run()

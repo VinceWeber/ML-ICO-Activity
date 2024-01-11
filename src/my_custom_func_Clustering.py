@@ -37,7 +37,17 @@ def Automatic_nb_cluster(X_scaled,Method, max_clusters,threshold,ouput=None,mlfl
             inertia.append(kmeans.inertia_)
 
     elif Method=="AgglomerativeClustering":
-        print('No method implemented !!')
+        from sklearn.cluster import AgglomerativeClustering
+        # Liste pour stocker les valeurs de l'inertie
+        inertia_agglomerative = []
+
+        for n_clusters in range(1, max_clusters + 1):
+            agglomerative = AgglomerativeClustering(n_clusters=n_clusters, linkage='ward')
+            agglomerative.fit(X_scaled)
+            # You may need to choose a suitable metric for your problem, such as 'euclidean'
+            # Adjust the metric parameter based on your data characteristics.
+            inertia_agglomerative.append(agglomerative.inertia_)
+        
 
     nb_clusters = optimal_nb_cluster(inertia,threshold,max_clusters)
 

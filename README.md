@@ -36,7 +36,7 @@ Unclustered data :
 ![image](00-Readmefiles/Actes_total.png)
 
 Clustered carepathes :
-![image](00-Readmefiles/Mlflow_Exp_NIP_Cl_P1_CPP)
+![image](00-Readmefiles/Mlflow_Exp_NIP_Cl_P1_CPP.png)
 
 From this clustering we can distinguish 3 main groups: 
 - Group 0 : Patient with a small activity in the hospital (can be prestation inter établissement, and patient without a complex illness)

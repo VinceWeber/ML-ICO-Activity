@@ -18,11 +18,11 @@ class Caracteristiques_Dataset_Parcours:
 
     output=False
     
-    def __init__(self, name, date1, date2,site,date_etude1,date_etude2):
-        self.set_attibutes(name,date1, date2,site,date_etude1,date_etude2)
+    def __init__(self, name, date1, date2,site,date_etude1,date_etude2, FiltreNIP):
+        self.set_attibutes(name,date1, date2,site,date_etude1,date_etude2, FiltreNIP)
     
     def get_x(self):
-        Return_dict={'Name' : [self.name] ,'Date1_filtreNIP' : [self.date1] ,'Date2_filtreNIP' : [self.date2],'Date3_filtre_Data_set' : [self.DebutDataset] , \
+        Return_dict={'Name' : [self.name] ,'Date1_filtreNIP' : [self.date1] ,'Date2_filtreNIP' : [self.date2], 'FiltreNIP' :[self.filtreNIP] , 'Date3_filtre_Data_set' : [self.DebutDataset] , \
                      'Date4_filtre_Data_set' : [self.FinDataset], 'Site' : [self.site], \
             'DS_Total actes' : [self.Actes_Total], 'DS_Encoded_Actes' : [self.Actes_Encoded], 'DS_pct Encoded_Actes' : [self.Actes_percent_encoded], \
             'DS_Total_sejours': [self.Sejours_Total], 'DS_Encoded_Sejours' : [self.Sejours_Encoded], 'DS_pct Encoded_Sejours' : [self.Sejours_percent_encoded], \
@@ -40,13 +40,14 @@ class Caracteristiques_Dataset_Parcours:
               on site ' + self.site + ' , NIP Filtered between '+ self.date1.strftime('%Y-%m-%d %H:%M:%S') + ' and ' + self.date2.strftime('%Y-%m-%d %H:%M:%S') + ' )'
 
 
-    def set_attibutes(self, name,date1, date2,my_site,date3,date4):
+    def set_attibutes(self, name,date1, date2,my_site,date3,date4, FiltreNIP):
         self.name=name
         self.date1=date1
         self.date2=date2
         self.DebutDataset=date3
         self.FinDataset=date4
         self.site=my_site
+        self.filtreNIP=FiltreNIP
         
         Table_Liste_Actes = 'A_Actes_ICO_2018_2021_V2_TRIMED' #INCRIT EN DUR DANS LA PROC SQL !!
         Table_Actes_filtres ='Tmp_Py_A_Actes_Export'
@@ -77,7 +78,7 @@ class Caracteristiques_Dataset_Parcours:
                     + '\',\'' + My_filter_2nd_date.strftime('%Y-%m-%d %H:%M:%S') \
                     + '\',\'' + Date1_Etude.strftime('%Y-%m-%d %H:%M:%S') \
                     + '\',\'' + Date2_Etude.strftime('%Y-%m-%d %H:%M:%S') \
-                    + '\','  + Site 
+                    + '\','  + Site +',' + '\'' + FiltreNIP + '\''
         AlSQL.AlSQL_Execute(AlSQL.engine,Requete,self.output)
 
 

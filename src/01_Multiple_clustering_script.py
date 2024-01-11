@@ -116,7 +116,7 @@ for index,row in config.iterrows():
     #STORE THE RESULT IN MLFLOW
     df = pd.DataFrame.from_dict(Caracteristiques_Dataset)
     # Convert specified columns to dictionary
-    mydict = df.iloc[:, 6:].to_dict(orient='list')
+    mydict = df.iloc[:, 7:].to_dict(orient='list')
     # Filter dictionary to contain only float values and not lists
     for key, value in mydict.items():
         if len(value) == 1 :

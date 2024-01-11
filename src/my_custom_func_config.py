@@ -38,6 +38,7 @@ def get_Create_dataset_parameters(CSV_config):
     DSprefix=CSV_config['DS_Prefix']
     Create_dataset_parameters={DSprefix + 'My_NIP_filter_1rst_date': CSV_config['My_NIP_filter_1rst_date'],
                                 DSprefix + 'My_NIP_filter_2nd_date_delta_in_days': int(CSV_config['My_NIP_filter_2nd_date_delta_in_days']),
+                                DSprefix + 'FiltreNIP': CSV_config['My_NIP_filter'],
                                 DSprefix + 'Site': str(CSV_config['Site']),
                                 DSprefix + 'Start_Window_time': CSV_config['Start_Window_time'],
                                 DSprefix + 'End_Window_time': CSV_config['End_Window_time'],

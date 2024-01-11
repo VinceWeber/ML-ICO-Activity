@@ -48,11 +48,12 @@ def Create_dataset (Create_dataset_parameters,DSprefix):
     My_NIP_filter_2nd_date=My_NIP_filter_1rst_date + timedelta(days=Create_dataset_parameters[DSprefix + 'My_NIP_filter_2nd_date_delta_in_days'])
 
     Site=Create_dataset_parameters[DSprefix + 'Site']
+    filtreNIP=Create_dataset_parameters[DSprefix + 'FiltreNIP']
 
     Mydataset_date1=datetime.strptime(Create_dataset_parameters[DSprefix + 'Start_Window_time'], '%m-%d-%Y %H:%M:%S')
     Mydataset_date2=datetime.strptime(Create_dataset_parameters[DSprefix + 'End_Window_time'], '%m-%d-%Y %H:%M:%S')
 
-    Caract_Df_SH = pd.DataFrame.from_dict(PC.Caracteristiques_Dataset_Parcours(1, My_NIP_filter_1rst_date,My_NIP_filter_2nd_date,Site,Mydataset_date1,Mydataset_date2).get_x())
+    Caract_Df_SH = pd.DataFrame.from_dict(PC.Caracteristiques_Dataset_Parcours(1, My_NIP_filter_1rst_date,My_NIP_filter_2nd_date,Site,Mydataset_date1,Mydataset_date2,filtreNIP).get_x())
 
     #print(Caract_Df_SH)
     return Caract_Df_SH

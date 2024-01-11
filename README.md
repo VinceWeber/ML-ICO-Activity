@@ -38,10 +38,11 @@ Unclustered data :
 Clustered carepathes :
 ![image](00-Readmefiles/Mlflow_Exp_NIP_Cl_P1_CPP.png)
 
-From this clustering we can distinguish 3 main groups: 
-- Group 0 : Patient with a small activity in the hospital (can be prestation inter établissement, and patient without a complex illness)
-- Group 1 : Patients seems to have a complete carepath in the hospital, with 2 waves of Radiothérapie treatment and a surgery at the beguinning.
-- Group 2 : Patients seems to have a complete carepath in the hospital, with 1 waves of Radiothérapie treatment.
+From this clustering analysis, three main groups can be distinguished:
+
+-Group 0: Patients with minimal activity in the hospital, possibly related to inter-establishment procedures, and individuals without complex illnesses.
+-Group 1: Patients who appear to undergo a comprehensive care path within the hospital, involving two waves of radiotherapy treatment and an initial surgery.
+-Group 2: Patients who appear to undergo a complete care path within the hospital, with one wave of radiotherapy treatment.
 
 
 

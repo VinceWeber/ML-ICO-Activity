@@ -227,6 +227,10 @@ for index,row in config.iterrows():
         mlflow.log_artifact(myouputpath + "distance_matrix.csv", "Matrice de distance inter-Parcours")
         print(Mcfbf.myprint('Save the Matrice de distance OK', index, total_index))
 
+        #Ajout de variables avant clustering (ajouter le total des actes de chaque dimension)
+        
+
+
         #Clustering parameters
         Parcours_Clust_parameters=Mcfconf.set_parcours_clust_parameters(Ac_config)
         #SECOND CLUSTERING (principal clust)

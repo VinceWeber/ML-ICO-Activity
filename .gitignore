@@ -179,24 +179,3 @@ src/mlruns/
 mlartifacts/
 mlruns/
 
-06 - Temp_outputs/Actes_rdth.png
-06 - Temp_outputs/Actes_total.png
-06 - Temp_outputs/Agg_Pat.csv
-06 - Temp_outputs/Cl_P_abscisses.csv
-06 - Temp_outputs/Cl_P_Clust_Summary.csv
-06 - Temp_outputs/Cl_P_clust.csv
-06 - Temp_outputs/Cl_P_curve.png
-06 - Temp_outputs/Cl_P_NIP_Carac.csv
-06 - Temp_outputs/Cl_P_PCA.png
-06 - Temp_outputs/Cl_P-Cl_T_abscisses.csv
-06 - Temp_outputs/Cl_T_abscisses.csv
-06 - Temp_outputs/Cl_T_Clust_Summary.csv
-06 - Temp_outputs/Cl_T_clust.csv
-06 - Temp_outputs/Cl_T_curve.png
-06 - Temp_outputs/Cl_T_NIP_Carac.csv
-06 - Temp_outputs/Cl_T_PCA.png
-06 - Temp_outputs/distance_matrix.csv
-06 - Temp_outputs/Mlflow_Exp_NIP_Cl_P1_CPP.png
-06 - Temp_outputs/Mlflow_Exp_NIP_Cl_T1_CPP.png
-06 - Temp_outputs/Mlflow_Exp_NIP_CPP1Cl_P-Cl_T_CPP.png
-06 - Temp_outputs/TS_curves.png

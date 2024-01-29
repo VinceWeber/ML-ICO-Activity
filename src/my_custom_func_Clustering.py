@@ -25,6 +25,11 @@ def Automatic_nb_cluster(X_scaled,Method, max_clusters,threshold,ouput=None,mlfl
 
     import matplotlib.pyplot as plt
     
+
+    curve_filename=mlflow_output['curve_filename']
+    curve_mlflowname=mlflow_output['curve_mlflowname']
+    myLinkage= mlflow_output['linkage']
+
     #APPLY CLUSTERING
     if Method=="KMeans" :
         from sklearn.cluster import KMeans
@@ -36,31 +41,35 @@ def Automatic_nb_cluster(X_scaled,Method, max_clusters,threshold,ouput=None,mlfl
             kmeans.fit(X_scaled)
             inertia.append(kmeans.inertia_)
 
+        nb_clusters = optimal_nb_cluster(inertia,threshold,max_clusters)
+
+        # Tracer le graphique de l'inertie en fonction du nombre de clusters
+        plt.figure(figsize=(10, 6))
+        plt.plot(range(1, max_clusters + 1), inertia, marker='o')
+        plt.xlabel('Nombre de clusters')
+        plt.ylabel('Inertie')
+        plt.title('Méthode du coude pour déterminer le nombre optimal de clusters')
+
     elif Method=="AgglomerativeClustering":
         from sklearn.cluster import AgglomerativeClustering
-        # Liste pour stocker les valeurs de l'inertie
-        inertia_agglomerative = []
+        from sklearn.metrics import silhouette_score
+        # Liste pour stocker les valeurs du silhouette score
+        silhouette_scores = []
 
-        for n_clusters in range(1, max_clusters + 1):
-            agglomerative = AgglomerativeClustering(n_clusters=n_clusters, linkage='ward')
-            agglomerative.fit(X_scaled)
-            # You may need to choose a suitable metric for your problem, such as 'euclidean'
-            # Adjust the metric parameter based on your data characteristics.
-            inertia_agglomerative.append(agglomerative.inertia_)
+        for n_clusters in range(2, max_clusters + 1):  # Adjust starting point as Agglomerative requires at least 2 clusters
+            agglomerative = AgglomerativeClustering(n_clusters=n_clusters, linkage=myLinkage)
+            labels = agglomerative.fit_predict(X_scaled)
+            silhouette_scores.append(silhouette_score(X_scaled, labels))
         
+        nb_clusters=silhouette_scores.index(max(silhouette_scores))+2
+    
+        # Tracer le graphique de slihouette en fonction du nombre de clusters
+        plt.figure(figsize=(10, 6))
+        plt.plot(range(2, max_clusters + 1), silhouette_scores, marker='o')
+        plt.xlabel('Nombre de clusters')
+        plt.ylabel('Silhouette')
+        plt.title('Détermination du nombre optimal de clusters par recherche du maximum de la silhouette')
 
-    nb_clusters = optimal_nb_cluster(inertia,threshold,max_clusters)
-
-    curve_filename=mlflow_output['curve_filename']
-    curve_mlflowname=mlflow_output['curve_mlflowname']
-
-
-    # Tracer le graphique de l'inertie en fonction du nombre de clusters
-    plt.figure(figsize=(10, 6))
-    plt.plot(range(1, max_clusters + 1), inertia, marker='o')
-    plt.xlabel('Nombre de clusters')
-    plt.ylabel('Inertie')
-    plt.title('Méthode du coude pour déterminer le nombre optimal de clusters')
     
     if mlflow!=None:
         plt.savefig(curve_filename)
@@ -91,13 +100,15 @@ def Do_Clustering(X_scaled,Method,nb_clusters,ouput=None,mlflow=None,mlflow_outp
     #data= {col_name : []}
     #df_tobemerged_to_aggreg = pd.DataFrame(data)
 
+    myLinkage=mlflow_output['linkage']
+
     #APPLY CLUSTERING
     if Method=="KMeans" :
         from sklearn.cluster import KMeans
         clust = KMeans(n_clusters=nb_clusters)
     elif Method=="AgglomerativeClustering":
         from sklearn.cluster import AgglomerativeClustering
-        clust = AgglomerativeClustering(n_clusters=nb_clusters, linkage='ward')
+        clust = AgglomerativeClustering(n_clusters=nb_clusters, linkage=myLinkage)
 
     #PREDICT THE CLUSTER ON THE DATASET
     labels = clust.fit_predict(X_scaled)
@@ -183,7 +194,7 @@ def Do_Clustering(X_scaled,Method,nb_clusters,ouput=None,mlflow=None,mlflow_outp
 
     return df_dist_matrix, Clustering_summary
 
-def my_clust_func(X_scaled,Method,n_clusters,max_clusters,threshold,ouput,mlflow,mlflow_output,List_NIP):
+def my_clust_func(X_scaled,Method,n_clusters,max_clusters,threshold,ouput,mlflow,My_Clust_parameter,List_NIP):
     # Design to perform a clustering from :
     # a matrix (Xscaled)
     # a method (KMeans, Agglomerative, GMM, or....)
@@ -198,22 +209,22 @@ def my_clust_func(X_scaled,Method,n_clusters,max_clusters,threshold,ouput,mlflow
     
     import pandas as pd
 
-    Cluster_summary_filename=mlflow_output['Summary_filename']
-    Cluster_summary_mlflowname=mlflow_output['Summary_mlflowname']
+    Cluster_summary_filename=My_Clust_parameter['Summary_filename']
+    Cluster_summary_mlflowname=My_Clust_parameter['Summary_mlflowname']
 
-    NIP_Carac_filename=mlflow_output['NIP_Carac_filename']
-    NIP_Carac_mlflowname=mlflow_output['NIP_Carac_mlflowname']
+    NIP_Carac_filename=My_Clust_parameter['NIP_Carac_filename']
+    NIP_Carac_mlflowname=My_Clust_parameter['NIP_Carac_mlflowname']
 
-    col_name= mlflow_output['clust_name']
+    col_name= My_Clust_parameter['clust_name']
 
     if n_clusters==None:
-        n_clusters=Automatic_nb_cluster(X_scaled,Method, max_clusters,threshold,ouput,mlflow,mlflow_output)
+        n_clusters=Automatic_nb_cluster(X_scaled,Method, max_clusters,threshold,ouput,mlflow,My_Clust_parameter)
         mlflow.log_metrics({'Optimal_nb_' + col_name : n_clusters})
 
     #nb of clusters
     mlflow.log_params({'NB_ ' + col_name : n_clusters})
 
-    df_dist,Cl_sum=Do_Clustering(X_scaled,Method,n_clusters,ouput,mlflow,mlflow_output)
+    df_dist,Cl_sum=Do_Clustering(X_scaled,Method,n_clusters,ouput,mlflow,My_Clust_parameter)
 
     #print('my_clust_func - Dfdist')
     #print(df_dist)
@@ -470,6 +481,7 @@ def cluster(My_Aggreg_dict_df,Data_to_be_clustered,ouput,mlflow,My_Clust_paramet
     Nb_clust=My_Clust_parameter['Nb_clusters']
     Max_clusters=My_Clust_parameter['max_nb_clusters']
     threshold=My_Clust_parameter['threshold']
+    
 
     # Standardiser les données
     scaler = StandardScaler()

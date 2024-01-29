@@ -116,7 +116,7 @@ def get_Aggreg_param(CSV_config):
 def set_Time_clust_parameters(CSV_Clust_config):
     
     if CSV_Clust_config['T_Nb_clusters']!='None':
-        default_n_clust=CSV_Clust_config['T_Nb_clusters']
+        default_n_clust=int(CSV_Clust_config['T_Nb_clusters'])
     else:
         default_n_clust=None
 
@@ -144,6 +144,7 @@ def set_Time_clust_parameters(CSV_Clust_config):
     Time_Clust_parameters={
         'Method': CSV_Clust_config['T_Method'],
         'Nb_clusters' : default_n_clust,
+        'linkage' : CSV_Clust_config['T_linkage'],
         'max_nb_clusters' : CSV_Clust_config['T_max_nb_clusters'],
         'threshold': CSV_Clust_config['T_threshold'],
         'clust_name' : clust_name,
@@ -163,7 +164,7 @@ def set_Time_clust_parameters(CSV_Clust_config):
 def set_parcours_clust_parameters(CSV_Clust_config):
     
     if CSV_Clust_config['P_Nb_clusters']!='None':
-        default_n_clust=CSV_Clust_config['P_Nb_clusters']
+        default_n_clust=int(CSV_Clust_config['P_Nb_clusters'])
     else:
         default_n_clust=None
 
@@ -191,6 +192,7 @@ def set_parcours_clust_parameters(CSV_Clust_config):
     Parcours_Clust_parameters={
         'Method': CSV_Clust_config['P_Method'],
         'Nb_clusters' : default_n_clust,
+        'linkage' : CSV_Clust_config['P_linkage'],
         'max_nb_clusters' : CSV_Clust_config['P_max_nb_clusters'],
         'threshold': CSV_Clust_config['P_threshold'],
         'clust_name' : clust_name,

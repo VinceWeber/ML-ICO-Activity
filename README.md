@@ -40,9 +40,9 @@ Clustered carepathes :
 
 From this clustering analysis, three main groups can be distinguished:
 
--Group 0: Patients with minimal activity in the hospital, possibly related to inter-establishment procedures, and individuals without complex illnesses.
--Group 1: Patients who appear to undergo a comprehensive care path within the hospital, involving two waves of radiotherapy treatment and an initial surgery.
--Group 2: Patients who appear to undergo a complete care path within the hospital, with one wave of radiotherapy treatment.
+- Group 0: Patients with minimal activity in the hospital, possibly related to inter-establishment procedures, and individuals without complex illnesses.
+- Group 1: Patients who appear to undergo a comprehensive care path within the hospital, involving two waves of radiotherapy treatment and an initial surgery.
+- Group 2: Patients who appear to undergo a complete care path within the hospital, with one wave of radiotherapy treatment.
 
 
 

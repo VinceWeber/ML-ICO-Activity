@@ -41,7 +41,7 @@ def AlSQL_Execute(engine, requete_sql, output=None):
 
 # Initialisation des paramètres d'accès à la BDD Activité
 try:
-    server = '172.24.197.105'
+    server = '172.20.70.153'
     database = 'ICO_Activite'
     username = 'sa'
     password = 'vyNM~pgDxO>0[5+ryM>F'

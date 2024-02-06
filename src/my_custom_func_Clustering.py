@@ -69,7 +69,8 @@ def Automatic_nb_cluster(X_scaled,Method, max_clusters,threshold,ouput=None,mlfl
         plt.xlabel('Nombre de clusters')
         plt.ylabel('Silhouette')
         plt.title('Détermination du nombre optimal de clusters par recherche du maximum de la silhouette')
-
+    else:
+        raise ValueError(f'Clustering Method not recognized, input is {Method} but KMeans or AgglomerativeClustering is expected')
     
     if mlflow!=None:
         plt.savefig(curve_filename)

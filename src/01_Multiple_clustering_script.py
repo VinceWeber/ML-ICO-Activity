@@ -228,14 +228,42 @@ for index,row in config.iterrows():
         print(Mcfbf.myprint('Save the Matrice de distance OK', index, total_index))
 
         #Ajout de variables avant clustering (ajouter le total des actes de chaque dimension)
-        
+        #Ajout à droite de la distmatrix de la somme des types d'actes par dimension 
+        # cad ( regroupement de Aggreg Patient par NIP, FT1,FV1, FT2, FV2), transposer le résultat et concacter à droite de la dist_matrix
 
+        print(Mcfbf.myprint('EXTENSION DE LA MATRICE DE DISTANCE', index, total_index))
+        #print ('Aggreg_Patients')
+        #print(Aggreg_Patients)
+
+        #print('dist matrix')
+        #print(dist_matrix)
+        #tmp_Aggreg_Patients = Aggreg_Patients['df'].drop(Aggreg_Patients['df'].columns[0], axis=1)
+        tmp_Aggreg_Patients = Aggreg_Patients['df']
+        tmp_Aggreg_Patients['Filter'] = tmp_Aggreg_Patients[['FT1', 'FV1', 'FT2', 'FV2']].apply(lambda x: ' '.join(x.dropna().astype(str)), axis=1)
+        #df['summed_col'] = df[['all columns except 'NIP','FT1', 'FV1', 'FT2', 'FV2']].apply(lambda x: sum(), axis=1)
+                            
+        to_sum_Aggreg_Patients = tmp_Aggreg_Patients.drop(columns=['NIP', 'FT1', 'FV1', 'FT2', 'FV2'])
+        tmp_Aggreg_Patients['summed_col'] = to_sum_Aggreg_Patients.sum(axis=1)
+        exp_Aggreg_Patients = tmp_Aggreg_Patients[['NIP','Filter','summed_col']]
+
+        # Create the pivot table
+        exp2_Aggreg_Patients = exp_Aggreg_Patients.pivot_table(index='NIP', columns='Filter', values='summed_col', aggfunc='sum')
+        exp2_Aggreg_Patients.reset_index(inplace=True)
+
+        tmp2_Aggreg_Patients=exp2_Aggreg_Patients.drop(columns=['NIP'])
+        Array_Sum_Aggreg_Patients = tmp2_Aggreg_Patients.to_numpy()
+        Array_Sum_Aggreg_Patients
+
+        dist_matrix_and_Total = np.concatenate((dist_matrix, Array_Sum_Aggreg_Patients), axis=1)
+
+        #print('extended dist matrix')
+        #print(dist_matrix_and_Total)
 
         #Clustering parameters
         Parcours_Clust_parameters=Mcfconf.set_parcours_clust_parameters(Ac_config)
         #SECOND CLUSTERING (principal clust)
         print(Mcfbf.myprint('Clustering de la  Matrice de distance ', index, total_index))
-        Aggreg_Parcours_clust=McfC.cluster(Aggreg_Patients,dist_matrix,False,mlflow,Parcours_Clust_parameters )
+        Aggreg_Parcours_clust=McfC.cluster(Aggreg_Patients,dist_matrix_and_Total,False,mlflow,Parcours_Clust_parameters )
         print(Mcfbf.myprint('Second clustering (Principal clust) OK', index, total_index))
         elapsed_time = time.time() - start_time
         mlflow.log_metrics({'Time-Parcours_clustering_seconds' : elapsed_time })

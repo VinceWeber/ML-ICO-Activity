@@ -1,0 +1,120 @@
+,NIP,1900-W000002,1900-W000003,1900-W000004,1900-W000005,1900-W000006,1900-W000007,1900-W000008,1900-W000009,1900-W000010,1900-W000011,FT1,FV1,FT2,FV2
+0,N201900001,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+0,N201900001,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+0,N201900001,0,0,0,0,0,0,0,0,0,0,6,SUIVI_CT,0,nan
+0,N201900001,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+0,N201900001,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+0,N201900001,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+0,N201900001,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie
+1,N201900002,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+1,N201900002,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+1,N201900002,0,0,0,0,0,0,0,0,0,0,6,SUIVI_CT,0,nan
+1,N201900002,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+1,N201900002,0,0,0,0,0,0,0,1,0,0,3,Traitement,1,Chirurgie
+1,N201900002,0,0,0,0,0,0,0,0,1,0,3,Traitement,1,Oncologie Medicale
+1,N201900002,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie
+2,N201900003,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+2,N201900003,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+2,N201900003,0,0,0,0,0,0,0,0,0,0,6,SUIVI_CT,0,nan
+2,N201900003,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+2,N201900003,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+2,N201900003,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+2,N201900003,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie
+3,N201900004,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+3,N201900004,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+3,N201900004,0,0,0,0,0,0,0,0,0,0,6,SUIVI_CT,0,nan
+3,N201900004,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+3,N201900004,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+3,N201900004,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+3,N201900004,0,0,1,1,1,1,1,1,1,0,3,Traitement,1,Radiothérapie
+4,N201900005,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+4,N201900005,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+4,N201900005,0,0,0,0,0,0,0,0,0,0,6,SUIVI_CT,0,nan
+4,N201900005,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+4,N201900005,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+4,N201900005,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+4,N201900005,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie
+5,N201900006,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+5,N201900006,0,0,0,0,1,0,0,1,0,0,3,Lourd,1,Oncologie Medicale
+5,N201900006,0,0,0,1,1,0,0,0,0,0,6,SUIVI_CT,0,nan
+5,N201900006,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+5,N201900006,0,0,1,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+5,N201900006,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+5,N201900006,0,0,0,1,1,1,1,1,1,1,3,Traitement,1,Radiothérapie
+6,N201900007,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+6,N201900007,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+6,N201900007,0,0,0,0,0,0,0,0,0,0,6,SUIVI_CT,0,nan
+6,N201900007,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+6,N201900007,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+6,N201900007,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+6,N201900007,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie
+7,N201900008,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+7,N201900008,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+7,N201900008,0,0,0,0,0,0,0,0,0,0,6,SUIVI_CT,0,nan
+7,N201900008,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+7,N201900008,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+7,N201900008,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+7,N201900008,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie
+8,N201900009,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+8,N201900009,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+8,N201900009,0,0,0,0,0,0,0,0,0,0,6,SUIVI_CT,0,nan
+8,N201900009,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+8,N201900009,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+8,N201900009,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+8,N201900009,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie
+9,N201900010,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+9,N201900010,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+9,N201900010,0,0,0,0,0,0,0,0,0,0,6,SUIVI_CT,0,nan
+9,N201900010,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+9,N201900010,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+9,N201900010,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+9,N201900010,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie
+10,N201900011,0,0,0,0,0,0,0,1,0,0,3,Lourd,1,Chirurgie
+10,N201900011,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+10,N201900011,0,0,0,0,0,0,0,0,0,0,6,SUIVI_CT,0,nan
+10,N201900011,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+10,N201900011,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+10,N201900011,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+10,N201900011,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie
+11,N201900012,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+11,N201900012,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+11,N201900012,0,0,0,0,0,0,0,0,0,0,6,SUIVI_CT,0,nan
+11,N201900012,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+11,N201900012,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+11,N201900012,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+11,N201900012,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie
+12,N201900013,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+12,N201900013,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+12,N201900013,0,0,0,0,0,0,0,0,0,0,6,SUIVI_CT,0,nan
+12,N201900013,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+12,N201900013,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+12,N201900013,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+12,N201900013,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie
+13,N201900014,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+13,N201900014,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+13,N201900014,0,0,0,0,0,0,0,0,0,0,6,SUIVI_CT,0,nan
+13,N201900014,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+13,N201900014,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+13,N201900014,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+13,N201900014,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie
+14,N201900015,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+14,N201900015,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+14,N201900015,0,0,0,1,1,1,1,1,1,0,6,SUIVI_CT,0,nan
+14,N201900015,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+14,N201900015,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+14,N201900015,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+14,N201900015,0,0,0,1,1,1,1,1,1,1,3,Traitement,1,Radiothérapie
+15,N201900016,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+15,N201900016,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+15,N201900016,0,0,0,0,0,0,0,0,1,0,6,SUIVI_CT,0,nan
+15,N201900016,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+15,N201900016,0,0,1,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+15,N201900016,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+15,N201900016,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie
+16,N201900017,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Chirurgie
+16,N201900017,0,0,0,0,0,0,0,0,0,0,3,Lourd,1,Oncologie Medicale
+16,N201900017,0,0,0,0,0,0,1,0,1,0,6,SUIVI_CT,0,nan
+16,N201900017,0,0,0,0,0,0,0,0,0,0,6,SUIVI_LT,0,nan
+16,N201900017,0,0,1,0,0,0,0,0,0,0,3,Traitement,1,Chirurgie
+16,N201900017,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Oncologie Medicale
+16,N201900017,0,0,0,0,0,0,0,0,0,0,3,Traitement,1,Radiothérapie

@@ -40,8 +40,10 @@ def AlSQL_Execute(engine, requete_sql, output=None):
 
 
 # Initialisation des paramètres d'accès à la BDD Activité
+
+
 try:
-    server = '172.20.70.153'
+    server = '172.27.128.36'
     database = 'ICO_Activite'
     username = 'sa'
     password = 'vyNM~pgDxO>0[5+ryM>F'
@@ -66,3 +68,4 @@ except sqlalchemy.exc.SQLAlchemyError as ex:
     print(f'Erreur de connexion à la BDD : {ex}')
 else:
     print('Connexion BDD - OK')
+    

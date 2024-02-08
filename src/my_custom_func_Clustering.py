@@ -69,8 +69,29 @@ def Automatic_nb_cluster(X_scaled,Method, max_clusters,threshold,ouput=None,mlfl
         plt.xlabel('Nombre de clusters')
         plt.ylabel('Silhouette')
         plt.title('Détermination du nombre optimal de clusters par recherche du maximum de la silhouette')
+    
+    elif Method == "GMM":
+        from sklearn.mixture import GaussianMixture
+        # Liste pour stocker les valeurs de l'inertie
+        bic = []
+
+        for n_components in range(1, max_clusters + 1):
+            gmm = GaussianMixture(n_components=n_components)
+            gmm.fit(X_scaled)
+            bic.append(gmm.bic(X_scaled))
+
+        nb_clusters = optimal_nb_cluster(bic, threshold, max_clusters)
+
+        # Tracer le graphique du BIC en fonction du nombre de composants
+        plt.figure(figsize=(10, 6))
+        plt.plot(range(1, max_clusters + 1), bic, marker='o')
+        plt.xlabel('Nombre de composants')
+        plt.ylabel('BIC')
+        plt.title('Critère d\'information bayésien (BIC) pour déterminer le nombre optimal de composants')
+    
+    
     else:
-        raise ValueError(f'Clustering Method not recognized, input is {Method} but KMeans or AgglomerativeClustering is expected')
+        raise ValueError(f'Clustering Method not recognized, input is \"{Method}\" but \"KMeans\" or \"AgglomerativeClustering\" is expected')
     
     if mlflow!=None:
         plt.savefig(curve_filename)
@@ -110,6 +131,10 @@ def Do_Clustering(X_scaled,Method,nb_clusters,ouput=None,mlflow=None,mlflow_outp
     elif Method=="AgglomerativeClustering":
         from sklearn.cluster import AgglomerativeClustering
         clust = AgglomerativeClustering(n_clusters=nb_clusters, linkage=myLinkage)
+    elif Method == "GMM":
+        from sklearn.mixture import GaussianMixture
+        clust = GaussianMixture(n_components=nb_clusters)
+
 
     #PREDICT THE CLUSTER ON THE DATASET
     labels = clust.fit_predict(X_scaled)

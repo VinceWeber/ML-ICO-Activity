@@ -38,6 +38,9 @@ from sklearn import metrics, tree
 import Sql_Alchemy_Classes as AlSQL
 #import Parcours_Classes as PC
 
+#initialize the databse connexion
+
+
 import os
 current_directory = os.getcwd()
 
